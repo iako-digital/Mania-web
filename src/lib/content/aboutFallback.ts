@@ -1,0 +1,17 @@
+// Default About-page narrative, shown until this content is entered in the
+// Studio (About Page singleton). Mirrors the source Georgian brief with an
+// English translation reviewed alongside it.
+export const aboutFallback = {
+  bio: {
+    ka: "ამ სფეროში ვარ 2004 წლიდან. ჩემი მთავარი მოტივაცია ამ საქმეში არის შემოქმედებისა და ხელოვნების დიდი სიყვარული და ამ სფეროში ამოუწურავი შესაძლებლობების დიდი ნაწილის ფლობის სურვილი. ჩემი წლების დაუღალავმა შრომამ და გამოცდილებამ მაქცია ამ სფეროში უნივერსალურ პროფესიონალად.",
+    en: "In this craft since 2004. My driving force has always been a deep love of creativity and art, and the desire to master the endless possibilities this field offers. Years of tireless work and hands-on experience have shaped me into a truly universal professional in this field.",
+  },
+  careerNarrative: {
+    ka: "მე ვარ მოდის სახლი „მანიას” მფლობელი 2007 წლიდან. არაერთი წარმატებული ჩვენება და კოლექცია მქონდა. ვკერავ ინდივიდუალურ სამოსს, როგორც ყოველდღიურს, ასევე საბანკეტო და საქორწინო რიტუალებისთვის. 2 წელი ვიმუშავე კომპანია „ანაბეჭდში” და კომპანია „ელეკრისში” კონსტრუქტორ-დიზაინერად.",
+    en: "Owner of the Mania fashion house since 2007, with numerous successful runway shows and collections to her name. She creates custom, made-to-measure garments — from everyday wear to banquet and wedding pieces — and spent two years working as a pattern-maker/designer at the companies Anabechdi and Elekris.",
+  },
+  achievementsNarrative: {
+    ka: "ადამიანისთვის, თუ მოინდომებს, არცერთ ასაკში არ არის გვიან შეიძინო ახალი უნარები და განვითარდე ყოველდღიურად. მართალია ბევრი რთული კონსტრუქცია ავაგე და შევკერე, „ოქროს გლობუსის” და პოპულარული კაბები ერთი ფოტოს ნახვით ერთი-ერთში გამიკეთებია და ამით ვამაყობ რათქმაუნდა, მაგრამ ძალიან ვამაყობ, რომ 55 წლის ასაკში 2 თვეში შევისწავლე Gerber AccuMark-ის პროგრამა და წარმატებულადაც გავაგრძელე საქმიანობა ამ პროგრამაში.",
+    en: "If a person truly wants to, it's never too late — at any age — to acquire new skills and grow every day. It's true that I've built and sewn many technically demanding garments, including recreating celebrated “Golden Globes” red-carpet gowns one-to-one from a single photograph, and I'm proud of that, of course. But what I'm proudest of is that at 55, I learned the Gerber AccuMark program in just two months, and have gone on to work successfully with it ever since.",
+  },
+};

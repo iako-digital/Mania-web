@@ -1,0 +1,115 @@
+{
+  "nav": {
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "expertise": "Expertise",
+    "about": "About",
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "home": {
+    "kicker": "Pattern-Maker · Designer",
+    "heroCta": "View Portfolio",
+    "heroSecondaryCta": "The Process",
+    "introTitle": "A universal professional, since 2004",
+    "introBody": "In this craft since 2004. My driving force has always been a deep love of creativity and art, and the desire to master the endless possibilities this field offers. Years of tireless work and hands-on experience have shaped me into a truly universal professional — equally at home sketching a concept, drafting a pattern, or fitting the final seam.",
+    "introCta": "Read the full story",
+    "featuredTitle": "Selected Work",
+    "featuredSubtitle": "Three pieces that trace the line from concept to construction",
+    "featuredCta": "View project",
+    "featuredAllCta": "View full portfolio"
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "From first sketch to finished cutting file",
+    "allCategories": "All",
+    "backToPortfolio": "Back to portfolio",
+    "empty": "Projects for this category are being added.",
+    "detailsLabel": "Details",
+    "yearLabel": "Year",
+    "occasionLabel": "Occasion",
+    "categoryLabel": "Category"
+  },
+  "categories": {
+    "womens-couture": "Women's Couture",
+    "wedding-formal": "Wedding & Formal",
+    "production-patterns": "Production Patterns",
+    "three-d": "3D"
+  },
+  "expertise": {
+    "title": "Expertise & Workflow",
+    "subtitle": "Technical precision, from concept to cutting room",
+    "processTitle": "The Process",
+    "processSubtitle": "Every garment follows the same disciplined path",
+    "skillsTitle": "Core Skills",
+    "skillsSubtitle": "Two decades of hands-on, universal pattern-making expertise",
+    "softwareTitle": "Software",
+    "softwareBody": "Works in Gerber AccuMark — from digitizing a hand-drafted pattern to preparing production-ready cutting files.",
+    "skillsList": [
+      "Design ideation & sketching",
+      "Technical flat drawing",
+      "Paper pattern drafting",
+      "Sample sewing & fit correction",
+      "Pattern digitization & correction",
+      "Base pattern grading across size ranges",
+      "Fabric consumption optimization",
+      "Preparing & submitting cutting files for Gerber",
+      "Pattern draping & modeling",
+      "Operational breakdown of the garment for production"
+    ],
+    "steps": {
+      "concept": {
+        "title": "Concept Design",
+        "description": "Sketching and shaping the initial idea — silhouette, proportion, and intent."
+      },
+      "pattern": {
+        "title": "Pattern Development",
+        "description": "Drafting the paper pattern and sewing a sample for fit and correction."
+      },
+      "grading": {
+        "title": "Base Grading",
+        "description": "Grading the base pattern precisely across the full size range."
+      },
+      "optimization": {
+        "title": "Fabric Optimization",
+        "description": "Optimizing fabric consumption and marker efficiency."
+      },
+      "cutting": {
+        "title": "Cutting Files",
+        "description": "Preparing and sending digitized files for cutting on Gerber."
+      }
+    }
+  },
+  "about": {
+    "title": "About",
+    "roleLabel": "Pattern-Maker Designer",
+    "bioTitle": "Introduction",
+    "careerTitle": "Career",
+    "achievementsTitle": "Achievements",
+    "achievementsPullQuote": "At 55, I learned Gerber AccuMark in two months — proof it's never too late to master new tools.",
+    "skillsTitle": "Core Skills",
+    "programsTitle": "Software & Programs"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "For commissions, collaborations, and production inquiries",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "formName": "Name",
+    "formEmail": "Email",
+    "formMessage": "Message",
+    "formSubmit": "Send Message",
+    "formSuccess": "Thank you — your message has been sent.",
+    "formError": "Something went wrong. Please try again or reach out by phone or email."
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "tagline": "Technical Precision. High Fashion Engineering."
+  },
+  "theme": {
+    "dark": "Dark",
+    "light": "Light",
+    "toggle": "Toggle theme"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "name": "mania-web-tmp",
+  "name": "mania-web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,9 +9,17 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^6.10.1",
+    "framer-motion": "^13.1.1",
     "next": "16.3.2",
+    "next-intl": "^4.13.7",
+    "next-sanity": "^13.3.3",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "resend": "^6.22.0",
+    "sanity": "^6.10.1",
+    "styled-components": "^6.5.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
