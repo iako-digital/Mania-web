@@ -12,9 +12,9 @@ export default async function AdminSkillsPage({
 
   return (
     <div className="max-w-3xl">
-      <h1 className="font-display text-3xl text-text-primary">Skills</h1>
-      <p className="mt-2 text-text-muted">The core skills list shown on Expertise and About.</p>
-      {saved && <p className="mt-4 text-sm text-gold">Saved.</p>}
+      <h1 className="font-display text-3xl text-text-primary">უნარები</h1>
+      <p className="mt-2 text-text-muted">ძირითადი უნარების სია გვერდებზე „ექსპერტიზა“ და „ჩემ შესახებ“.</p>
+      {saved && <p className="mt-4 text-sm text-gold">შენახულია.</p>}
 
       <div className="mt-10 flex flex-col gap-6">
         {skills.map((skill) => (
@@ -25,7 +25,7 @@ export default async function AdminSkillsPage({
           >
             <input type="hidden" name="id" value={skill.id} />
             <div className="w-24 shrink-0">
-              <Field label="Order">
+              <Field label="რიგითობა">
                 <TextInput name="order" type="number" defaultValue={skill.order} />
               </Field>
             </div>
@@ -42,7 +42,7 @@ export default async function AdminSkillsPage({
 
       <form action={saveSkill} className="mt-10 flex flex-col gap-4 border border-dashed border-hairline p-6 sm:flex-row sm:items-end">
         <div className="w-24 shrink-0">
-          <Field label="Order">
+          <Field label="რიგითობა">
             <TextInput name="order" type="number" defaultValue={skills.length + 1} />
           </Field>
         </div>
@@ -50,7 +50,7 @@ export default async function AdminSkillsPage({
           <BilingualInput name="label" />
         </div>
         <div className="shrink-0">
-          <SaveButton>Add skill</SaveButton>
+          <SaveButton>დამატება</SaveButton>
         </div>
       </form>
     </div>

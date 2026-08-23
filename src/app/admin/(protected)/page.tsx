@@ -1,20 +1,20 @@
 import Link from "next/link";
 
 const CARDS = [
-  { href: "/admin/hero", title: "Hero", description: "Home page headline, subheadline, and cover media." },
-  { href: "/admin/about", title: "About", description: "Bio, career narrative, achievements, portrait, programs." },
-  { href: "/admin/skills", title: "Skills", description: "The core skills list shown on Expertise and About." },
-  { href: "/admin/workflow", title: "Workflow", description: "The 5-step process shown on the Expertise page." },
-  { href: "/admin/categories", title: "Categories", description: "Portfolio category labels and slugs." },
-  { href: "/admin/portfolio", title: "Portfolio", description: "Add, edit, and remove portfolio projects." },
-  { href: "/admin/settings", title: "Site Settings", description: "Site name, tagline, phone, email, social links." },
+  { href: "/admin/hero", title: "თავსართი", description: "მთავარი გვერდის სათაური, ქვესათაური და გარეკანის მედია." },
+  { href: "/admin/about", title: "ჩემ შესახებ", description: "ბიოგრაფია, კარიერის აღწერა, მიღწევები, პორტრეტი, პროგრამები." },
+  { href: "/admin/skills", title: "უნარები", description: "ძირითადი უნარების სია, რომელიც ჩანს გვერდებზე „ექსპერტიზა“ და „ჩემ შესახებ“." },
+  { href: "/admin/workflow", title: "სამუშაო პროცესი", description: "5-საფეხურიანი პროცესი „ექსპერტიზის“ გვერდზე." },
+  { href: "/admin/categories", title: "კატეგორიები", description: "პორტფოლიოს კატეგორიების სახელები." },
+  { href: "/admin/portfolio", title: "პორტფოლიო", description: "პროექტების დამატება, რედაქტირება და წაშლა." },
+  { href: "/admin/settings", title: "საიტის პარამეტრები", description: "საიტის სახელი, სლოგანი, ტელეფონი, ელ. ფოსტა, სოციალური ბმულები." },
 ];
 
 export default function AdminDashboardPage() {
   return (
     <div>
-      <h1 className="font-display text-3xl text-text-primary">Content</h1>
-      <p className="mt-2 text-text-muted">Choose a section to edit.</p>
+      <h1 className="font-display text-3xl text-text-primary">კონტენტი</h1>
+      <p className="mt-2 text-text-muted">აირჩიეთ განყოფილება რედაქტირებისთვის.</p>
 
       <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {CARDS.map((card) => (

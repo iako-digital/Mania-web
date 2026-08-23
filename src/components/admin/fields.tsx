@@ -20,6 +20,8 @@ export function Textarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return <textarea {...props} className={`${inputClass} resize-none ${props.className || ""}`} />;
 }
 
+const AUTO_TRANSLATE_HINT = "ცარიელი დატოვეთ — ავტომატურად ითარგმნება ქართულიდან";
+
 export function BilingualInput({
   name,
   ka,
@@ -34,8 +36,8 @@ export function BilingualInput({
       <Field label="ქართული">
         <TextInput name={`${name}_ka`} defaultValue={ka} />
       </Field>
-      <Field label="English">
-        <TextInput name={`${name}_en`} defaultValue={en} />
+      <Field label="ინგლისური">
+        <TextInput name={`${name}_en`} defaultValue={en} placeholder={AUTO_TRANSLATE_HINT} />
       </Field>
     </div>
   );
@@ -57,14 +59,14 @@ export function BilingualTextarea({
       <Field label="ქართული">
         <Textarea name={`${name}_ka`} defaultValue={ka} rows={rows} />
       </Field>
-      <Field label="English">
-        <Textarea name={`${name}_en`} defaultValue={en} rows={rows} />
+      <Field label="ინგლისური">
+        <Textarea name={`${name}_en`} defaultValue={en} rows={rows} placeholder={AUTO_TRANSLATE_HINT} />
       </Field>
     </div>
   );
 }
 
-export function SaveButton({ children = "Save" }: { children?: React.ReactNode }) {
+export function SaveButton({ children = "შენახვა" }: { children?: React.ReactNode }) {
   return (
     <button
       type="submit"
@@ -77,7 +79,7 @@ export function SaveButton({ children = "Save" }: { children?: React.ReactNode }
 
 export function DeleteButton({
   formAction,
-  children = "Delete",
+  children = "წაშლა",
 }: {
   formAction: string | ((formData: FormData) => void | Promise<void>);
   children?: React.ReactNode;

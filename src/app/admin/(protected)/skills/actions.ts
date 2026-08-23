@@ -4,6 +4,7 @@ import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { deleteItem, upsertItem } from "@/lib/content/collections";
+import { resolveLocaleString } from "@/lib/translate";
 import type { SkillItem } from "@/lib/content/types";
 
 const FILE = "skills.json";
@@ -11,13 +12,15 @@ const FILE = "skills.json";
 export async function saveSkill(formData: FormData): Promise<void> {
   const id = String(formData.get("id") || "") || randomUUID();
 
+  const label = await resolveLocaleString(
+    String(formData.get("label_ka") || ""),
+    String(formData.get("label_en") || ""),
+  );
+
   const item: SkillItem = {
     id,
     order: Number(formData.get("order") || 0),
-    label: {
-      ka: String(formData.get("label_ka") || ""),
-      en: String(formData.get("label_en") || ""),
-    },
+    label,
   };
 
   await upsertItem<SkillItem>(FILE, item);

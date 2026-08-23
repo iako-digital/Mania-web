@@ -3,18 +3,18 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { writeContent } from "@/lib/content/store";
+import { resolveLocaleString } from "@/lib/translate";
 import type { HeroContent } from "@/lib/content/types";
 
 export async function updateHero(formData: FormData): Promise<void> {
+  const [headline, subheadline] = await Promise.all([
+    resolveLocaleString(String(formData.get("headline_ka") || ""), String(formData.get("headline_en") || "")),
+    resolveLocaleString(String(formData.get("subheadline_ka") || ""), String(formData.get("subheadline_en") || "")),
+  ]);
+
   const data: HeroContent = {
-    headline: {
-      ka: String(formData.get("headline_ka") || ""),
-      en: String(formData.get("headline_en") || ""),
-    },
-    subheadline: {
-      ka: String(formData.get("subheadline_ka") || ""),
-      en: String(formData.get("subheadline_en") || ""),
-    },
+    headline,
+    subheadline,
     mediaType: formData.get("mediaType") === "video" ? "video" : "image",
     videoUrl: String(formData.get("videoUrl") || ""),
     imageUrl: String(formData.get("imageUrl") || ""),

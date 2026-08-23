@@ -37,23 +37,23 @@ export default async function AdminPortfolioEditPage({
 
   return (
     <div className="max-w-2xl">
-      <h1 className="font-display text-3xl text-text-primary">{id === "new" ? "New project" : "Edit project"}</h1>
+      <h1 className="font-display text-3xl text-text-primary">{id === "new" ? "ახალი პროექტი" : "პროექტის რედაქტირება"}</h1>
 
       <form action={savePortfolioItem} className="mt-10 flex flex-col gap-8">
         {id !== "new" && <input type="hidden" name="id" value={item.id} />}
 
         <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">Title</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">სათაური</p>
           <div className="mt-2">
             <BilingualInput name="title" ka={item.title.ka} en={item.title.en} />
           </div>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <Field label="Slug (optional — auto from English title)">
+          <Field label="Slug (არასავალდებულო — ავტომატურად ინგლისური სათაურიდან)">
             <TextInput name="slug" defaultValue={item.slug} />
           </Field>
-          <Field label="Category">
+          <Field label="კატეგორია">
             <select
               name="categorySlug"
               defaultValue={item.categorySlug}
@@ -62,7 +62,7 @@ export default async function AdminPortfolioEditPage({
               <option value="">—</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.slug}>
-                  {category.title.en}
+                  {category.title.ka || category.title.en}
                 </option>
               ))}
             </select>
@@ -70,35 +70,35 @@ export default async function AdminPortfolioEditPage({
         </div>
 
         <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">Description</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">აღწერა</p>
           <div className="mt-2">
             <BilingualTextarea name="description" ka={item.description.ka} en={item.description.en} rows={4} />
           </div>
         </div>
 
-        <Field label="Cover image URL">
-          <TextInput name="coverImageUrl" defaultValue={item.coverImageUrl} placeholder="/uploads/project.jpg or https://…" />
+        <Field label="ყდის სურათის URL">
+          <TextInput name="coverImageUrl" defaultValue={item.coverImageUrl} placeholder="/uploads/project.jpg ან https://…" />
         </Field>
 
-        <Field label="Gallery image URLs (one per line)">
+        <Field label="გალერეის სურათების URL-ები (თითო ხაზზე)">
           <Textarea name="galleryUrls" defaultValue={item.galleryUrls.join("\n")} rows={4} />
         </Field>
 
-        <Field label="Video URL (optional) — a YouTube link or a direct .mp4 URL">
-          <TextInput name="videoUrl" defaultValue={item.videoUrl} placeholder="https://youtu.be/… or /uploads/clip.mp4" />
+        <Field label="ვიდეოს URL (არასავალდებულო) — YouTube ბმული ან პირდაპირი .mp4 ფაილი">
+          <TextInput name="videoUrl" defaultValue={item.videoUrl} placeholder="https://youtu.be/… ან /uploads/clip.mp4" />
         </Field>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <Field label="Year">
+          <Field label="წელი">
             <TextInput name="year" defaultValue={item.year} />
           </Field>
-          <Field label="Order">
+          <Field label="რიგითობა">
             <TextInput name="order" type="number" defaultValue={item.order} />
           </Field>
         </div>
 
         <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">Occasion / client (optional)</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">შემთხვევა / კლიენტი (არასავალდებულო)</p>
           <div className="mt-2">
             <BilingualInput name="occasion" ka={item.occasion?.ka} en={item.occasion?.en} />
           </div>
@@ -106,11 +106,11 @@ export default async function AdminPortfolioEditPage({
 
         <label className="flex items-center gap-3">
           <input type="checkbox" name="featured" defaultChecked={item.featured} className="h-4 w-4 accent-[var(--gold)]" />
-          <span className="font-mono text-xs uppercase tracking-widest text-text-muted">Featured on Home</span>
+          <span className="font-mono text-xs uppercase tracking-widest text-text-muted">გამორჩეული მთავარ გვერდზე</span>
         </label>
 
         <div>
-          <SaveButton>{id === "new" ? "Create project" : "Save"}</SaveButton>
+          <SaveButton>{id === "new" ? "პროექტის შექმნა" : "შენახვა"}</SaveButton>
         </div>
       </form>
     </div>

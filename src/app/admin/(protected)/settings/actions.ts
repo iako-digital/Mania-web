@@ -3,17 +3,20 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { writeContent } from "@/lib/content/store";
+import { resolveLocaleString } from "@/lib/translate";
 import type { SiteSettings } from "@/lib/content/types";
 
 export async function updateSettings(formData: FormData): Promise<void> {
   const socialRaw = String(formData.get("socialLinks") || "");
 
+  const tagline = await resolveLocaleString(
+    String(formData.get("tagline_ka") || ""),
+    String(formData.get("tagline_en") || ""),
+  );
+
   const data: SiteSettings = {
     siteName: String(formData.get("siteName") || ""),
-    tagline: {
-      ka: String(formData.get("tagline_ka") || ""),
-      en: String(formData.get("tagline_en") || ""),
-    },
+    tagline,
     phone: String(formData.get("phone") || ""),
     email: String(formData.get("email") || ""),
     location: String(formData.get("location") || ""),

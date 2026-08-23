@@ -11,11 +11,11 @@ export default function AdminLoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-ink px-6">
       <form action={formAction} className="w-full max-w-sm border border-hairline bg-surface p-8">
-        <h1 className="font-display text-2xl text-text-primary">Admin</h1>
-        <p className="mt-1 text-sm text-text-muted">Mania Vashakidze — content panel</p>
+        <h1 className="font-display text-2xl text-text-primary">მართვის პანელი</h1>
+        <p className="mt-1 text-sm text-text-muted">მანია ვაშაკიძე — კონტენტის მართვა</p>
 
         <label htmlFor="password" className="mt-8 block font-mono text-xs uppercase tracking-widest text-text-muted">
-          Password
+          პაროლი
         </label>
         <input
           id="password"
@@ -33,7 +33,7 @@ export default function AdminLoginPage() {
           disabled={pending}
           className="mt-8 w-full bg-gold px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-ink transition-colors hover:bg-text-primary disabled:opacity-50 cursor-pointer"
         >
-          {pending ? "Checking…" : "Log in"}
+          {pending ? "მოწმდება…" : "შესვლა"}
         </button>
       </form>
     </div>

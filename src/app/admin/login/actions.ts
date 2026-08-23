@@ -12,11 +12,11 @@ export async function login(_prevState: LoginState, formData: FormData): Promise
   const password = String(formData.get("password") || "");
 
   if (!process.env.ADMIN_PASSWORD || !process.env.ADMIN_SESSION_SECRET) {
-    return { error: "Admin login isn't configured on the server yet (missing ADMIN_PASSWORD / ADMIN_SESSION_SECRET)." };
+    return { error: "ადმინის შესვლა ჯერ არ არის კონფიგურირებული სერვერზე (აკლია ADMIN_PASSWORD / ADMIN_SESSION_SECRET)." };
   }
 
   if (!verifyPassword(password)) {
-    return { error: "Incorrect password." };
+    return { error: "პაროლი არასწორია." };
   }
 
   const store = await cookies();

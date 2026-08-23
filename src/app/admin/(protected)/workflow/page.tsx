@@ -12,27 +12,27 @@ export default async function AdminWorkflowPage({
 
   return (
     <div className="max-w-3xl">
-      <h1 className="font-display text-3xl text-text-primary">Workflow</h1>
-      <p className="mt-2 text-text-muted">The 5-step process shown on the Expertise page.</p>
-      {saved && <p className="mt-4 text-sm text-gold">Saved.</p>}
+      <h1 className="font-display text-3xl text-text-primary">სამუშაო პროცესი</h1>
+      <p className="mt-2 text-text-muted">5-საფეხურიანი პროცესი „ექსპერტიზის“ გვერდზე.</p>
+      {saved && <p className="mt-4 text-sm text-gold">შენახულია.</p>}
 
       <div className="mt-10 flex flex-col gap-6">
         {steps.map((step) => (
           <form key={step.id} action={saveWorkflowStep} className="flex flex-col gap-4 border border-hairline bg-surface p-6">
             <input type="hidden" name="id" value={step.id} />
             <div className="w-24">
-              <Field label="Order">
+              <Field label="რიგითობა">
                 <TextInput name="order" type="number" defaultValue={step.order} />
               </Field>
             </div>
             <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-text-muted">Title</p>
+              <p className="font-mono text-xs uppercase tracking-widest text-text-muted">სათაური</p>
               <div className="mt-2">
                 <BilingualInput name="title" ka={step.title.ka} en={step.title.en} />
               </div>
             </div>
             <div>
-              <p className="font-mono text-xs uppercase tracking-widest text-text-muted">Description</p>
+              <p className="font-mono text-xs uppercase tracking-widest text-text-muted">აღწერა</p>
               <div className="mt-2">
                 <BilingualTextarea name="description" ka={step.description.ka} en={step.description.en} rows={2} />
               </div>
@@ -47,24 +47,24 @@ export default async function AdminWorkflowPage({
 
       <form action={saveWorkflowStep} className="mt-10 flex flex-col gap-4 border border-dashed border-hairline p-6">
         <div className="w-24">
-          <Field label="Order">
+          <Field label="რიგითობა">
             <TextInput name="order" type="number" defaultValue={steps.length + 1} />
           </Field>
         </div>
         <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">Title</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">სათაური</p>
           <div className="mt-2">
             <BilingualInput name="title" />
           </div>
         </div>
         <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">Description</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">აღწერა</p>
           <div className="mt-2">
             <BilingualTextarea name="description" rows={2} />
           </div>
         </div>
         <div>
-          <SaveButton>Add step</SaveButton>
+          <SaveButton>დამატება</SaveButton>
         </div>
       </form>
     </div>

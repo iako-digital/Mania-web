@@ -13,35 +13,35 @@ export default async function AdminSettingsPage({
 
   return (
     <div className="max-w-2xl">
-      <h1 className="font-display text-3xl text-text-primary">Site Settings</h1>
-      <p className="mt-2 text-text-muted">Site name, tagline, and contact details.</p>
-      {saved && <p className="mt-4 text-sm text-gold">Saved.</p>}
+      <h1 className="font-display text-3xl text-text-primary">საიტის პარამეტრები</h1>
+      <p className="mt-2 text-text-muted">საიტის სახელი, სლოგანი და საკონტაქტო ინფორმაცია.</p>
+      {saved && <p className="mt-4 text-sm text-gold">შენახულია.</p>}
 
       <form action={updateSettings} className="mt-10 flex flex-col gap-8">
-        <Field label="Site name">
+        <Field label="საიტის სახელი">
           <TextInput name="siteName" defaultValue={settings.siteName} />
         </Field>
 
         <div>
-          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">Tagline</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">სლოგანი</p>
           <div className="mt-2">
             <BilingualInput name="tagline" ka={settings.tagline.ka} en={settings.tagline.en} />
           </div>
         </div>
 
-        <Field label="Phone">
+        <Field label="ტელეფონი">
           <TextInput name="phone" defaultValue={settings.phone} />
         </Field>
 
-        <Field label="Email">
+        <Field label="ელ. ფოსტა">
           <TextInput name="email" type="email" defaultValue={settings.email} />
         </Field>
 
-        <Field label="Location">
-          <TextInput name="location" defaultValue={settings.location} placeholder="Tbilisi, Georgia" />
+        <Field label="მდებარეობა">
+          <TextInput name="location" defaultValue={settings.location} placeholder="თბილისი, საქართველო" />
         </Field>
 
-        <Field label="Social links (one per line, format: Label | https://url)">
+        <Field label="სოციალური ბმულები (თითო ხაზზე, ფორმატით: სახელი | https://ბმული)">
           <Textarea name="socialLinks" defaultValue={socialLinksText} rows={4} />
         </Field>
 

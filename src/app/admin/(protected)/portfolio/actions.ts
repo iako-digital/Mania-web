@@ -4,6 +4,7 @@ import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { deleteItem, upsertItem } from "@/lib/content/collections";
+import { resolveLocaleString } from "@/lib/translate";
 import type { PortfolioItemContent } from "@/lib/content/types";
 
 const FILE = "portfolio.json";
@@ -18,19 +19,24 @@ function slugify(value: string): string {
 
 export async function savePortfolioItem(formData: FormData): Promise<void> {
   const id = String(formData.get("id") || "") || randomUUID();
-  const titleEn = String(formData.get("title_en") || "");
   const slugInput = String(formData.get("slug") || "");
   const galleryRaw = String(formData.get("galleryUrls") || "");
 
+  const [title, description, occasion] = await Promise.all([
+    resolveLocaleString(String(formData.get("title_ka") || ""), String(formData.get("title_en") || "")),
+    resolveLocaleString(
+      String(formData.get("description_ka") || ""),
+      String(formData.get("description_en") || ""),
+    ),
+    resolveLocaleString(String(formData.get("occasion_ka") || ""), String(formData.get("occasion_en") || "")),
+  ]);
+
   const item: PortfolioItemContent = {
     id,
-    slug: slugify(slugInput || titleEn),
-    title: { ka: String(formData.get("title_ka") || ""), en: titleEn },
+    slug: slugify(slugInput || title.en) || id.slice(0, 8),
+    title,
     categorySlug: String(formData.get("categorySlug") || ""),
-    description: {
-      ka: String(formData.get("description_ka") || ""),
-      en: String(formData.get("description_en") || ""),
-    },
+    description,
     coverImageUrl: String(formData.get("coverImageUrl") || ""),
     galleryUrls: galleryRaw
       .split("\n")
@@ -40,10 +46,7 @@ export async function savePortfolioItem(formData: FormData): Promise<void> {
     featured: formData.get("featured") === "on",
     order: Number(formData.get("order") || 0),
     year: String(formData.get("year") || ""),
-    occasion: {
-      ka: String(formData.get("occasion_ka") || ""),
-      en: String(formData.get("occasion_en") || ""),
-    },
+    occasion,
   };
 
   await upsertItem<PortfolioItemContent>(FILE, item);

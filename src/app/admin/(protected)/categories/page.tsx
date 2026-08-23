@@ -12,9 +12,9 @@ export default async function AdminCategoriesPage({
 
   return (
     <div className="max-w-3xl">
-      <h1 className="font-display text-3xl text-text-primary">Categories</h1>
-      <p className="mt-2 text-text-muted">Portfolio category labels and slugs.</p>
-      {saved && <p className="mt-4 text-sm text-gold">Saved.</p>}
+      <h1 className="font-display text-3xl text-text-primary">კატეგორიები</h1>
+      <p className="mt-2 text-text-muted">პორტფოლიოს კატეგორიების სახელები.</p>
+      {saved && <p className="mt-4 text-sm text-gold">შენახულია.</p>}
 
       <div className="mt-10 flex flex-col gap-6">
         {categories.map((category) => (
@@ -25,7 +25,7 @@ export default async function AdminCategoriesPage({
           >
             <input type="hidden" name="id" value={category.id} />
             <div className="w-24 shrink-0">
-              <Field label="Order">
+              <Field label="რიგითობა">
                 <TextInput name="order" type="number" defaultValue={category.order} />
               </Field>
             </div>
@@ -50,20 +50,20 @@ export default async function AdminCategoriesPage({
         className="mt-10 flex flex-col gap-4 border border-dashed border-hairline p-6 sm:flex-row sm:items-end"
       >
         <div className="w-24 shrink-0">
-          <Field label="Order">
+          <Field label="რიგითობა">
             <TextInput name="order" type="number" defaultValue={categories.length + 1} />
           </Field>
         </div>
         <div className="w-40 shrink-0">
-          <Field label="Slug (optional)">
-            <TextInput name="slug" placeholder="auto from English title" />
+          <Field label="Slug (არასავალდებულო)">
+            <TextInput name="slug" placeholder="ავტომატურად ინგლისური სათაურიდან" />
           </Field>
         </div>
         <div className="flex-1">
           <BilingualInput name="title" />
         </div>
         <div className="shrink-0">
-          <SaveButton>Add category</SaveButton>
+          <SaveButton>დამატება</SaveButton>
         </div>
       </form>
     </div>

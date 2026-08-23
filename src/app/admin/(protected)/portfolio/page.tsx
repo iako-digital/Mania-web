@@ -15,21 +15,21 @@ export default async function AdminPortfolioListPage({
     <div className="max-w-4xl">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-display text-3xl text-text-primary">Portfolio</h1>
-          <p className="mt-2 text-text-muted">Projects shown in the portfolio grid.</p>
+          <h1 className="font-display text-3xl text-text-primary">პორტფოლიო</h1>
+          <p className="mt-2 text-text-muted">პროექტები, რომლებიც ჩანს პორტფოლიოს გვერდზე.</p>
         </div>
         <Link
           href="/admin/portfolio/new"
           className="bg-gold px-5 py-3 font-mono text-xs uppercase tracking-[0.2em] text-ink hover:bg-text-primary transition-colors"
         >
-          New project
+          ახალი პროექტი
         </Link>
       </div>
 
-      {saved && <p className="mt-4 text-sm text-gold">Saved.</p>}
+      {saved && <p className="mt-4 text-sm text-gold">შენახულია.</p>}
 
       <div className="mt-10 flex flex-col gap-3">
-        {items.length === 0 && <p className="text-text-muted">No projects yet.</p>}
+        {items.length === 0 && <p className="text-text-muted">ჯერ არცერთი პროექტი არ არის.</p>}
 
         {items.map((item) => (
           <div
@@ -43,17 +43,17 @@ export default async function AdminPortfolioListPage({
               <div className="h-16 w-16 shrink-0 bg-ink" />
             )}
             <div className="flex-1">
-              <p className="text-text-primary">{item.title.en || item.title.ka || "(untitled)"}</p>
+              <p className="text-text-primary">{item.title.ka || item.title.en || "(უსათაურო)"}</p>
               <p className="font-mono text-xs uppercase tracking-widest text-text-muted">
-                {item.category?.title.en || item.categorySlug} · {item.slug}
-                {item.featured ? " · Featured" : ""}
+                {item.category?.title.ka || item.categorySlug} · {item.slug}
+                {item.featured ? " · გამორჩეული" : ""}
               </p>
             </div>
             <Link
               href={`/admin/portfolio/${item.id}`}
               className="font-mono text-xs uppercase tracking-widest text-text-muted hover:text-gold"
             >
-              Edit
+              რედაქტირება
             </Link>
             <form action={removePortfolioItem}>
               <input type="hidden" name="id" value={item.id} />
