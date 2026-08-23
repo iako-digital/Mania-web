@@ -2,11 +2,11 @@
 
 import { motion } from "framer-motion";
 import { useLocale } from "next-intl";
-import { pickLocale } from "@/lib/sanity/locale";
+import { pickLocale } from "@/lib/content/locale";
 import { fadeUp, staggerChildren } from "@/lib/motion/variants";
-import type { SkillData } from "@/lib/sanity/types";
+import type { SkillItem } from "@/lib/content/types";
 
-export function SkillsGrid({ skills }: { skills: SkillData[] }) {
+export function SkillsGrid({ skills }: { skills: SkillItem[] }) {
   const locale = useLocale();
 
   return (
@@ -19,7 +19,7 @@ export function SkillsGrid({ skills }: { skills: SkillData[] }) {
     >
       {skills.map((skill, i) => (
         <motion.li
-          key={i}
+          key={skill.id}
           variants={fadeUp}
           className="flex items-start gap-4 border-b border-hairline pb-5"
         >

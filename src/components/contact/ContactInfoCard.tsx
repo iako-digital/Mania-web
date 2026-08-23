@@ -5,10 +5,12 @@ export async function ContactInfoCard({
   locale,
   phone,
   email,
+  location,
 }: {
   locale: string;
   phone: string;
   email: string;
+  location?: string;
 }) {
   const t = await getTranslations({ locale, namespace: "contact" });
 
@@ -26,6 +28,12 @@ export async function ContactInfoCard({
           {email}
         </a>
       </div>
+      {location && (
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-gold">{t("locationLabel")}</p>
+          <p className="mt-2 text-text-primary">{location}</p>
+        </div>
+      )}
     </RevealOnScroll>
   );
 }

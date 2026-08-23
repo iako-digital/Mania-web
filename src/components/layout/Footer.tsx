@@ -1,9 +1,12 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { getSiteSettings } from "@/lib/content/queries";
 
-export function Footer() {
-  const t = useTranslations("footer");
-  const nav = useTranslations("nav");
+export async function Footer() {
+  const t = await getTranslations("footer");
+  const nav = await getTranslations("nav");
+  const contact = await getTranslations("contact");
+  const settings = await getSiteSettings();
   const year = new Date().getFullYear();
 
   return (
@@ -28,6 +31,35 @@ export function Footer() {
               </Link>
             ))}
           </nav>
+
+          <div className="flex flex-col gap-2 text-sm">
+            {settings.phone && (
+              <a href={`tel:${settings.phone.replace(/\s+/g, "")}`} className="text-text-muted hover:text-gold transition-colors">
+                {contact("phoneLabel")}: {settings.phone}
+              </a>
+            )}
+            {settings.email && (
+              <a href={`mailto:${settings.email}`} className="text-text-muted hover:text-gold transition-colors">
+                {contact("emailLabel")}: {settings.email}
+              </a>
+            )}
+            {settings.location && <p className="text-text-muted">{settings.location}</p>}
+            {settings.socialLinks.length > 0 && (
+              <div className="mt-1 flex flex-wrap gap-x-5 gap-y-1">
+                {settings.socialLinks.map((link) => (
+                  <a
+                    key={link.url}
+                    href={link.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-mono text-xs uppercase tracking-[0.15em] text-text-muted hover:text-gold transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="mt-12 flex flex-col-reverse gap-4 border-t border-hairline pt-6 text-xs text-text-muted md:flex-row md:items-center md:justify-between">

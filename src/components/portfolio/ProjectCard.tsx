@@ -1,20 +1,18 @@
 "use client";
 
-import Image from "next/image";
 import { useLocale } from "next-intl";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/navigation";
-import { urlForImage } from "@/lib/sanity/image";
-import { pickLocale } from "@/lib/sanity/locale";
+import { pickLocale } from "@/lib/content/locale";
 import { fadeUp } from "@/lib/motion/variants";
-import type { PortfolioItemSummary } from "@/lib/sanity/types";
+import type { PortfolioItemWithCategory } from "@/lib/content/queries";
 
 export function ProjectCard({
   item,
   className = "",
   priority = false,
 }: {
-  item: PortfolioItemSummary;
+  item: PortfolioItemWithCategory;
   className?: string;
   priority?: boolean;
 }) {
@@ -26,12 +24,12 @@ export function ProjectCard({
     <motion.div variants={fadeUp} className={className}>
       <Link href={`/portfolio/${item.slug}`} className="crop-mark group relative block overflow-hidden">
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-surface">
-          <Image
-            src={urlForImage(item.coverImage).width(900).height(1125).url()}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={item.coverImageUrl}
             alt={title}
-            fill
-            priority={priority}
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            loading={priority ? "eager" : "lazy"}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
           <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
             <div

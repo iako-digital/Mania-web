@@ -1,0 +1,6 @@
+[
+  { "id": "cat-1", "slug": "womens-couture", "order": 1, "title": { "ka": "ქალის კუტიური", "en": "Women's Couture" } },
+  { "id": "cat-2", "slug": "wedding-formal", "order": 2, "title": { "ka": "საქორწილო და საზეიმო", "en": "Wedding & Formal" } },
+  { "id": "cat-3", "slug": "production-patterns", "order": 3, "title": { "ka": "საწარმოო თარგები", "en": "Production Patterns" } },
+  { "id": "cat-4", "slug": "three-d", "order": 4, "title": { "ka": "3D", "en": "3D" } }
+]

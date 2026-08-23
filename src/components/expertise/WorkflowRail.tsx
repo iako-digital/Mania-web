@@ -2,11 +2,11 @@
 
 import { motion } from "framer-motion";
 import { useLocale } from "next-intl";
-import { pickLocale } from "@/lib/sanity/locale";
+import { pickLocale } from "@/lib/content/locale";
 import { fadeUp, staggerChildren } from "@/lib/motion/variants";
-import type { WorkflowStepData } from "@/lib/sanity/types";
+import type { WorkflowStepItem } from "@/lib/content/types";
 
-export function WorkflowRail({ steps }: { steps: WorkflowStepData[] }) {
+export function WorkflowRail({ steps }: { steps: WorkflowStepItem[] }) {
   const locale = useLocale();
 
   return (
@@ -19,7 +19,7 @@ export function WorkflowRail({ steps }: { steps: WorkflowStepData[] }) {
     >
       <div className="grid grid-cols-1 gap-10 md:grid-cols-5 md:gap-4">
         {steps.map((step, i) => (
-          <motion.div key={i} variants={fadeUp} className="relative flex flex-col gap-4 md:items-start">
+          <motion.div key={step.id} variants={fadeUp} className="relative flex flex-col gap-4 md:items-start">
             <div className="flex items-center gap-4 md:flex-col md:items-start">
               <span className="font-mono text-2xl text-gold">
                 {String(i + 1).padStart(2, "0")}

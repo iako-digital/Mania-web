@@ -1,11 +1,11 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
-import { urlForImage } from "@/lib/sanity/image";
-import { pickLocale } from "@/lib/sanity/locale";
-import { getPortfolioItemBySlug } from "@/lib/sanity/queries";
+import { YouTubeEmbed } from "@/components/ui/YouTubeEmbed";
+import { pickLocale } from "@/lib/content/locale";
+import { getPortfolioItemBySlug } from "@/lib/content/queries";
+import { getYouTubeId } from "@/lib/youtube";
 
 export default async function PortfolioDetailPage({
   params,
@@ -28,6 +28,7 @@ export default async function PortfolioDetailPage({
   const description = pickLocale(item.description, locale);
   const category = item.category ? pickLocale(item.category.title, locale) : "";
   const occasion = pickLocale(item.occasion, locale);
+  const youTubeId = getYouTubeId(item.videoUrl);
 
   return (
     <article className="mx-auto max-w-5xl px-6 py-24 lg:px-10 lg:py-32">
@@ -67,37 +68,33 @@ export default async function PortfolioDetailPage({
       </RevealOnScroll>
 
       <RevealOnScroll className="relative mt-14 aspect-[4/5] w-full overflow-hidden md:aspect-[16/9]">
-        <Image
-          src={urlForImage(item.coverImage).width(1800).url()}
-          alt={title}
-          fill
-          priority
-          className="object-cover"
-        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={item.coverImageUrl} alt={title} className="absolute inset-0 h-full w-full object-cover" />
       </RevealOnScroll>
 
-      {item.video?.asset && (
+      {item.videoUrl && youTubeId && (
         <RevealOnScroll className="mt-10">
-          <video
-            className="w-full"
-            controls
-            playsInline
-            preload="metadata"
-          >
-            <source src={item.video.asset.url} type="video/mp4" />
+          <YouTubeEmbed videoId={youTubeId} title={title} />
+        </RevealOnScroll>
+      )}
+
+      {item.videoUrl && !youTubeId && (
+        <RevealOnScroll className="mt-10">
+          <video className="w-full" controls playsInline preload="metadata">
+            <source src={item.videoUrl} type="video/mp4" />
           </video>
         </RevealOnScroll>
       )}
 
-      {item.gallery && item.gallery.length > 0 && (
+      {item.galleryUrls && item.galleryUrls.length > 0 && (
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {item.gallery.map((image, i) => (
-            <RevealOnScroll key={i} delay={i * 0.05} className="relative aspect-[4/5] overflow-hidden">
-              <Image
-                src={urlForImage(image).width(1000).url()}
+          {item.galleryUrls.map((url, i) => (
+            <RevealOnScroll key={url} delay={i * 0.05} className="relative aspect-[4/5] overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={url}
                 alt={`${title} — ${i + 1}`}
-                fill
-                className="object-cover"
+                className="absolute inset-0 h-full w-full object-cover"
               />
             </RevealOnScroll>
           ))}

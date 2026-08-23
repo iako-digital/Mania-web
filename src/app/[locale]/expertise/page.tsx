@@ -3,10 +3,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { WorkflowRail } from "@/components/expertise/WorkflowRail";
 import { SkillsGrid } from "@/components/expertise/SkillsGrid";
 import { ProgramBadge } from "@/components/expertise/ProgramBadge";
-import { getSkills, getWorkflowSteps } from "@/lib/sanity/queries";
-import type { SkillData, WorkflowStepData } from "@/lib/sanity/types";
-
-const STEP_KEYS = ["concept", "pattern", "grading", "optimization", "cutting"] as const;
+import { getSkills, getWorkflowSteps } from "@/lib/content/queries";
 
 export default async function ExpertisePage({
   params,
@@ -17,32 +14,7 @@ export default async function ExpertisePage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "expertise" });
-
-  const [stepsFromCms, skillsFromCms] = await Promise.all([getWorkflowSteps(), getSkills()]);
-
-  const steps: WorkflowStepData[] =
-    stepsFromCms.length > 0
-      ? stepsFromCms
-      : STEP_KEYS.map((key) => ({
-          _id: key,
-          title: {
-            ka: t(`steps.${key}.title`),
-            en: t(`steps.${key}.title`),
-          },
-          description: {
-            ka: t(`steps.${key}.description`),
-            en: t(`steps.${key}.description`),
-          },
-        }));
-
-  const skillsListFallback = t.raw("skillsList") as string[];
-  const skills: SkillData[] =
-    skillsFromCms.length > 0
-      ? skillsFromCms
-      : skillsListFallback.map((label, i) => ({
-          _id: String(i),
-          label: { ka: label, en: label },
-        }));
+  const [steps, skills] = await Promise.all([getWorkflowSteps(), getSkills()]);
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">

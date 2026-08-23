@@ -4,10 +4,8 @@ import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { Portrait } from "@/components/about/Portrait";
 import { AchievementsBlock } from "@/components/about/AchievementsBlock";
 import { SkillsGrid } from "@/components/expertise/SkillsGrid";
-import { getAboutPage, getSkills } from "@/lib/sanity/queries";
-import { pickLocale } from "@/lib/sanity/locale";
-import { aboutFallback } from "@/lib/content/aboutFallback";
-import type { SkillData } from "@/lib/sanity/types";
+import { getAboutContent, getSkills } from "@/lib/content/queries";
+import { pickLocale } from "@/lib/content/locale";
 
 export default async function AboutPage({
   params,
@@ -18,30 +16,19 @@ export default async function AboutPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "about" });
-  const [about, skillsFromCms] = await Promise.all([getAboutPage(), getSkills()]);
+  const [about, skills] = await Promise.all([getAboutContent(), getSkills()]);
 
-  const bio = pickLocale(about?.bio, locale) || pickLocale(aboutFallback.bio, locale);
-  const career =
-    pickLocale(about?.careerNarrative, locale) || pickLocale(aboutFallback.careerNarrative, locale);
-  const achievements =
-    pickLocale(about?.achievementsNarrative, locale) ||
-    pickLocale(aboutFallback.achievementsNarrative, locale);
-  const programs = about?.programs && about.programs.length > 0 ? about.programs : ["Gerber AccuMark"];
-
-  const skillsListFallback = (await getTranslations({ locale, namespace: "expertise" })).raw(
-    "skillsList",
-  ) as string[];
-  const skills: SkillData[] =
-    skillsFromCms.length > 0
-      ? skillsFromCms
-      : skillsListFallback.map((label, i) => ({ _id: String(i), label: { ka: label, en: label } }));
+  const bio = pickLocale(about.bio, locale);
+  const career = pickLocale(about.careerNarrative, locale);
+  const achievements = pickLocale(about.achievementsNarrative, locale);
+  const programs = about.programs.length > 0 ? about.programs : ["Gerber AccuMark"];
 
   return (
     <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
       <SectionHeading kicker={t("roleLabel")} title={t("title")} />
 
       <div className="mt-16 grid grid-cols-1 gap-16 lg:grid-cols-[minmax(0,380px)_1fr] lg:gap-20">
-        <Portrait portrait={about?.portrait} />
+        <Portrait portraitUrl={about.portraitUrl} />
 
         <div className="flex flex-col gap-16">
           <RevealOnScroll>

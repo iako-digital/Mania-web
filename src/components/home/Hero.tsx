@@ -1,16 +1,16 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
-import { urlForImage } from "@/lib/sanity/image";
-import { pickLocale } from "@/lib/sanity/locale";
+import { YouTubeBackground } from "@/components/ui/YouTubeBackground";
+import { pickLocale } from "@/lib/content/locale";
+import { getYouTubeId } from "@/lib/youtube";
 import { staggerChildren, fadeUp, fabricEase } from "@/lib/motion/variants";
-import type { HeroSectionData } from "@/lib/sanity/types";
+import type { HeroContent } from "@/lib/content/types";
 
-export function Hero({ data }: { data: HeroSectionData | null }) {
+export function Hero({ data }: { data: HeroContent | null }) {
   const t = useTranslations("home");
   const locale = useLocale();
   const ref = useRef<HTMLDivElement>(null);
@@ -25,13 +25,18 @@ export function Hero({ data }: { data: HeroSectionData | null }) {
       ? "Where a technical blueprint resolves into a finished garment."
       : "სადაც ტექნიკური ნახაზი მზა სამოსად იქცევა.");
 
-  const hasVideo = data?.mediaType === "video" && data.video?.asset;
-  const hasImage = data?.mediaType === "image" && data.image;
+  const hasVideo = data?.mediaType === "video" && data.videoUrl;
+  const hasImage = data?.mediaType === "image" && data.imageUrl;
+  const youTubeId = hasVideo ? getYouTubeId(data!.videoUrl) : null;
 
   return (
     <section ref={ref} className="relative flex min-h-[92vh] items-center overflow-hidden">
       <motion.div style={{ y }} className="absolute inset-0 z-0">
-        {hasVideo ? (
+        {hasVideo && youTubeId ? (
+          <div className="absolute inset-0 opacity-60">
+            <YouTubeBackground videoId={youTubeId} />
+          </div>
+        ) : hasVideo ? (
           <video
             className="h-full w-full object-cover opacity-60"
             autoPlay
@@ -39,18 +44,13 @@ export function Hero({ data }: { data: HeroSectionData | null }) {
             loop
             playsInline
             preload="metadata"
-            poster={data?.posterImage ? urlForImage(data.posterImage).width(1600).url() : undefined}
+            poster={data?.posterUrl || undefined}
           >
-            <source src={data!.video!.asset!.url} type="video/mp4" />
+            <source src={data!.videoUrl} type="video/mp4" />
           </video>
         ) : hasImage ? (
-          <Image
-            src={urlForImage(data!.image!).width(1920).height(1200).url()}
-            alt=""
-            fill
-            priority
-            className="object-cover opacity-60"
-          />
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={data!.imageUrl} alt="" className="h-full w-full object-cover opacity-60" />
         ) : (
           <div className="h-full w-full bg-gradient-to-b from-surface via-ink to-ink" />
         )}
@@ -86,7 +86,7 @@ export function Hero({ data }: { data: HeroSectionData | null }) {
 
         <motion.h1
           variants={fadeUp}
-          className="mt-6 font-display text-5xl font-medium leading-[0.95] tracking-tight text-text-primary sm:text-6xl md:text-7xl lg:text-8xl"
+          className="mt-6 font-display text-4xl font-medium leading-[0.95] tracking-tight text-text-primary sm:text-6xl md:text-7xl lg:text-8xl"
           style={{ clipPath: "inset(0 0 0 0)" }}
         >
           {headline.split(" ").map((word, i) => (

@@ -4,14 +4,14 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { ProjectCard } from "@/components/portfolio/ProjectCard";
 import { staggerChildren } from "@/lib/motion/variants";
-import type { PortfolioItemSummary } from "@/lib/sanity/types";
+import type { PortfolioItemContent } from "@/lib/content/types";
 
 export async function FeaturedProjects({
   locale,
   items,
 }: {
   locale: string;
-  items: PortfolioItemSummary[];
+  items: PortfolioItemContent[];
 }) {
   const t = await getTranslations({ locale, namespace: "home" });
 
@@ -28,7 +28,7 @@ export async function FeaturedProjects({
       <RevealOnScroll variants={staggerChildren}>
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item, i) => (
-            <ProjectCard key={item._id} item={item} priority={i === 0} />
+            <ProjectCard key={item.id} item={item} priority={i === 0} />
           ))}
         </div>
       </RevealOnScroll>

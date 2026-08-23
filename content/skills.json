@@ -1,0 +1,12 @@
+[
+  { "id": "skill-1", "order": 1, "label": { "ka": "დიზაინის ხატვა-მოფიქრება", "en": "Design ideation & sketching" } },
+  { "id": "skill-2", "order": 2, "label": { "ka": "ტექნიკური ნახაზის შედგენა", "en": "Technical flat drawing" } },
+  { "id": "skill-3", "order": 3, "label": { "ka": "ქაღალდის თარგის აგება", "en": "Paper pattern drafting" } },
+  { "id": "skill-4", "order": 4, "label": { "ka": "ნიმუშის კერვა-კორექტირება", "en": "Sample sewing & fit correction" } },
+  { "id": "skill-5", "order": 5, "label": { "ka": "თარგის გაციფრულება-კორექტირება", "en": "Pattern digitization & correction" } },
+  { "id": "skill-6", "order": 6, "label": { "ka": "საბაზისო თარგის გრადაცია ზომებში", "en": "Base pattern grading across size ranges" } },
+  { "id": "skill-7", "order": 7, "label": { "ka": "ქსოვილის ხარჯის ოპტიმიზაცია", "en": "Fabric consumption optimization" } },
+  { "id": "skill-8", "order": 8, "label": { "ka": "გერბერზე ჭრისთვის ფაილების გამზადება-გადაგზავნა", "en": "Preparing & submitting cutting files for Gerber" } },
+  { "id": "skill-9", "order": 9, "label": { "ka": "თარგების მოდელირება", "en": "Pattern draping & modeling" } },
+  { "id": "skill-10", "order": 10, "label": { "ka": "საწარმოში მოდელის ოპერაციულად ჩაშლა", "en": "Operational breakdown of the garment for production" } }
+]

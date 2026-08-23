@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { pickLocale } from "@/lib/sanity/locale";
-import type { CategoryRef } from "@/lib/sanity/types";
+import { pickLocale } from "@/lib/content/locale";
+import type { CategoryItem } from "@/lib/content/types";
 
 export async function CategoryFilter({
   locale,
@@ -9,7 +9,7 @@ export async function CategoryFilter({
   active,
 }: {
   locale: string;
-  categories: CategoryRef[];
+  categories: CategoryItem[];
   active?: string;
 }) {
   const t = await getTranslations({ locale, namespace: "portfolio" });

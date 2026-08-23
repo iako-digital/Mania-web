@@ -3,7 +3,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { LocaleSwitcher } from "./LocaleSwitcher";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 type NavItem = { href: string; key: string };
@@ -65,9 +64,8 @@ export function MobileNav({
             ))}
           </nav>
 
-          <div className="flex items-center justify-between px-6 py-8">
+          <div className="flex items-center justify-center px-6 py-8">
             <ThemeToggle />
-            <LocaleSwitcher />
           </div>
         </motion.div>
       )}

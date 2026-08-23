@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { writeClient } from "@/lib/sanity/client";
-import { isSanityConfigured } from "../../../../sanity/env";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -29,24 +27,14 @@ export async function POST(request: Request) {
   const trimmedName = name.trim().slice(0, 200);
   const trimmedEmail = email.trim().slice(0, 200);
   const trimmedMessage = message.trim().slice(0, 5000);
+  const receivedAt = new Date().toISOString();
 
-  let delivered = false;
-
-  if (isSanityConfigured && process.env.SANITY_API_WRITE_TOKEN) {
-    try {
-      await writeClient.create({
-        _type: "contactMessage",
-        name: trimmedName,
-        email: trimmedEmail,
-        message: trimmedMessage,
-        receivedAt: new Date().toISOString(),
-        handled: false,
-      });
-      delivered = true;
-    } catch (err) {
-      console.error("Failed to store contact message in Sanity:", err);
-    }
-  }
+  // Always logged (visible in your host's function logs) as a baseline
+  // audit trail, independent of whether email delivery is configured.
+  console.log(
+    "[contact]",
+    JSON.stringify({ name: trimmedName, email: trimmedEmail, message: trimmedMessage, receivedAt }),
+  );
 
   if (process.env.RESEND_API_KEY && process.env.CONTACT_NOTIFICATION_EMAIL) {
     try {
@@ -58,17 +46,10 @@ export async function POST(request: Request) {
         subject: `New inquiry from ${trimmedName}`,
         text: `Name: ${trimmedName}\nEmail: ${trimmedEmail}\n\n${trimmedMessage}`,
       });
-      delivered = true;
     } catch (err) {
-      console.error("Failed to send contact notification email:", err);
+      console.error("[contact] Resend delivery failed:", err);
+      return NextResponse.json({ error: "Message could not be emailed" }, { status: 502 });
     }
-  }
-
-  if (!delivered) {
-    console.error(
-      "Contact form submission could not be delivered — configure SANITY_API_WRITE_TOKEN and/or RESEND_API_KEY.",
-    );
-    return NextResponse.json({ error: "Message could not be delivered" }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });

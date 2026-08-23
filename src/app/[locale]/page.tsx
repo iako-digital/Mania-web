@@ -2,7 +2,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/home/Hero";
 import { IntroStatement } from "@/components/home/IntroStatement";
 import { FeaturedProjects } from "@/components/home/FeaturedProjects";
-import { getAboutPage, getFeaturedPortfolioItems, getHeroSection } from "@/lib/sanity/queries";
+import { getAboutContent, getFeaturedPortfolioItems, getHeroContent } from "@/lib/content/queries";
 
 export default async function HomePage({
   params,
@@ -13,9 +13,9 @@ export default async function HomePage({
   setRequestLocale(locale);
 
   const [hero, featured, about] = await Promise.all([
-    getHeroSection(),
+    getHeroContent(),
     getFeaturedPortfolioItems(3),
-    getAboutPage(),
+    getAboutContent(),
   ]);
 
   return (

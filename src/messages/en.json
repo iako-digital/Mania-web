@@ -31,12 +31,6 @@
     "occasionLabel": "Occasion",
     "categoryLabel": "Category"
   },
-  "categories": {
-    "womens-couture": "Women's Couture",
-    "wedding-formal": "Wedding & Formal",
-    "production-patterns": "Production Patterns",
-    "three-d": "3D"
-  },
   "expertise": {
     "title": "Expertise & Workflow",
     "subtitle": "Technical precision, from concept to cutting room",
@@ -45,41 +39,7 @@
     "skillsTitle": "Core Skills",
     "skillsSubtitle": "Two decades of hands-on, universal pattern-making expertise",
     "softwareTitle": "Software",
-    "softwareBody": "Works in Gerber AccuMark — from digitizing a hand-drafted pattern to preparing production-ready cutting files.",
-    "skillsList": [
-      "Design ideation & sketching",
-      "Technical flat drawing",
-      "Paper pattern drafting",
-      "Sample sewing & fit correction",
-      "Pattern digitization & correction",
-      "Base pattern grading across size ranges",
-      "Fabric consumption optimization",
-      "Preparing & submitting cutting files for Gerber",
-      "Pattern draping & modeling",
-      "Operational breakdown of the garment for production"
-    ],
-    "steps": {
-      "concept": {
-        "title": "Concept Design",
-        "description": "Sketching and shaping the initial idea — silhouette, proportion, and intent."
-      },
-      "pattern": {
-        "title": "Pattern Development",
-        "description": "Drafting the paper pattern and sewing a sample for fit and correction."
-      },
-      "grading": {
-        "title": "Base Grading",
-        "description": "Grading the base pattern precisely across the full size range."
-      },
-      "optimization": {
-        "title": "Fabric Optimization",
-        "description": "Optimizing fabric consumption and marker efficiency."
-      },
-      "cutting": {
-        "title": "Cutting Files",
-        "description": "Preparing and sending digitized files for cutting on Gerber."
-      }
-    }
+    "softwareBody": "Works in Gerber AccuMark — from digitizing a hand-drafted pattern to preparing production-ready cutting files."
   },
   "about": {
     "title": "About",
@@ -96,6 +56,7 @@
     "subtitle": "For commissions, collaborations, and production inquiries",
     "phoneLabel": "Phone",
     "emailLabel": "Email",
+    "locationLabel": "Location",
     "formName": "Name",
     "formEmail": "Email",
     "formMessage": "Message",

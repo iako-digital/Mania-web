@@ -1,15 +1,15 @@
 import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/Button";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
-import { pickLocale } from "@/lib/sanity/locale";
-import type { AboutPageData } from "@/lib/sanity/types";
+import { pickLocale } from "@/lib/content/locale";
+import type { AboutContent } from "@/lib/content/types";
 
 export async function IntroStatement({
   locale,
   about,
 }: {
   locale: string;
-  about: AboutPageData | null;
+  about: AboutContent | null;
 }) {
   const t = await getTranslations({ locale, namespace: "home" });
   const body = pickLocale(about?.bio, locale) || t("introBody");

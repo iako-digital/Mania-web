@@ -1,12 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { urlForImage } from "@/lib/sanity/image";
 import { scaleIn } from "@/lib/motion/variants";
-import type { Image as SanityImage } from "sanity";
 
-export function Portrait({ portrait }: { portrait?: SanityImage }) {
+export function Portrait({ portraitUrl }: { portraitUrl?: string }) {
   return (
     <motion.div
       initial="hidden"
@@ -15,13 +12,12 @@ export function Portrait({ portrait }: { portrait?: SanityImage }) {
       variants={scaleIn}
       className="crop-mark relative aspect-[4/5] w-full overflow-hidden bg-surface"
     >
-      {portrait ? (
-        <Image
-          src={urlForImage(portrait).width(1200).height(1500).url()}
+      {portraitUrl ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={portraitUrl}
           alt="Mania Vashakidze"
-          fill
-          priority
-          className="object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
         />
       ) : (
         <div className="flex h-full w-full items-center justify-center">
