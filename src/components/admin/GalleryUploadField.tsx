@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { Upload } from "lucide-react";
 import { uploadManyToCloudinary } from "@/lib/cloudinary-upload";
 import { isVideoUrl } from "@/lib/media";
 import { useUploadGate } from "./UploadGateContext";
@@ -102,17 +103,10 @@ export function GalleryUploadField({
   return (
     <Field label={label}>
       <div className="mt-2 flex flex-col gap-3">
-        <textarea
-          name={name}
-          value={urls.join("\n")}
-          onChange={(e) => setUrls(e.target.value.split("\n"))}
-          rows={4}
-          className={`${inputClass} resize-none`}
-        />
-
         <div className="flex flex-wrap items-center gap-4">
-          <label className="cursor-pointer border border-hairline px-4 py-2 font-mono text-xs uppercase tracking-widest text-text-muted transition-colors hover:border-gold hover:text-gold">
-            ფაილების ატვირთვა (სურათები და ვიდეო)
+          <label className="inline-flex w-fit cursor-pointer items-center gap-2 bg-gold px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-[0.15em] text-ink transition-colors hover:bg-text-primary">
+            <Upload size={14} />
+            ფაილების ატვირთვა
             <input
               ref={fileInputRef}
               type="file"
@@ -139,7 +133,7 @@ export function GalleryUploadField({
         </div>
 
         <p className="font-mono text-[11px] uppercase tracking-widest text-text-muted">
-          მაქსიმუმ {MAX_IMAGES_PER_BATCH} სურათი ან {MAX_VIDEOS_PER_BATCH} ვიდეო ერთ ჯერზე
+          სურათები და ვიდეო ერთად — მაქსიმუმ {MAX_IMAGES_PER_BATCH} სურათი ან {MAX_VIDEOS_PER_BATCH} ვიდეო ერთ ჯერზე
         </p>
 
         {notice && <p className="text-xs text-gold">{notice}</p>}
@@ -166,6 +160,19 @@ export function GalleryUploadField({
             ))}
           </div>
         )}
+
+        <label className="block">
+          <span className="font-mono text-[11px] uppercase tracking-widest text-text-muted">
+            URL-ების სია (ავტომატურად ივსება ატვირთვისას — ხელითაც შეგიძლიათ ჩასწოროთ)
+          </span>
+          <textarea
+            name={name}
+            value={urls.join("\n")}
+            onChange={(e) => setUrls(e.target.value.split("\n"))}
+            rows={4}
+            className={`${inputClass} resize-none`}
+          />
+        </label>
       </div>
     </Field>
   );
