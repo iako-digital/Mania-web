@@ -1,6 +1,9 @@
-import type { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
+"use client";
 
-const inputClass =
+import type { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
+import { useUploadGate } from "./UploadGateContext";
+
+export const inputClass =
   "mt-2 w-full border-b border-hairline bg-transparent py-2 text-text-primary placeholder:text-text-muted/50 focus:border-gold focus:outline-none";
 
 export function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -67,12 +70,16 @@ export function BilingualTextarea({
 }
 
 export function SaveButton({ children = "შენახვა" }: { children?: React.ReactNode }) {
+  const gate = useUploadGate();
+  const disabled = gate?.uploading ?? false;
+
   return (
     <button
       type="submit"
-      className="bg-gold px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-ink transition-colors hover:bg-text-primary cursor-pointer"
+      disabled={disabled}
+      className="bg-gold px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-ink transition-colors hover:bg-text-primary disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
     >
-      {children}
+      {disabled ? "მედია იტვირთება…" : children}
     </button>
   );
 }
