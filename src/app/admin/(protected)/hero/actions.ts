@@ -15,7 +15,6 @@ export async function updateHero(formData: FormData): Promise<void> {
   const data: HeroContent = {
     headline,
     subheadline,
-    mediaType: formData.get("mediaType") === "video" ? "video" : "image",
     videoUrl: String(formData.get("videoUrl") || ""),
     imageUrl: String(formData.get("imageUrl") || ""),
     posterUrl: String(formData.get("posterUrl") || ""),

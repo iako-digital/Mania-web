@@ -2,12 +2,9 @@
 
 import { useRef, useState } from "react";
 import { uploadToCloudinary } from "@/lib/cloudinary-upload";
+import { isVideoUrl } from "@/lib/media";
 import { useUploadGate } from "./UploadGateContext";
 import { Field, TextInput } from "./fields";
-
-function looksLikeVideo(url: string): boolean {
-  return /\.(mp4|webm|mov|m4v)(\?|$)/i.test(url) || url.includes("/video/upload/");
-}
 
 export function MediaUploadField({
   name,
@@ -49,7 +46,7 @@ export function MediaUploadField({
   }
 
   const isUploading = progress !== null;
-  const isVideo = looksLikeVideo(url);
+  const isVideo = isVideoUrl(url);
 
   return (
     <Field label={label}>

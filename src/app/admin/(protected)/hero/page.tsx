@@ -1,5 +1,5 @@
 import { getHeroContent } from "@/lib/content/queries";
-import { BilingualInput, BilingualTextarea, Field, SaveButton } from "@/components/admin/fields";
+import { BilingualInput, BilingualTextarea, SaveButton } from "@/components/admin/fields";
 import { MediaUploadField } from "@/components/admin/MediaUploadField";
 import { UploadGateProvider } from "@/components/admin/UploadGateContext";
 import { updateHero } from "./actions";
@@ -34,36 +34,25 @@ export default async function AdminHeroPage({
             </div>
           </div>
 
-          <Field label="მედიის ტიპი">
-            <select
-              name="mediaType"
-              defaultValue={hero.mediaType}
-              className="mt-2 w-full border-b border-hairline bg-transparent py-2 text-text-primary focus:border-gold focus:outline-none"
-            >
-              <option value="image">ფოტო</option>
-              <option value="video">ვიდეო (ციკლური)</option>
-            </select>
-          </Field>
-
-          <MediaUploadField
-            name="imageUrl"
-            label="სურათი (გამოიყენება, თუ მედიის ტიპია „ფოტო“)"
-            defaultValue={hero.imageUrl}
-            accept="image/*"
-            placeholder="ატვირთეთ ფაილი ან ჩასვით URL"
-          />
-
           <MediaUploadField
             name="videoUrl"
-            label="ვიდეო (გამოიყენება, თუ მედიის ტიპია „ვიდეო“) — ატვირთეთ ფაილი ან ჩასვით YouTube ბმული"
+            label="თავსართის ვიდეო — თუ ატვირთავთ, ის ავტომატურად გამოჩნდება ფოტოს ნაცვლად"
             defaultValue={hero.videoUrl}
             accept="video/*"
             placeholder="ატვირთეთ ფაილი, ან ჩასვით https://youtu.be/… ბმული"
           />
 
           <MediaUploadField
+            name="imageUrl"
+            label="თავსართის ფოტო — გამოჩნდება, თუ ვიდეო არ არის ატვირთული"
+            defaultValue={hero.imageUrl}
+            accept="image/*"
+            placeholder="ატვირთეთ ფაილი ან ჩასვით URL"
+          />
+
+          <MediaUploadField
             name="posterUrl"
-            label="ვიდეოს გარეკანის სურათი (არასავალდებულო)"
+            label="ვიდეოს გარეკანის სურათი (არასავალდებულო — ჩანს ვიდეოს ჩატვირთვამდე)"
             defaultValue={hero.posterUrl}
             accept="image/*"
           />

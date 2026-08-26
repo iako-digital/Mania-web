@@ -25,8 +25,11 @@ export function Hero({ data }: { data: HeroContent | null }) {
       ? "Where a technical blueprint resolves into a finished garment."
       : "სადაც ტექნიკური ნახაზი მზა სამოსად იქცევა.");
 
-  const hasVideo = data?.mediaType === "video" && data.videoUrl;
-  const hasImage = data?.mediaType === "image" && data.imageUrl;
+  // A video banner takes priority whenever one is set, falling back to the
+  // photo, then to the ambient gradient — no separate "media type" toggle
+  // to keep in sync with which field is actually filled in.
+  const hasVideo = Boolean(data?.videoUrl);
+  const hasImage = !hasVideo && Boolean(data?.imageUrl);
   const youTubeId = hasVideo ? getYouTubeId(data!.videoUrl) : null;
 
   return (

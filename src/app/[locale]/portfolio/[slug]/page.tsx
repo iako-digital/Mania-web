@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { YouTubeEmbed } from "@/components/ui/YouTubeEmbed";
 import { pickLocale } from "@/lib/content/locale";
+import { isVideoUrl } from "@/lib/media";
 import { getPortfolioItemBySlug } from "@/lib/content/queries";
 import { getYouTubeId } from "@/lib/youtube";
 
@@ -90,12 +91,22 @@ export default async function PortfolioDetailPage({
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
           {item.galleryUrls.map((url, i) => (
             <RevealOnScroll key={url} delay={i * 0.05} className="relative aspect-[4/5] overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={url}
-                alt={`${title} — ${i + 1}`}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
+              {isVideoUrl(url) ? (
+                <video
+                  src={url}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  controls
+                  playsInline
+                  preload="metadata"
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={url}
+                  alt={`${title} — ${i + 1}`}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              )}
             </RevealOnScroll>
           ))}
         </div>

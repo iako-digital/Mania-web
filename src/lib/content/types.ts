@@ -6,7 +6,6 @@ export interface LocaleString {
 export interface HeroContent {
   headline: LocaleString;
   subheadline: LocaleString;
-  mediaType: "video" | "image";
   videoUrl?: string;
   imageUrl?: string;
   posterUrl?: string;

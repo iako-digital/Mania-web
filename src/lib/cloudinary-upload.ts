@@ -61,3 +61,46 @@ export function uploadToCloudinary(
     xhr.send(formData);
   });
 }
+
+export interface BatchUploadItem {
+  file: File;
+  result?: CloudinaryUploadResult;
+  error?: string;
+}
+
+// Uploads many files with a bounded number of concurrent XHRs (uploading
+// e.g. 100 files all at once would blow past the browser's per-origin
+// connection limits and make individual progress meaningless), reporting
+// per-file progress as it goes via onFileProgress.
+export async function uploadManyToCloudinary(
+  files: File[],
+  {
+    concurrency = 4,
+    onFileProgress,
+  }: {
+    concurrency?: number;
+    onFileProgress?: (index: number, percent: number) => void;
+  } = {},
+): Promise<BatchUploadItem[]> {
+  const results: BatchUploadItem[] = files.map((file) => ({ file }));
+  let next = 0;
+
+  async function worker() {
+    while (next < files.length) {
+      const index = next++;
+      try {
+        const result = await uploadToCloudinary(files[index], (percent) =>
+          onFileProgress?.(index, percent),
+        );
+        results[index].result = result;
+      } catch (err) {
+        results[index].error = err instanceof Error ? err.message : "ატვირთვა ვერ მოხერხდა.";
+      }
+    }
+  }
+
+  const workers = Array.from({ length: Math.min(concurrency, files.length) }, () => worker());
+  await Promise.all(workers);
+
+  return results;
+}

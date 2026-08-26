@@ -61,6 +61,30 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Native <select> popups don't inherit the page's dark background, so
+   without this the option list renders as light-on-light/invisible.
+   color-scheme tells the browser to draw its native form-control chrome
+   (including the dropdown) in the matching palette; the explicit
+   background/color on select + option is a belt-and-suspenders fallback
+   for engines that don't fully honor color-scheme for popups. */
+:root {
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+select {
+  background-color: var(--surface);
+  color: var(--text-primary);
+}
+
+select option {
+  background-color: var(--surface);
+  color: var(--text-primary);
+}
+
 ::selection {
   background: var(--gold);
   color: var(--ink);
