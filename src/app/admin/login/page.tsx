@@ -1,12 +1,14 @@
 "use client";
 
-import { useActionState } from "react";
+import { useState, useActionState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { login, type LoginState } from "./actions";
 
 const initialState: LoginState = {};
 
 export default function AdminLoginPage() {
   const [state, formAction, pending] = useActionState(login, initialState);
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-ink px-6">
@@ -17,14 +19,24 @@ export default function AdminLoginPage() {
         <label htmlFor="password" className="mt-8 block font-mono text-xs uppercase tracking-widest text-text-muted">
           პაროლი
         </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          required
-          autoFocus
-          className="mt-2 w-full border-b border-hairline bg-transparent py-3 text-text-primary focus:border-gold focus:outline-none"
-        />
+        <div className="relative mt-2">
+          <input
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            required
+            autoFocus
+            className="w-full border-b border-hairline bg-transparent py-3 pr-9 text-text-primary focus:border-gold focus:outline-none"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            aria-label={showPassword ? "პაროლის დამალვა" : "პაროლის ჩვენება"}
+            className="absolute right-0 top-1/2 -translate-y-1/2 p-1 text-text-muted transition-colors hover:text-gold cursor-pointer"
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
+        </div>
 
         {state.error && <p className="mt-4 text-sm text-red-400">{state.error}</p>}
 

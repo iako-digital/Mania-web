@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Inter, JetBrains_Mono, Noto_Sans_Georgian, Noto_Serif_Georgian } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -25,6 +25,24 @@ const inter = Inter({
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// Fraunces/Inter/JetBrains Mono have no Georgian (Mkhedruli) glyphs, so these
+// carry the Georgian script — listed after the Latin fonts in each CSS
+// font-family stack (see globals.css), the browser uses them only for the
+// glyphs the Latin face is missing.
+const notoSerifGeorgian = Noto_Serif_Georgian({
+  variable: "--font-noto-serif-georgian",
+  subsets: ["georgian"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const notoSansGeorgian = Noto_Sans_Georgian({
+  variable: "--font-noto-sans-georgian",
+  subsets: ["georgian"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -67,7 +85,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoSerifGeorgian.variable} ${notoSansGeorgian.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-ink text-text-primary">

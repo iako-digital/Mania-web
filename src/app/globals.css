@@ -38,9 +38,13 @@
   --color-text-muted: var(--text-muted);
   --color-hairline: var(--hairline);
 
-  --font-display: var(--font-fraunces);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-jetbrains-mono);
+  /* Fraunces/Inter/JetBrains Mono have no Georgian glyphs, so Noto Serif/Sans
+     Georgian carry the Mkhedruli script — the browser only reaches them for
+     characters the Latin face can't render, matching the same visual weight
+     (display serif vs. clean sans) as the Latin type. */
+  --font-display: var(--font-fraunces), var(--font-noto-serif-georgian), serif;
+  --font-sans: var(--font-inter), var(--font-noto-sans-georgian), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), var(--font-noto-sans-georgian), monospace;
 }
 
 * {
