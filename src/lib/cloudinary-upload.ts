@@ -1,10 +1,10 @@
 "use client";
 
 export const MAX_IMAGE_SIZE_BYTES = 50 * 1024 * 1024; // 50MB
-export const MAX_VIDEO_SIZE_BYTES = 100 * 1024 * 1024; // 100MB
+export const MAX_VIDEO_SIZE_BYTES = 500 * 1024 * 1024; // 500MB
 
 const SIZE_LIMIT_MESSAGE =
-  "ფაილის ზომა აღემატება დაშვებულ ლიმიტს (ფოტო: მაქს. 50MB, ვიდეო: მაქს. 100MB).";
+  "ფაილის ზომა აღემატება დაშვებულ ლიმიტს (ფოტო: მაქს. 50MB, ვიდეო: მაქს. 500MB).";
 
 export interface CloudinaryUploadResult {
   secureUrl: string;
