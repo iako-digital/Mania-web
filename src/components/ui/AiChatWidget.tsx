@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { MessageCircle, Send, X } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface ChatMessage {
   role: "user" | "model";
@@ -60,7 +62,7 @@ export function AiChatWidget({ welcomeMessage }: { welcomeMessage: string }) {
   return (
     <div className="fixed bottom-6 left-6 z-50">
       {open && (
-        <div className="mb-3 flex h-[28rem] w-[22rem] max-w-[calc(100vw-3rem)] flex-col overflow-hidden border border-hairline bg-surface shadow-xl shadow-black/40">
+        <div className="mb-3 flex h-[28rem] w-[92vw] max-w-[calc(100vw-3rem)] flex-col overflow-hidden border border-hairline bg-surface shadow-xl shadow-black/40 sm:w-[420px]">
           <div className="flex items-start justify-between border-b border-hairline bg-ink px-4 py-3">
             <div>
               <p className="font-display text-base text-text-primary">{t("title")}</p>
@@ -87,18 +89,20 @@ export function AiChatWidget({ welcomeMessage }: { welcomeMessage: string }) {
           </div>
 
           <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
-            {messages.map((m, i) => (
-              <div
-                key={i}
-                className={`max-w-[85%] px-3 py-2 text-sm leading-relaxed ${
-                  m.role === "user"
-                    ? "ml-auto bg-gold text-ink"
-                    : "border border-hairline bg-ink text-text-primary"
-                }`}
-              >
-                {m.text}
-              </div>
-            ))}
+            {messages.map((m, i) =>
+              m.role === "user" ? (
+                <div key={i} className="ml-auto max-w-[85%] bg-gold px-3 py-2 text-sm leading-relaxed text-ink">
+                  {m.text}
+                </div>
+              ) : (
+                <div
+                  key={i}
+                  className="max-w-[85%] border border-hairline bg-ink px-3 py-2 text-text-primary prose prose-invert max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-1 text-sm"
+                >
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.text}</ReactMarkdown>
+                </div>
+              ),
+            )}
             {sending && (
               <div className="max-w-[85%] border border-hairline bg-ink px-3 py-2 text-sm text-text-muted">
                 {t("thinking")}
