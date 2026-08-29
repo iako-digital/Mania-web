@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Upload } from "lucide-react";
+import { ChevronLeft, ChevronRight, Trash2, Upload } from "lucide-react";
 import { uploadManyToCloudinary } from "@/lib/cloudinary-upload";
 import { isVideoUrl } from "@/lib/media";
 import { useUploadGate } from "./UploadGateContext";
@@ -14,10 +14,12 @@ export function GalleryUploadField({
   name,
   label,
   defaultValue = [],
+  hint,
 }: {
   name: string;
   label: string;
   defaultValue?: string[];
+  hint?: string;
 }) {
   const [urls, setUrls] = useState<string[]>(defaultValue);
   const [batchTotal, setBatchTotal] = useState(0);
@@ -93,6 +95,16 @@ export function GalleryUploadField({
     setUrls((prev) => prev.filter((_, i) => i !== index));
   }
 
+  function moveBy(index: number, delta: number) {
+    setUrls((prev) => {
+      const target = index + delta;
+      if (target < 0 || target >= prev.length) return prev;
+      const next = [...prev];
+      [next[index], next[target]] = [next[target], next[index]];
+      return next;
+    });
+  }
+
   const isUploading = batchTotal > 0;
   const completedCount = batchProgress.filter((p) => p >= 100).length;
   const overallPercent =
@@ -103,6 +115,7 @@ export function GalleryUploadField({
   return (
     <Field label={label}>
       <div className="mt-2 flex flex-col gap-3">
+        {hint && <p className="text-xs text-text-muted">{hint}</p>}
         <div className="flex flex-wrap items-center gap-4">
           <label className="inline-flex w-fit cursor-pointer items-center gap-2 bg-gold px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-[0.15em] text-ink transition-colors hover:bg-text-primary">
             <Upload size={14} />
@@ -141,21 +154,47 @@ export function GalleryUploadField({
 
         {urls.filter(Boolean).length > 0 && (
           <div className="flex flex-wrap gap-2">
-            {urls.filter(Boolean).map((u, i) => (
-              <div key={`${u}-${i}`} className="group relative h-16 w-16 shrink-0 overflow-hidden border border-hairline bg-ink">
+            {urls.filter(Boolean).map((u, i, arr) => (
+              <div key={`${u}-${i}`} className="group relative h-20 w-20 shrink-0 overflow-hidden border border-hairline bg-ink">
                 {isVideoUrl(u) ? (
                   <video src={u} className="h-full w-full object-cover" muted />
                 ) : (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={u} alt="" className="h-full w-full object-cover" />
                 )}
-                <button
-                  type="button"
-                  onClick={() => removeAt(i)}
-                  className="absolute inset-0 hidden items-center justify-center bg-ink/85 font-mono text-[10px] uppercase tracking-widest text-red-400 group-hover:flex cursor-pointer"
-                >
-                  წაშლა
-                </button>
+                <div className="absolute inset-0 flex flex-col items-center justify-between bg-ink/0 p-1 opacity-0 transition-all duration-200 group-hover:bg-ink/80 group-hover:opacity-100">
+                  <button
+                    type="button"
+                    onClick={() => removeAt(i)}
+                    title="წაშლა"
+                    aria-label="წაშლა"
+                    className="rounded-full bg-red-400/90 p-1.5 text-ink transition-colors hover:bg-red-400 cursor-pointer"
+                  >
+                    <Trash2 size={12} />
+                  </button>
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={() => moveBy(i, -1)}
+                      disabled={i === 0}
+                      title="ერთით მარცხნივ"
+                      aria-label="ერთით მარცხნივ"
+                      className="rounded-full bg-gold p-1 text-ink transition-colors hover:bg-text-primary disabled:cursor-not-allowed disabled:opacity-30 cursor-pointer"
+                    >
+                      <ChevronLeft size={12} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => moveBy(i, 1)}
+                      disabled={i === arr.length - 1}
+                      title="ერთით მარჯვნივ"
+                      aria-label="ერთით მარჯვნივ"
+                      className="rounded-full bg-gold p-1 text-ink transition-colors hover:bg-text-primary disabled:cursor-not-allowed disabled:opacity-30 cursor-pointer"
+                    >
+                      <ChevronRight size={12} />
+                    </button>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

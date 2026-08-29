@@ -80,8 +80,11 @@ export default async function PortfolioDetailPage({
       )}
 
       {item.videoUrl && !youTubeId && (
-        <RevealOnScroll className="mt-10">
-          <video className="w-full" controls playsInline preload="metadata">
+        <RevealOnScroll className="mt-10 text-center">
+          {/* No fixed box: width/height stay at the video's own ratio, only
+              capped so a portrait clip never dwarfs the page and a landscape
+              one never overflows the column. */}
+          <video className="mx-auto block max-h-[80vh] max-w-full bg-surface" controls playsInline preload="metadata">
             <source src={item.videoUrl} type="video/mp4" />
           </video>
         </RevealOnScroll>

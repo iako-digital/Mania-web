@@ -26,6 +26,7 @@ export default async function AdminAboutPage({
             defaultValue={about.portraitUrl}
             accept="image/*"
             placeholder="ატვირთეთ ფაილი ან ჩასვით URL"
+            hint="ნებისმიერი პროპორციის ფოტო (ავტომატურად ერგება დიზაინს)"
           />
 
           <div>

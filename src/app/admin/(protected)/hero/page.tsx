@@ -40,6 +40,7 @@ export default async function AdminHeroPage({
             defaultValue={hero.videoUrl}
             accept="video/*"
             placeholder="ატვირთეთ ფაილი, ან ჩასვით https://youtu.be/… ბმული"
+            hint="ნებისმიერი ზომის (რეკომენდებულია 16:9 HD/4K 1920x1080 ან ვერტიკალური)"
           />
 
           <MediaUploadField
@@ -48,6 +49,7 @@ export default async function AdminHeroPage({
             defaultValue={hero.imageUrl}
             accept="image/*"
             placeholder="ატვირთეთ ფაილი ან ჩასვით URL"
+            hint="ნებისმიერი ზომის (რეკომენდებულია 16:9 HD/4K 1920x1080 ან ვერტიკალური)"
           />
 
           <MediaUploadField

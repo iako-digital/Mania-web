@@ -86,9 +86,15 @@ export default async function AdminPortfolioEditPage({
             defaultValue={item.coverImageUrl}
             accept="image/*"
             placeholder="ატვირთეთ ფაილი ან ჩასვით URL"
+            hint="ნებისმიერი ზომისა და ფორმატის ფოტო/ვიდეო (ავტომატურად ერგება დიზაინს)"
           />
 
-          <GalleryUploadField name="galleryUrls" label="გალერეის სურათები" defaultValue={item.galleryUrls} />
+          <GalleryUploadField
+            name="galleryUrls"
+            label="გალერეის სურათები"
+            defaultValue={item.galleryUrls}
+            hint="ნებისმიერი ზომისა და ფორმატის ფოტო/ვიდეო (ავტომატურად ერგება დიზაინს)"
+          />
 
           <MediaUploadField
             name="videoUrl"
@@ -96,6 +102,7 @@ export default async function AdminPortfolioEditPage({
             defaultValue={item.videoUrl}
             accept="video/*"
             placeholder="ატვირთეთ ფაილი, ან ჩასვით https://youtu.be/… ბმული"
+            hint="ნებისმიერი ზომისა და ფორმატის ფოტო/ვიდეო (ავტომატურად ერგება დიზაინს)"
           />
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
