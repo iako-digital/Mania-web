@@ -93,7 +93,7 @@ export async function Footer() {
                 href="https://www.cdc.org.ge/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text-muted hover:text-gold transition-colors"
+                className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity"
               >
                 CDC Studio
               </a>
