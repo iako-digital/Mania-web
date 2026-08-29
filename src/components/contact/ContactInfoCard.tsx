@@ -6,13 +6,16 @@ export async function ContactInfoCard({
   phone,
   email,
   location,
+  messengerUrl,
 }: {
   locale: string;
   phone: string;
   email: string;
   location?: string;
+  messengerUrl?: string;
 }) {
   const t = await getTranslations({ locale, namespace: "contact" });
+  const tm = await getTranslations({ locale, namespace: "messenger" });
 
   return (
     <RevealOnScroll className="flex flex-col gap-8 border border-hairline bg-surface p-8">
@@ -28,6 +31,19 @@ export async function ContactInfoCard({
           {email}
         </a>
       </div>
+      {messengerUrl && (
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-gold">{tm("contactLabel")}</p>
+          <a
+            href={messengerUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 block font-display text-xl text-text-primary hover:text-gold transition-colors"
+          >
+            {tm("tooltip")}
+          </a>
+        </div>
+      )}
       {location && (
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.25em] text-gold">{t("locationLabel")}</p>

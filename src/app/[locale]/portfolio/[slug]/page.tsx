@@ -5,7 +5,7 @@ import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { YouTubeEmbed } from "@/components/ui/YouTubeEmbed";
 import { pickLocale } from "@/lib/content/locale";
 import { isVideoUrl } from "@/lib/media";
-import { getPortfolioItemBySlug } from "@/lib/content/queries";
+import { getPortfolioItemBySlug, getSiteSettings } from "@/lib/content/queries";
 import { getYouTubeId } from "@/lib/youtube";
 
 export default async function PortfolioDetailPage({
@@ -16,9 +16,11 @@ export default async function PortfolioDetailPage({
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const [item, t] = await Promise.all([
+  const [item, t, tm, settings] = await Promise.all([
     getPortfolioItemBySlug(slug),
     getTranslations({ locale, namespace: "portfolio" }),
+    getTranslations({ locale, namespace: "messenger" }),
+    getSiteSettings(),
   ]);
 
   if (!item) {
@@ -65,6 +67,17 @@ export default async function PortfolioDetailPage({
 
         {description && (
           <p className="mt-10 max-w-2xl text-lg leading-relaxed text-text-muted">{description}</p>
+        )}
+
+        {settings.messengerUrl && (
+          <a
+            href={settings.messengerUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-flex items-center gap-2 bg-gold px-6 py-3.5 font-mono text-xs uppercase tracking-[0.2em] text-ink transition-all duration-300 hover:bg-text-primary cursor-pointer"
+          >
+            {tm("portfolioCta")}
+          </a>
         )}
       </RevealOnScroll>
 

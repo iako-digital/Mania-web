@@ -20,6 +20,7 @@ export async function updateSettings(formData: FormData): Promise<void> {
     phone: String(formData.get("phone") || ""),
     email: String(formData.get("email") || ""),
     location: String(formData.get("location") || ""),
+    messengerUrl: String(formData.get("messengerUrl") || ""),
     socialLinks: socialRaw
       .split("\n")
       .map((line) => line.trim())

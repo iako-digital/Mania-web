@@ -6,6 +6,7 @@ export async function Footer() {
   const t = await getTranslations("footer");
   const nav = await getTranslations("nav");
   const contact = await getTranslations("contact");
+  const messenger = await getTranslations("messenger");
   const settings = await getSiteSettings();
   const year = new Date().getFullYear();
 
@@ -41,6 +42,16 @@ export async function Footer() {
             {settings.email && (
               <a href={`mailto:${settings.email}`} className="text-text-muted hover:text-gold transition-colors">
                 {contact("emailLabel")}: {settings.email}
+              </a>
+            )}
+            {settings.messengerUrl && (
+              <a
+                href={settings.messengerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-muted hover:text-gold transition-colors"
+              >
+                {messenger("contactLabel")}
               </a>
             )}
             {settings.location && <p className="text-text-muted">{settings.location}</p>}

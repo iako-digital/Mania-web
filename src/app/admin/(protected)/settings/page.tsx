@@ -41,6 +41,14 @@ export default async function AdminSettingsPage({
           <TextInput name="location" defaultValue={settings.location} placeholder="თბილისი, საქართველო" />
         </Field>
 
+        <Field label="Messenger ბმული">
+          <TextInput
+            name="messengerUrl"
+            defaultValue={settings.messengerUrl}
+            placeholder="https://m.me/…"
+          />
+        </Field>
+
         <Field label="სოციალური ბმულები (თითო ხაზზე, ფორმატით: სახელი | https://ბმული)">
           <Textarea name="socialLinks" defaultValue={socialLinksText} rows={4} />
         </Field>

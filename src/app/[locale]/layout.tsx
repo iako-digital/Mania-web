@@ -7,6 +7,8 @@ import { routing } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeScript } from "@/components/ui/ThemeScript";
+import { MessengerFAB } from "@/components/ui/MessengerFAB";
+import { getSiteSettings } from "@/lib/content/queries";
 import "../globals.css";
 
 const fraunces = Fraunces({
@@ -82,6 +84,8 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
+  const settings = await getSiteSettings();
+
   return (
     <html
       lang={locale}
@@ -95,6 +99,7 @@ export default async function LocaleLayout({
           <Header />
           <main className="relative z-10 flex-1">{children}</main>
           <Footer />
+          <MessengerFAB href={settings.messengerUrl} />
         </NextIntlClientProvider>
       </body>
     </html>

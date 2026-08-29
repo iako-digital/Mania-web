@@ -51,6 +51,11 @@
     "skillsTitle": "Core Skills",
     "programsTitle": "Software & Programs"
   },
+  "messenger": {
+    "tooltip": "Chat on Messenger",
+    "portfolioCta": "Order / Consult on Messenger",
+    "contactLabel": "Messenger"
+  },
   "contact": {
     "title": "Contact",
     "subtitle": "For commissions, collaborations, and production inquiries",

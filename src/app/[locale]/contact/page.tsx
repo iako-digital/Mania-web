@@ -21,7 +21,13 @@ export default async function ContactPage({
 
       <div className="mt-16 grid grid-cols-1 gap-16 lg:grid-cols-[1fr_minmax(0,340px)]">
         <ContactForm />
-        <ContactInfoCard locale={locale} phone={settings.phone} email={settings.email} location={settings.location} />
+        <ContactInfoCard
+          locale={locale}
+          phone={settings.phone}
+          email={settings.email}
+          location={settings.location}
+          messengerUrl={settings.messengerUrl}
+        />
       </div>
     </div>
   );

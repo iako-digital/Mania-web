@@ -65,5 +65,6 @@ export interface SiteSettings {
   phone: string;
   email: string;
   location: string;
+  messengerUrl: string;
   socialLinks: SocialLink[];
 }
