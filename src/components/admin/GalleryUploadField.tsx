@@ -76,13 +76,14 @@ export function GalleryUploadField({
     });
 
     const uploaded = results.filter((r) => r.result).map((r) => r.result!.secureUrl);
-    const failedCount = results.filter((r) => r.error).length;
+    const failed = results.filter((r) => r.error);
 
     if (uploaded.length > 0) {
       setUrls((prev) => [...prev, ...uploaded]);
     }
-    if (failedCount > 0) {
-      setError(`${failedCount} ფაილის ატვირთვა ვერ მოხერხდა.`);
+    if (failed.length > 0) {
+      const uniqueReasons = Array.from(new Set(failed.map((r) => r.error)));
+      setError(`${failed.length} ფაილის ატვირთვა ვერ მოხერხდა: ${uniqueReasons.slice(0, 2).join(" ")}`);
     }
 
     setBatchTotal(0);
