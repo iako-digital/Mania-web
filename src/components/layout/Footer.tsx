@@ -17,13 +17,13 @@ export async function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div>
-            <p className="flex items-center gap-2.5 font-display text-xl">
+            <p className="flex items-center gap-2 font-display text-xl">
               <Image
                 src="/logo-mark.png"
                 alt="Mania Vashakidze"
-                width={36}
-                height={36}
-                className="h-8 w-8 shrink-0 rounded-full"
+                width={173}
+                height={200}
+                className="h-8 w-auto shrink-0 object-contain"
               />
               MANIA <span className="text-gold">VASHAKIDZE</span>
             </p>
