@@ -2,7 +2,10 @@
   {
     "id": "step-1",
     "order": 1,
-    "title": { "ka": "კონცეფციის დიზაინი", "en": "Concept Design" },
+    "title": {
+      "ka": "კონცეფციის დიზაინი",
+      "en": "Concept Design"
+    },
     "description": {
       "ka": "საწყისი იდეის ესკიზირება და ფორმირება — სილუეტი, პროპორცია და ჩანაფიქრი.",
       "en": "Sketching and shaping the initial idea — silhouette, proportion, and intent."
@@ -11,7 +14,10 @@
   {
     "id": "step-2",
     "order": 2,
-    "title": { "ka": "თარგის აგება", "en": "Pattern Development" },
+    "title": {
+      "ka": "თარგის აგება",
+      "en": "Pattern Development"
+    },
     "description": {
       "ka": "ქაღალდის თარგის აგება და ნიმუშის შეკერვა მორგებისა და კორექტირებისთვის.",
       "en": "Drafting the paper pattern and sewing a sample for fit and correction."
@@ -20,7 +26,10 @@
   {
     "id": "step-3",
     "order": 3,
-    "title": { "ka": "საბაზისო გრადაცია", "en": "Base Grading" },
+    "title": {
+      "ka": "საბაზისო გრადაცია",
+      "en": "Base Grading"
+    },
     "description": {
       "ka": "საბაზისო თარგის ზუსტი გრადაცია ზომების სრულ დიაპაზონში.",
       "en": "Grading the base pattern precisely across the full size range."
@@ -29,7 +38,10 @@
   {
     "id": "step-4",
     "order": 4,
-    "title": { "ka": "ქსოვილის ოპტიმიზაცია", "en": "Fabric Optimization" },
+    "title": {
+      "ka": "ქსოვილის ოპტიმიზაცია",
+      "en": "Fabric Optimization"
+    },
     "description": {
       "ka": "ქსოვილის ხარჯისა და საჭრელი სქემის ეფექტურობის ოპტიმიზაცია.",
       "en": "Optimizing fabric consumption and marker efficiency."
@@ -38,7 +50,10 @@
   {
     "id": "step-5",
     "order": 5,
-    "title": { "ka": "საჭრელი ფაილები", "en": "Cutting Files" },
+    "title": {
+      "ka": "საჭრელი ფაილები",
+      "en": "Cutting Files"
+    },
     "description": {
       "ka": "გაციფრულებული ფაილების მომზადება და გადაგზავნა გერბერზე ჭრისთვის.",
       "en": "Preparing and sending digitized files for cutting on Gerber."
