@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { getSiteSettings } from "@/lib/content/queries";
 import { SocialLinks } from "@/components/ui/SocialLinks";
@@ -16,7 +17,14 @@ export async function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div>
-            <p className="font-display text-xl">
+            <p className="flex items-center gap-2.5 font-display text-xl">
+              <Image
+                src="/logo-mark.png"
+                alt="Mania Vashakidze"
+                width={36}
+                height={36}
+                className="h-8 w-8 shrink-0 rounded-full"
+              />
               MANIA <span className="text-gold">VASHAKIDZE</span>
             </p>
             <p className="mt-2 max-w-xs text-sm text-text-muted">{t("tagline")}</p>

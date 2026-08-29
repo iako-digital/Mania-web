@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { LocaleSwitcher } from "./LocaleSwitcher";
@@ -32,7 +33,15 @@ export function Header({
   return (
     <header className="sticky top-0 z-40 border-b border-hairline bg-ink/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 sm:py-5 lg:px-10">
-        <Link href="/" className="font-display text-base tracking-tight sm:text-lg">
+        <Link href="/" className="flex items-center gap-2.5 font-display text-base tracking-tight sm:text-lg">
+          <Image
+            src="/logo-mark.png"
+            alt="Mania Vashakidze"
+            width={32}
+            height={32}
+            className="h-7 w-7 shrink-0 rounded-full sm:h-8 sm:w-8"
+            priority
+          />
           MANIA <span className="text-gold">VASHAKIDZE</span>
         </Link>
 
