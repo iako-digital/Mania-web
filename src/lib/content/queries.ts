@@ -1,6 +1,7 @@
 import { readContent } from "./store";
 import type {
   AboutContent,
+  AiAssistantContent,
   CategoryItem,
   HeroContent,
   PortfolioItemContent,
@@ -33,6 +34,10 @@ export async function getAboutContent(): Promise<AboutContent> {
 
 export async function getSiteSettings(): Promise<SiteSettings> {
   return readContent<SiteSettings>("site.json");
+}
+
+export async function getAiAssistantContent(): Promise<AiAssistantContent> {
+  return readContent<AiAssistantContent>("ai-assistant.json");
 }
 
 export async function getSkills(): Promise<SkillItem[]> {

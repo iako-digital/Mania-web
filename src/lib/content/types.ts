@@ -59,6 +59,13 @@ export interface SocialLink {
   url: string;
 }
 
+export interface AiAssistantContent {
+  enabled: boolean;
+  knowledgeBase: string;
+  systemInstructions: string;
+  welcomeMessage: LocaleString;
+}
+
 export interface SiteSettings {
   siteName: string;
   tagline: LocaleString;

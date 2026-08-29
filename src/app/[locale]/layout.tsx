@@ -8,7 +8,9 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeScript } from "@/components/ui/ThemeScript";
 import { MessengerFAB } from "@/components/ui/MessengerFAB";
-import { getSiteSettings } from "@/lib/content/queries";
+import { AiChatWidget } from "@/components/ui/AiChatWidget";
+import { getAiAssistantContent, getSiteSettings } from "@/lib/content/queries";
+import { pickLocale } from "@/lib/content/locale";
 import "../globals.css";
 
 const fraunces = Fraunces({
@@ -84,7 +86,7 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  const settings = await getSiteSettings();
+  const [settings, aiAssistant] = await Promise.all([getSiteSettings(), getAiAssistantContent()]);
 
   return (
     <html
@@ -104,6 +106,9 @@ export default async function LocaleLayout({
           <main className="relative z-10 flex-1">{children}</main>
           <Footer />
           <MessengerFAB href={settings.messengerUrl} />
+          {aiAssistant.enabled && (
+            <AiChatWidget welcomeMessage={pickLocale(aiAssistant.welcomeMessage, locale)} />
+          )}
         </NextIntlClientProvider>
       </body>
     </html>

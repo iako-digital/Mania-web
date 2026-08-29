@@ -10,7 +10,7 @@ async function translateToEnglish(georgianText: string): Promise<string> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) return "";
 
-  const model = process.env.GEMINI_MODEL || "gemini-2.0-flash";
+  const model = process.env.GEMINI_MODEL || "gemini-3.6-flash";
 
   try {
     const res = await fetch(

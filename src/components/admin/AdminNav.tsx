@@ -9,6 +9,7 @@ const SECTIONS = [
   { href: "/admin/workflow", label: "სამუშაო პროცესი" },
   { href: "/admin/categories", label: "კატეგორიები" },
   { href: "/admin/portfolio", label: "პორტფოლიო" },
+  { href: "/admin/ai-assistant", label: "AI ასისტენტი" },
   { href: "/admin/settings", label: "საიტის პარამეტრები" },
 ];
 

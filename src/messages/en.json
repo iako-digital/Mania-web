@@ -56,6 +56,14 @@
     "portfolioCta": "Order / Consult on Messenger",
     "contactLabel": "Messenger"
   },
+  "aiChat": {
+    "openLabel": "Chat with the AI assistant",
+    "title": "AI Assistant",
+    "placeholder": "Type a message…",
+    "send": "Send",
+    "thinking": "Typing…",
+    "errorGeneric": "Something went wrong. Please try again."
+  },
   "contact": {
     "title": "Contact",
     "subtitle": "For commissions, collaborations, and production inquiries",
