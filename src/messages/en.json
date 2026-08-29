@@ -62,6 +62,7 @@
     "phoneLabel": "Phone",
     "emailLabel": "Email",
     "locationLabel": "Location",
+    "socialLabel": "Social",
     "formName": "Name",
     "formEmail": "Email",
     "formMessage": "Message",

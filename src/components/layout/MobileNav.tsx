@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 
 type NavItem = { href: string; key: string };
 
@@ -12,11 +13,17 @@ export function MobileNav({
   onClose,
   items,
   activePathname,
+  facebookUrl,
+  instagramUrl,
+  youtubeUrl,
 }: {
   open: boolean;
   onClose: () => void;
   items: readonly NavItem[];
   activePathname: string;
+  facebookUrl?: string;
+  instagramUrl?: string;
+  youtubeUrl?: string;
 }) {
   const t = useTranslations("nav");
 
@@ -64,7 +71,14 @@ export function MobileNav({
             ))}
           </nav>
 
-          <div className="flex items-center justify-center px-6 py-8">
+          <div className="flex flex-col items-center gap-6 px-6 py-8">
+            <SocialLinks
+              facebookUrl={facebookUrl}
+              instagramUrl={instagramUrl}
+              youtubeUrl={youtubeUrl}
+              className="flex items-center gap-6"
+              iconClassName="h-6 w-6"
+            />
             <ThemeToggle />
           </div>
         </motion.div>

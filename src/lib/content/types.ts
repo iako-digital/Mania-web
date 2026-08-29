@@ -66,5 +66,8 @@ export interface SiteSettings {
   email: string;
   location: string;
   messengerUrl: string;
+  facebookUrl: string;
+  instagramUrl: string;
+  youtubeUrl: string;
   socialLinks: SocialLink[];
 }

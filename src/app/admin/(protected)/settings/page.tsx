@@ -49,7 +49,31 @@ export default async function AdminSettingsPage({
           />
         </Field>
 
-        <Field label="სოციალური ბმულები (თითო ხაზზე, ფორმატით: სახელი | https://ბმული)">
+        <Field label="Facebook გვერდი">
+          <TextInput
+            name="facebookUrl"
+            defaultValue={settings.facebookUrl}
+            placeholder="https://www.facebook.com/…"
+          />
+        </Field>
+
+        <Field label="Instagram გვერდი">
+          <TextInput
+            name="instagramUrl"
+            defaultValue={settings.instagramUrl}
+            placeholder="https://www.instagram.com/…"
+          />
+        </Field>
+
+        <Field label="YouTube არხი">
+          <TextInput
+            name="youtubeUrl"
+            defaultValue={settings.youtubeUrl}
+            placeholder="https://www.youtube.com/@…"
+          />
+        </Field>
+
+        <Field label="სხვა სოციალური ბმულები (თითო ხაზზე, ფორმატით: სახელი | https://ბმული)">
           <Textarea name="socialLinks" defaultValue={socialLinksText} rows={4} />
         </Field>
 

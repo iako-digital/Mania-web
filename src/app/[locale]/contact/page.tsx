@@ -27,6 +27,9 @@ export default async function ContactPage({
           email={settings.email}
           location={settings.location}
           messengerUrl={settings.messengerUrl}
+          facebookUrl={settings.facebookUrl}
+          instagramUrl={settings.instagramUrl}
+          youtubeUrl={settings.youtubeUrl}
         />
       </div>
     </div>

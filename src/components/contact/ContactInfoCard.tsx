@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 
 export async function ContactInfoCard({
   locale,
@@ -7,12 +8,18 @@ export async function ContactInfoCard({
   email,
   location,
   messengerUrl,
+  facebookUrl,
+  instagramUrl,
+  youtubeUrl,
 }: {
   locale: string;
   phone: string;
   email: string;
   location?: string;
   messengerUrl?: string;
+  facebookUrl?: string;
+  instagramUrl?: string;
+  youtubeUrl?: string;
 }) {
   const t = await getTranslations({ locale, namespace: "contact" });
   const tm = await getTranslations({ locale, namespace: "messenger" });
@@ -48,6 +55,18 @@ export async function ContactInfoCard({
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.25em] text-gold">{t("locationLabel")}</p>
           <p className="mt-2 text-text-primary">{location}</p>
+        </div>
+      )}
+      {(facebookUrl || instagramUrl || youtubeUrl) && (
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-gold">{t("socialLabel")}</p>
+          <SocialLinks
+            facebookUrl={facebookUrl}
+            instagramUrl={instagramUrl}
+            youtubeUrl={youtubeUrl}
+            className="mt-2 flex items-center gap-4"
+            iconClassName="h-6 w-6"
+          />
         </div>
       )}
     </RevealOnScroll>

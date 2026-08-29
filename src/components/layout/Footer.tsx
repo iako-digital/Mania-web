@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getSiteSettings } from "@/lib/content/queries";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 
 export async function Footer() {
   const t = await getTranslations("footer");
@@ -55,6 +56,12 @@ export async function Footer() {
               </a>
             )}
             {settings.location && <p className="text-text-muted">{settings.location}</p>}
+            <SocialLinks
+              facebookUrl={settings.facebookUrl}
+              instagramUrl={settings.instagramUrl}
+              youtubeUrl={settings.youtubeUrl}
+              className="mt-1 flex items-center gap-4"
+            />
             {settings.socialLinks.length > 0 && (
               <div className="mt-1 flex flex-wrap gap-x-5 gap-y-1">
                 {settings.socialLinks.map((link) => (
@@ -77,7 +84,21 @@ export async function Footer() {
           <p>
             © {year} Mania Vashakidze. {t("rights")}
           </p>
-          <p className="font-mono uppercase tracking-widest">Gerber AccuMark Certified</p>
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span className="font-mono uppercase tracking-widest">Gerber AccuMark Certified</span>
+            <span className="text-text-muted/40">·</span>
+            <span>
+              Powered by{" "}
+              <a
+                href="https://www.cdc.org.ge/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-muted hover:text-gold transition-colors"
+              >
+                CDC Studio
+              </a>
+            </span>
+          </p>
         </div>
       </div>
     </footer>

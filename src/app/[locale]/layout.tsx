@@ -96,7 +96,11 @@ export default async function LocaleLayout({
         <ThemeScript />
         <NextIntlClientProvider>
           <div className="blueprint-grid" aria-hidden="true" />
-          <Header />
+          <Header
+            facebookUrl={settings.facebookUrl}
+            instagramUrl={settings.instagramUrl}
+            youtubeUrl={settings.youtubeUrl}
+          />
           <main className="relative z-10 flex-1">{children}</main>
           <Footer />
           <MessengerFAB href={settings.messengerUrl} />

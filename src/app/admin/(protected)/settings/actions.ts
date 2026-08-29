@@ -21,6 +21,9 @@ export async function updateSettings(formData: FormData): Promise<void> {
     email: String(formData.get("email") || ""),
     location: String(formData.get("location") || ""),
     messengerUrl: String(formData.get("messengerUrl") || ""),
+    facebookUrl: String(formData.get("facebookUrl") || ""),
+    instagramUrl: String(formData.get("instagramUrl") || ""),
+    youtubeUrl: String(formData.get("youtubeUrl") || ""),
     socialLinks: socialRaw
       .split("\n")
       .map((line) => line.trim())

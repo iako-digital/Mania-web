@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import { MobileNav } from "./MobileNav";
 
 const NAV_ITEMS = [
@@ -15,7 +16,15 @@ const NAV_ITEMS = [
   { href: "/contact", key: "contact" },
 ] as const;
 
-export function Header() {
+export function Header({
+  facebookUrl,
+  instagramUrl,
+  youtubeUrl,
+}: {
+  facebookUrl?: string;
+  instagramUrl?: string;
+  youtubeUrl?: string;
+}) {
   const t = useTranslations("nav");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -45,6 +54,13 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-6 lg:flex">
+          <SocialLinks
+            facebookUrl={facebookUrl}
+            instagramUrl={instagramUrl}
+            youtubeUrl={youtubeUrl}
+            className="flex items-center gap-4"
+            iconClassName="h-[18px] w-[18px]"
+          />
           <ThemeToggle />
           <LocaleSwitcher />
         </div>
@@ -64,7 +80,15 @@ export function Header() {
         </div>
       </div>
 
-      <MobileNav open={open} onClose={() => setOpen(false)} items={NAV_ITEMS} activePathname={pathname} />
+      <MobileNav
+        open={open}
+        onClose={() => setOpen(false)}
+        items={NAV_ITEMS}
+        activePathname={pathname}
+        facebookUrl={facebookUrl}
+        instagramUrl={instagramUrl}
+        youtubeUrl={youtubeUrl}
+      />
     </header>
   );
 }
