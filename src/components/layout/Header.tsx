@@ -35,11 +35,11 @@ export function Header({
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 sm:py-5 lg:px-10">
         <Link href="/" className="flex items-center gap-2 font-display text-base tracking-tight sm:text-lg">
           <Image
-            src="/logo-mark.png"
+            src="/logo-mark-gold-m.png"
             alt="Mania Vashakidze"
             width={173}
             height={200}
-            className="h-7 w-auto shrink-0 object-contain sm:h-8"
+            className="h-7 w-auto shrink-0 sm:h-8"
             priority
           />
           MANIA <span className="text-gold">VASHAKIDZE</span>

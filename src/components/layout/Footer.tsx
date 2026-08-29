@@ -19,11 +19,11 @@ export async function Footer() {
           <div>
             <p className="flex items-center gap-2 font-display text-xl">
               <Image
-                src="/logo-mark.png"
+                src="/logo-mark-gold-m.png"
                 alt="Mania Vashakidze"
                 width={173}
                 height={200}
-                className="h-8 w-auto shrink-0 object-contain"
+                className="h-8 w-auto shrink-0"
               />
               MANIA <span className="text-gold">VASHAKIDZE</span>
             </p>
