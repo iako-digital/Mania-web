@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { MessageCircle, Send, X } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 
 interface ChatMessage {
   role: "user" | "model";
@@ -99,7 +100,7 @@ export function AiChatWidget({ welcomeMessage }: { welcomeMessage: string }) {
                   key={i}
                   className="max-w-[85%] border border-hairline bg-ink px-3 py-2 text-text-primary prose prose-invert max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-1 text-sm"
                 >
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.text}</ReactMarkdown>
+                  <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>{m.text}</ReactMarkdown>
                 </div>
               ),
             )}
