@@ -86,14 +86,14 @@ export default async function AdminPortfolioEditPage({
             defaultValue={item.coverImageUrl}
             accept="image/*"
             placeholder="ატვირთეთ ფაილი ან ჩასვით URL"
-            hint="ნებისმიერი ზომისა და ფორმატის ფოტო/ვიდეო (ავტომატურად ერგება დიზაინს)"
+            hint="რეკომენდებული ზომა: 1200x800px (3:2) ან 1000x1250px (4:5)"
           />
 
           <GalleryUploadField
             name="galleryUrls"
             label="გალერეის სურათები"
             defaultValue={item.galleryUrls}
-            hint="ნებისმიერი ზომისა და ფორმატის ფოტო/ვიდეო (ავტომატურად ერგება დიზაინს)"
+            hint="რეკომენდებული ზომა: 1500px+ სიგანე (ნებისმიერი პროპორცია ავტომატურად ერგება)"
           />
 
           <MediaUploadField

@@ -26,7 +26,7 @@ export default async function AdminAboutPage({
             defaultValue={about.portraitUrl}
             accept="image/*"
             placeholder="ატვირთეთ ფაილი ან ჩასვით URL"
-            hint="ნებისმიერი პროპორციის ფოტო (ავტომატურად ერგება დიზაინს)"
+            hint="რეკომენდებული ზომა: 1200x1500px (4:5 ვერტიკალური) ან 800x1000px"
           />
 
           <div>

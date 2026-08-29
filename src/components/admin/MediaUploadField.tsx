@@ -60,7 +60,7 @@ export function MediaUploadField({
   return (
     <Field label={label}>
       <div className="mt-2 flex flex-col gap-3">
-        {hint && <p className="text-xs text-text-muted">{hint}</p>}
+        {hint && <p className="text-xs text-neutral-400 mt-1">{hint}</p>}
 
         <input
           ref={fileInputRef}

@@ -116,7 +116,7 @@ export function GalleryUploadField({
   return (
     <Field label={label}>
       <div className="mt-2 flex flex-col gap-3">
-        {hint && <p className="text-xs text-text-muted">{hint}</p>}
+        {hint && <p className="text-xs text-neutral-400 mt-1">{hint}</p>}
         <div className="flex flex-wrap items-center gap-4">
           <label className="inline-flex w-fit cursor-pointer items-center gap-2 bg-gold px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-[0.15em] text-ink transition-colors hover:bg-text-primary">
             <Upload size={14} />

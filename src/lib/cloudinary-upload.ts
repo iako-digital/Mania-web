@@ -1,10 +1,10 @@
 "use client";
 
-export const MAX_IMAGE_SIZE_BYTES = 15 * 1024 * 1024; // 15MB
+export const MAX_IMAGE_SIZE_BYTES = 50 * 1024 * 1024; // 50MB
 export const MAX_VIDEO_SIZE_BYTES = 100 * 1024 * 1024; // 100MB
 
 const SIZE_LIMIT_MESSAGE =
-  "ფაილის ზომა აღემატება დაშვებულ ლიმიტს (ფოტო: მაქს. 15MB, ვიდეო: მაქს. 100MB).";
+  "ფაილის ზომა აღემატება დაშვებულ ლიმიტს (ფოტო: მაქს. 50MB, ვიდეო: მაქს. 100MB).";
 
 export interface CloudinaryUploadResult {
   secureUrl: string;
@@ -32,7 +32,7 @@ export function uploadToCloudinary(
   const limit = file.type.startsWith("video/") ? MAX_VIDEO_SIZE_BYTES : MAX_IMAGE_SIZE_BYTES;
   if (file.size > limit) {
     const actualMb = (file.size / (1024 * 1024)).toFixed(1);
-    return Promise.reject(new Error(`${SIZE_LIMIT_MESSAGE} თქვენი ფაილი: ${actualMb}MB.`));
+    return Promise.reject(new Error(`${SIZE_LIMIT_MESSAGE} თქვენი ფაილი: ${actualMb} MB.`));
   }
 
   return new Promise((resolve, reject) => {
