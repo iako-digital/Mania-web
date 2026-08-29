@@ -41,7 +41,7 @@ export function Hero({ data }: { data: HeroContent | null }) {
           </div>
         ) : hasVideo ? (
           <video
-            className="h-full w-full object-cover opacity-60"
+            className="h-full w-full bg-ink object-contain opacity-60 sm:object-cover"
             autoPlay
             muted
             loop
@@ -53,7 +53,11 @@ export function Hero({ data }: { data: HeroContent | null }) {
           </video>
         ) : hasImage ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={data!.imageUrl} alt="" className="h-full w-full object-cover opacity-60" />
+          <img
+            src={data!.imageUrl}
+            alt=""
+            className="h-full w-full bg-ink object-contain opacity-60 sm:object-cover"
+          />
         ) : (
           <div className="h-full w-full bg-gradient-to-b from-surface via-ink to-ink" />
         )}
@@ -78,7 +82,7 @@ export function Hero({ data }: { data: HeroContent | null }) {
         initial="hidden"
         animate="visible"
         variants={staggerChildren}
-        className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10"
+        className="relative z-10 mx-auto max-w-7xl px-6 pb-24 sm:pb-0 lg:px-10"
       >
         <motion.p
           variants={fadeUp}
@@ -89,7 +93,7 @@ export function Hero({ data }: { data: HeroContent | null }) {
 
         <motion.h1
           variants={fadeUp}
-          className="mt-6 font-display text-4xl font-medium leading-[0.95] tracking-tight text-text-primary sm:text-6xl md:text-7xl lg:text-8xl"
+          className="mt-6 font-display text-3xl font-medium leading-[0.95] tracking-tight text-text-primary sm:text-5xl md:text-7xl lg:text-8xl"
           style={{ clipPath: "inset(0 0 0 0)" }}
         >
           {headline.split(" ").map((word, i) => (

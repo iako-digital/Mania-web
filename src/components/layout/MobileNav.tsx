@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -27,15 +28,24 @@ export function MobileNav({
 }) {
   const t = useTranslations("nav");
 
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
+
   return (
     <AnimatePresence>
       {open && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-50 flex flex-col bg-ink lg:hidden"
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "100%" }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed inset-0 z-[100] flex flex-col bg-ink lg:hidden"
         >
           <div className="flex items-center justify-between px-6 py-5">
             <span className="font-display text-lg">
