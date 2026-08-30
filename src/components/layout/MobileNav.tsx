@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -27,6 +28,11 @@ export function MobileNav({
   youtubeUrl?: string;
 }) {
   const t = useTranslations("nav");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -37,7 +43,9 @@ export function MobileNav({
     };
   }, [open]);
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {open && (
         <motion.div
@@ -45,7 +53,7 @@ export function MobileNav({
           animate={{ x: 0 }}
           exit={{ x: "100%" }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[100] flex flex-col bg-ink lg:hidden"
+          className="fixed inset-0 z-[999] flex h-screen w-full flex-col bg-ink lg:hidden"
         >
           <div className="flex items-center justify-between px-6 py-5">
             <span className="font-display text-lg">
@@ -60,7 +68,7 @@ export function MobileNav({
             </button>
           </div>
 
-          <nav className="flex flex-1 flex-col justify-center gap-2 px-6">
+          <nav className="flex flex-1 flex-col justify-center gap-6 px-6">
             {items.map((item, i) => (
               <motion.div
                 key={item.key}
@@ -93,6 +101,7 @@ export function MobileNav({
           </div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }
