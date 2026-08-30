@@ -16,7 +16,19 @@ export default function AdminLoginPage() {
         <h1 className="font-display text-2xl text-text-primary">მართვის პანელი</h1>
         <p className="mt-1 text-sm text-text-muted">მანია ვაშაკიძე — კონტენტის მართვა</p>
 
-        <label htmlFor="password" className="mt-8 block font-mono text-xs uppercase tracking-widest text-text-muted">
+        <label htmlFor="email" className="mt-8 block font-mono text-xs uppercase tracking-widest text-text-muted">
+          ელ-ფოსტა
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          autoFocus
+          className="mt-2 w-full border-b border-hairline bg-transparent py-3 text-text-primary focus:border-gold focus:outline-none"
+        />
+
+        <label htmlFor="password" className="mt-6 block font-mono text-xs uppercase tracking-widest text-text-muted">
           პაროლი
         </label>
         <div className="relative mt-2">
@@ -25,7 +37,6 @@ export default function AdminLoginPage() {
             name="password"
             type={showPassword ? "text" : "password"}
             required
-            autoFocus
             className="w-full border-b border-hairline bg-transparent py-3 pr-9 text-text-primary focus:border-gold focus:outline-none"
           />
           <button
