@@ -119,6 +119,18 @@ export default async function CourseDetailPage({
             </p>
           )}
 
+          {course.instructorBio && pickLocale(course.instructorBio, locale) && (
+            <div className="mt-4 flex flex-col gap-3 border-t border-hairline pt-4">
+              {pickLocale(course.instructorBio, locale)
+                .split("\n\n")
+                .map((paragraph) => (
+                  <p key={paragraph.slice(0, 20)} className="text-sm leading-relaxed text-text-muted">
+                    {paragraph}
+                  </p>
+                ))}
+            </div>
+          )}
+
           <div className="mt-8 border border-hairline bg-surface p-6">
             <p className="font-mono text-xs uppercase tracking-widest text-text-muted">{t("priceLabel")}</p>
             <p className="mt-2 font-display text-3xl text-gold">

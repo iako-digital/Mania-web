@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "1d3300a7-ce26-480c-a0c9-1c06014d5f2c",
+    "name": "Info",
+    "email": "info@mania.com.ge",
+    "role": "super_admin",
+    "createdAt": "2026-08-30T21:15:33.562Z"
+  }
+]

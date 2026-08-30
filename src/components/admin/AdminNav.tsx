@@ -11,6 +11,7 @@ const SECTIONS: { href: string; label: string; superAdminOnly?: boolean }[] = [
   { href: "/admin/categories", label: "კატეგორიები", superAdminOnly: true },
   { href: "/admin/portfolio", label: "პორტფოლიო", superAdminOnly: true },
   { href: "/admin/courses", label: "კურსები" },
+  { href: "/admin/pending-courses", label: "ტაბებას დრაფტები" },
   { href: "/admin/patterns", label: "თარგები" },
   { href: "/admin/students", label: "მოსწავლეები" },
   { href: "/admin/sales", label: "გაყიდვები" },

@@ -2,7 +2,10 @@
   {
     "id": "ai-tools-for-creatives",
     "slug": "ai-tools-for-creatives",
-    "title": { "ka": "AI ინსტრუმენტები კრეატიულებისთვის", "en": "AI Tools for Creatives" },
+    "title": {
+      "ka": "AI ინსტრუმენტები კრეატიულებისთვის",
+      "en": "AI Tools for Creatives"
+    },
     "subtitle": {
       "ka": "ისწავლეთ ხელოვნური ინტელექტის გამოყენება დიზაინში, ვიდეოსა და კონტენტის წარმოებაში",
       "en": "Learn to use AI across design, video, and content production"
@@ -20,12 +23,18 @@
       {
         "id": "section-intro",
         "order": 0,
-        "title": { "ka": "შესავალი", "en": "Introduction" },
+        "title": {
+          "ka": "შესავალი",
+          "en": "Introduction"
+        },
         "lessons": [
           {
             "id": "lesson-welcome",
             "order": 0,
-            "title": { "ka": "კურსში მოგესალმებით", "en": "Welcome to the course" },
+            "title": {
+              "ka": "კურსში მოგესალმებით",
+              "en": "Welcome to the course"
+            },
             "type": "video",
             "durationSeconds": 240,
             "bunnyVideoId": "",
@@ -35,7 +44,10 @@
           {
             "id": "lesson-tools-overview",
             "order": 1,
-            "title": { "ka": "ინსტრუმენტების მიმოხილვა", "en": "Overview of the tools" },
+            "title": {
+              "ka": "ინსტრუმენტების მიმოხილვა",
+              "en": "Overview of the tools"
+            },
             "type": "video",
             "durationSeconds": 620,
             "bunnyVideoId": "",
@@ -47,12 +59,18 @@
       {
         "id": "section-practice",
         "order": 1,
-        "title": { "ka": "პრაქტიკული პროექტები", "en": "Hands-on Projects" },
+        "title": {
+          "ka": "პრაქტიკული პროექტები",
+          "en": "Hands-on Projects"
+        },
         "lessons": [
           {
             "id": "lesson-project-1",
             "order": 0,
-            "title": { "ka": "პროექტი #1 — ბრენდის ვიზუალები", "en": "Project #1 — Brand Visuals" },
+            "title": {
+              "ka": "პროექტი #1 — ბრენდის ვიზუალები",
+              "en": "Project #1 — Brand Visuals"
+            },
             "type": "video",
             "durationSeconds": 900,
             "bunnyVideoId": "",
@@ -62,7 +80,10 @@
           {
             "id": "lesson-project-2",
             "order": 1,
-            "title": { "ka": "პროექტი #2 — AI ვიდეო მონტაჟი", "en": "Project #2 — AI Video Editing" },
+            "title": {
+              "ka": "პროექტი #2 — AI ვიდეო მონტაჟი",
+              "en": "Project #2 — AI Video Editing"
+            },
             "type": "video",
             "durationSeconds": 780,
             "bunnyVideoId": "",
@@ -91,7 +112,11 @@
       "en": "A special course for beginners! Learn to cut and sew simple, comfortable, and safe clothing for infants and children (rompers, kids' pants, dresses) together with your AI teacher, Tabeba."
     },
     "coverImageUrl": "https://res.cloudinary.com/dmcabui00/image/upload/v1788123587/aehqzj01oxkdhzx8n9o2.jpg",
-    "instructorName": "Tabeba (ტაბება) — AI საბავშვო მკერავი მასწავლებელი",
+    "instructorName": "Tabeba (ტაბება) — AI საბავშვო კონსტრუქტორ-მასწავლებელი",
+    "instructorBio": {
+      "ka": "„ტაბება“ (Tabeba) — საბავშვო ხაზის AI კონსტრუქტორ-მასწავლებელი\n\n„ტააა... ბება!“ — ასე ეთამაშებოდა დიზაინერი მანია ვაშაკიძე თავის პატარა შვილიშვილებს. თვალებზე ხელებს მიიფარებდა, ვითომ იმალებოდა და „ტააა... ბებააას!“ თქმასთან ერთად ღიმილით მოიცილებდა ხოლმე ხელებს.\n\nსწორედ ამ თბილი, ოჯახური მოგონებიდან დაიბადა საბავშვო ტანსაცმლის ხაზის შექმნის იდეა, რომელსაც დიზაინერმა „ტაბება“ დაარქვა. ბრენდი, რომელიც წლებია სიყვარულით ქმნის პატარებისთვის რბილ, კომფორტულ და დახვეწილ სამოსს, დღეს უკვე ციფრულ სამყაროში გადადის — „ტაბება“ მოგვევლინა AI კონსტრუქტორ-მასწავლებლად!\n\nის სპეციალიზებულია საბავშვო ტანსაცმლის ჭრა-კერვასა და თარგების მომზადებაზე. ტაბება ნაზი, მზრუნველი და პროფესიონალი გზამკვლევია, რომელიც ნაბიჯ-ნაბიჯ ასწავლის მშობლებსა და დამწყებებს პატარებისთვის უსაფრთხო, ნატურალური და მოხერხებული სამოსის შექმნას.",
+      "en": "\"Tabeba\" — AI Pattern-Maker & Teacher for the Kids' Line\n\n\"Taaa... beba!\" — that's how designer Mania Vashakidze used to play with her little grandchildren: covering her eyes with her hands as if hiding, then pulling them away with a smile, saying \"Taaa... bebaaa!\"\n\nIt was this warm, family memory that gave birth to the idea of a children's clothing line, which the designer named \"Tabeba.\" A brand that has spent years lovingly creating soft, comfortable, and refined clothing for little ones is now moving into the digital world — \"Tabeba\" has become an AI pattern-maker and teacher!\n\nShe specializes in cutting, sewing, and pattern-making for children's clothing. Tabeba is a gentle, caring, and professional guide who teaches parents and beginners, step by step, how to create safe, natural, and practical clothing for little ones."
+    },
     "price": 49,
     "currency": "GEL",
     "published": true,
@@ -99,20 +124,26 @@
     "aiTutor": {
       "enabled": true,
       "knowledgeBase": {
-        "ka": "შენ ხარ ტაბება (Tabeba) — მეგობრული, თბილი და პროფესიონალი AI მკერავი მასწავლებელი, რომელიც სპეციალიზებულია საბავშვო ტანსაცმლის ჭრა-კერვასა და თარგების მომზადებაზე. შენი მიზანია ასწავლო მშობლებსა და დამწყებებს ნატურალური ქსოვილების არჩევა, ბავშვის ზომების სწორად აღება და უსაფრთხო, რბილი ნაკერების გაკეთება. მიმართე მოსწავლეს თბილად და მოთმინებით, გამოიყენე მარტივი, დამწყებისთვის გასაგები ენა.",
-        "en": "You are Tabeba — a friendly, warm, and professional AI sewing teacher who specializes in cutting and sewing children's clothing and preparing patterns. Your goal is to teach parents and beginners how to choose natural fabrics, correctly take a child's measurements, and sew safe, soft seams. Speak warmly and patiently, using simple language a beginner can follow."
+        "ka": "შენ ხარ ტაბება (Tabeba) — საბავშვო ხაზის AI კონსტრუქტორი და მასწავლებელი. შენი სახელი უკავშირდება თბილ ოჯახურ მოგონებას: დიზაინერი მანია ვაშაკიძე შვილიშვილებს ეთამაშებოდა 'ტააა... ბება!'-ს (თვალებზე ხელების მიფარებითა და გამოჩენით), საიდანაც დაიბადა საბავშვო ხაზი 'ტაბება'. შენი მიზანია, თბილი, მზრუნველი და პროფესიონალური ენით ასწავლო სტუდენტებს საბავშვო ტანსაცმლის (ბოდეები, პიჟამოები, შარვლები, კაბები) სწორი გაზომვა, ნატურალური ქსოვილების შერჩევა, თარგების აგება და უსაფრთხო კერვა.",
+        "en": "You are Tabeba — the AI pattern-maker and teacher for the children's clothing line. Your name comes from a warm family memory: designer Mania Vashakidze used to play 'Taaa... beba!' with her grandchildren (covering her eyes with her hands, then revealing them), which is where the children's line 'Tabeba' got its name. Your goal is to teach students, in a warm, caring, and professional tone, how to correctly measure children for clothing (onesies, pajamas, pants, dresses), choose natural fabrics, construct patterns, and sew safely."
       }
     },
     "sections": [
       {
         "id": "section-materials",
         "order": 0,
-        "title": { "ka": "მოდული 1: შესავალი და მასალები", "en": "Module 1: Introduction & Materials" },
+        "title": {
+          "ka": "მოდული 1: შესავალი და მასალები",
+          "en": "Module 1: Introduction & Materials"
+        },
         "lessons": [
           {
             "id": "lesson-fabrics-tools",
             "order": 0,
-            "title": { "ka": "ქსოვილები, ძაფები და საკერავი მანქანის მომზადება", "en": "Fabrics, thread, and preparing your sewing machine" },
+            "title": {
+              "ka": "ქსოვილები, ძაფები და საკერავი მანქანის მომზადება",
+              "en": "Fabrics, thread, and preparing your sewing machine"
+            },
             "type": "article",
             "articleBody": {
               "ka": "ბავშვის ნაზი კანისთვის საუკეთესოა ბამბის ან სხვა ნატურალური ქსოვილები — ისინი სუნთქავენ და არ აღიზიანებენ კანს. ამ გაკვეთილში ვისწავლით, როგორ ავირჩიოთ შესაფერისი ქსოვილი და ძაფი, და როგორ მოვამზადოთ საკერავი მანქანა საბავშვო სამოსზე სამუშაოდ.",
@@ -125,12 +156,18 @@
       {
         "id": "section-measurements",
         "order": 1,
-        "title": { "ka": "მოდული 2: ზომების აღება", "en": "Module 2: Taking Measurements" },
+        "title": {
+          "ka": "მოდული 2: ზომების აღება",
+          "en": "Module 2: Taking Measurements"
+        },
         "lessons": [
           {
             "id": "lesson-measuring-child",
             "order": 0,
-            "title": { "ka": "ბავშვის სწორი გაზომვა", "en": "How to correctly measure a child" },
+            "title": {
+              "ka": "ბავშვის სწორი გაზომვა",
+              "en": "How to correctly measure a child"
+            },
             "type": "article",
             "articleBody": {
               "ka": "სწორი გაზომვა ნებისმიერი კარგად მორგებული სამოსის საფუძველია. ვისწავლით სიმაღლის, გულმკერდის, წელისა და თეძოების სწორად გაზომვას, და როგორ გადავიტანოთ ეს ზომები თარგზე.",
@@ -143,12 +180,18 @@
       {
         "id": "section-first-project",
         "order": 2,
-        "title": { "ka": "მოდული 3: პირველი პროექტი — საბავშვო შარვალი", "en": "Module 3: First Project — Kids' Pants" },
+        "title": {
+          "ka": "მოდული 3: პირველი პროექტი — საბავშვო შარვალი",
+          "en": "Module 3: First Project — Kids' Pants"
+        },
         "lessons": [
           {
             "id": "lesson-pants-project",
             "order": 0,
-            "title": { "ka": "რეზინიანი შორტი: თარგის გადატანა, ჭრა და აწყობა", "en": "Elastic-waist shorts: transferring the pattern, cutting, and assembly" },
+            "title": {
+              "ka": "რეზინიანი შორტი: თარგის გადატანა, ჭრა და აწყობა",
+              "en": "Elastic-waist shorts: transferring the pattern, cutting, and assembly"
+            },
             "type": "article",
             "articleBody": {
               "ka": "პირველი პრაქტიკული პროექტი — მარტივი რეზინიანი საბავშვო შორტი. ვისწავლით თარგის ქსოვილზე გადატანას, სწორ ჭრას და ნაწილების ერთმანეთთან აწყობას ნაბიჯ-ნაბიჯ.",
@@ -161,12 +204,18 @@
       {
         "id": "section-onesie-dress",
         "order": 3,
-        "title": { "ka": "მოდული 4: საბავშვო ბოდე და კაბა", "en": "Module 4: Baby Onesie & Dress" },
+        "title": {
+          "ka": "მოდული 4: საბავშვო ბოდე და კაბა",
+          "en": "Module 4: Baby Onesie & Dress"
+        },
         "lessons": [
           {
             "id": "lesson-onesie-dress-project",
             "order": 0,
-            "title": { "ka": "საყელო, ელასტიური ნაკერები და ღილების დამაგრება", "en": "Collar, elastic seams, and attaching buttons/snaps" },
+            "title": {
+              "ka": "საყელო, ელასტიური ნაკერები და ღილების დამაგრება",
+              "en": "Collar, elastic seams, and attaching buttons/snaps"
+            },
             "type": "article",
             "articleBody": {
               "ka": "ამ მოდულში ვკერავთ საბავშვო ბოდესა და კაბას — ვისწავლით საყელოს მიკერებას, ელასტიური, კანისთვის უსაფრთხო ნაკერების გაკეთებას და ღილების ან კნოპების სწორად დამაგრებას.",
@@ -179,12 +228,18 @@
       {
         "id": "section-quiz",
         "order": 4,
-        "title": { "ka": "მოდული 5: AI ქვიზი და დასრულების დადასტურება", "en": "Module 5: AI Quiz & Completion" },
+        "title": {
+          "ka": "მოდული 5: AI ქვიზი და დასრულების დადასტურება",
+          "en": "Module 5: AI Quiz & Completion"
+        },
         "lessons": [
           {
             "id": "lesson-final-quiz",
             "order": 0,
-            "title": { "ka": "ტაბებას პრაქტიკული ქვიზი", "en": "Tabeba's practical quiz" },
+            "title": {
+              "ka": "ტაბებას პრაქტიკული ქვიზი",
+              "en": "Tabeba's practical quiz"
+            },
             "type": "article",
             "articleBody": {
               "ka": "მოდულების დასრულების შემდეგ გაიარეთ ტაბებას მიერ გენერირებული პრაქტიკული ქვიზი „ქვიზის“ ჩანართში — ის ამოწმებს თქვენს ცოდნას ქსოვილების, ზომების აღებისა და ნაკერების შესახებ. თქვენი შედეგი ინახება თქვენს პირად კაბინეტში.",
@@ -193,9 +248,33 @@
             "isPreview": false
           }
         ]
+      },
+      {
+        "id": "section-daily-tabeba",
+        "order": 5,
+        "title": {
+          "ka": "დღიური გაკვეთილები (Tabeba)",
+          "en": "Daily Lessons (Tabeba)"
+        },
+        "lessons": [
+          {
+            "id": "39fb9996-f828-41dd-bdf0-b32ac0ae7d8e",
+            "order": 0,
+            "title": {
+              "ka": "ჩვილის კიმონოს სტილის ბოდე: ნაზი შეკერვა და უსაფრთხო თასმები",
+              "en": "Baby Kimono Bodysuit: Gentle Sewing and Safe Tie Fasteners"
+            },
+            "type": "article",
+            "articleBody": {
+              "ka": "საჭირო მასალები:\n1. 100% ორგანული ბამბის ინტერლოკი ან რიბანა (0.5 მეტრი).\n2. ბამბის რბილი კანტი ან კიპერის ლენტი თასმებისთვის (დაახლოებით 1 მეტრი).\n3. უჟანგავი, ალერგიის საწინააღმდეგო ლითონის ან პლასტმასის კნოპკები (3 ცალი შუასასთვის).\n4. ტრიკოტაჟის ნემსი (Ballpoint/Jersey) საკერავი მანქანისთვის.\n5. ტექსტილის მაკრატელი, მკერდის ცარცი და დამცავი ქინძისთავები.\n\nნაბიჯ-ნაბიჯ ინსტრუქცია:\n1. თარგის მომზადება და ჭრა: გამოჭერით ზურგის 1 დეტალი, წინა გადამფარავი 2 დეტალი (მარჯვენა და მარცხენა) და 2 სახელო.\n2. წინა გადაფარვისა და თასმების მომზადება: დაამუშავეთ წინა დეტალების ირიბი წიბოები რბილი ბამბის კანტით. ჩაკერეთ მოკლე თასმები (10-12 სმ) გადაფარვის კუთხეებში.\n3. მხრების შეერთება: დაადეთ წინა დეტალები ზურგის დეტალს პირისპირ და შეიკერეთ მხრები ელასტიური ნაკერით.\n4. სახელოების მიკერება: გაშლილ მდგომარეობაში მიაკერეთ სახელოები იღლიის ამოჭრილობას.\n5. გვერდითი ნაკერები: ერთიანი ნაკერით შეერთეთ გვერდები სახელოს მაჯიდან ბოდეს ქვედა კუთხემდე.\n6. შუასას დამუშავება: დაამუშავეთ ბოდეს ქვედა ამოჭრილობა კანტით და დაამაგრეთ 3 ცალი უსაფრთხო კნოპკა.\n\nთარგის რჩევები:\nტაბებას ოჯახური რჩევა: ახალშობილისთვის კიმონო ბოდე ყველაზე მოსახერხებელია, რადგან პატარას ტანსაცმელი თავზე გადაცმის გარეშე, ნაზად ეცმევა. თარგზე წინა გადაფარვის ზონა გააკეთეთ მინიმუმ 3-4 სმ-იანი, რათა გულმკერდი თბილად იყოს დაფარული. უსაფრთხოებისთვის თასმების სიგრძე არასოდეს გადააჭარბოთ 10-12 სმ-ს. ახალშობილის ძალიან ნაზი კანისთვის შეგიძლიათ ნაკერები გარეთა მხარეს გააკეთოთ.\n\nსწრაფი ქვიზი:\n\n1. რატომ არის კიმონოს სტილის ბოდე საუკეთესო არჩევანი ახალშობილისთვის?\n1. მხოლოდ დეკორატიული, ლამაზი იერის გამო\n2. რადგან იხსნება სრულად და ბავშვს ეცმევა თავზე გადაცმის გარეშე\n3. რადგან ნაკლებ ქსოვილს მოითხოვს ჭრისას\n4. რადგან მასზე ღილების დაკერება საერთოდ არ არის საჭირო\nსწორი პასუხი: რადგან იხსნება სრულად და ბავშვს ეცმევა თავზე გადაცმის გარეშე\nკიმონო ბოდე სრულად იშლება, რაც ახალშობილის ჩაცმას ხდის სრულიად უსაფრთხოსა და სტრესისგან თავისუფალს, რადგან ტანსაცმლის თავზე გადაცმა საჭირო არ არის.\n\n2. რა არის საბავშვო ტანსაცმელზე თასმების/ლენტების მაქსიმალური უსაფრთხო სიგრძე?\n1. 10-12 სმ\n2. 25-30 სმ\n3. 50 სმ\n4. სიგრძეს შეზღუდვა არ აქვს\nსწორი პასუხი: 10-12 სმ\nჩვილის უსაფრთხოების საერთაშორისო სტანდარტებით, თასმების სიგრძე არ უნდა აღემატებოდეს 10-12 სმ-ს, რათა თავიდან აირიდოთ გადახლართვის ან გაგუდვის საფრთხე.\n\n3. რომელი ნემსი უნდა გამოვიყენოთ ბამბის ელასტიური ტრიკოტაჟის (ინტერლოკის) კერვისას?\n1. სქელი ჯინსის ნემსი (Denim needle)\n2. ტრიკოტაჟის მომრგვალებულწვერიანი ნემსი (Ballpoint/Jersey needle)\n3. ტყავის ჭრის ნემსი (Leather needle)\n4. ნებისმიერი ძველი უნივერსალური ნემსი\nსწორი პასუხი: ტრიკოტაჟის მომრგვალებულწვერიანი ნემსი (Ballpoint/Jersey needle)\nტრიკოტაჟის ნემსის მომრგვალებული წვერი არ ჭრის ელასტიურ ძაფებს, არამედ ნაზად ჩადის მათ შორის, რაც იცავს ქსოვილს დახვრეტისა და გაფუჭებისგან.",
+              "en": "Materials needed:\n1. 100% organic cotton interlock or rib knit (0.5 meters).\n2. Soft cotton bias tape or twill tape for ties (approx. 1 meter).\n3. Nickel-free, hypoallergenic metal or plastic snaps (3 pcs for the crotch).\n4. Ballpoint/Jersey sewing machine needle.\n5. Fabric scissors, tailor's chalk, and sewing pins.\n\nStep-by-step guide:\n1. Pattern Preparation and Cutting: Cut 1 back piece, 2 overlapping front pieces (right and left), and 2 sleeves.\n2. Front Overlap and Tie Setup: Bind the diagonal edges of the front pieces with soft cotton bias tape. Insert short tie ribbons (10-12 cm) at the overlap corners.\n3. Shoulder Seams: Place front pieces onto the back piece right sides together and stitch the shoulders using a stretch stitch.\n4. Sleeve Attachment: Sew sleeves into the open armholes while the garment is flat.\n5. Side Seams: Stitch side seams and sleeve inseams in one continuous line from cuff to bottom hem.\n6. Crotch Finish: Bind the bottom crotch curve with knit tape and attach 3 safety snaps.\n\nPattern notes:\nTabeba's Family Tip: A kimono bodysuit is most convenient for newborns as it dresses them gently without pulling over their delicate head. Ensure a 3-4 cm front overlap on the pattern to keep the baby's chest warm. For baby safety, never make tie ribbons longer than 10-12 cm. For extra delicate newborn skin, you can even place seams on the outside.\n\nQuick quiz:\n\n1. Why is a kimono-style bodysuit the best choice for a newborn?\n1. Only because of its decorative appearance\n2. Because it opens fully and dresses the baby without pulling over the head\n3. Because it requires less fabric when cutting\n4. Because it does not require sewing any snaps at all\nCorrect answer: Because it opens fully and dresses the baby without pulling over the head\nA kimono bodysuit opens completely, making dressing safe and stress-free for a newborn without pulling fabric over their sensitive head.\n\n2. What is the maximum safe length for tie ribbons on baby clothing?\n1. 10-12 cm\n2. 25-30 cm\n3. 50 cm\n4. There is no length limit\nCorrect answer: 10-12 cm\nAccording to baby safety standards, tie ribbons should not exceed 10-12 cm to prevent any risk of entanglement or choking.\n\n3. Which needle should be used when sewing elastic cotton knit (interlock)?\n1. Thick denim needle\n2. Rounded tip knit needle (Ballpoint/Jersey needle)\n3. Leather cutting needle\n4. Any old universal needle\nCorrect answer: Rounded tip knit needle (Ballpoint/Jersey needle)\nA ballpoint/jersey needle has a rounded tip that slides gently between knit fibers rather than cutting them, preventing holes and damage."
+            },
+            "isPreview": false
+          }
+        ]
       }
     ],
     "createdAt": "2026-08-31T00:00:00.000Z",
-    "updatedAt": "2026-08-31T00:00:00.000Z"
+    "updatedAt": "2026-08-30T21:16:28.857Z"
   }
 ]

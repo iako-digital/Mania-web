@@ -54,6 +54,7 @@ export interface Course {
   description: LocaleString;
   coverImageUrl: string;
   instructorName: string;
+  instructorBio?: LocaleString;
   price: number;
   currency: "GEL" | "USD";
   published: boolean;

@@ -1,0 +1,113 @@
+[
+  {
+    "id": "41025097-f623-40c4-8afc-5805a2924f0b",
+    "courseId": "tabeba-kids-sewing-basics",
+    "title": {
+      "ka": "ჩვილის კიმონოს სტილის ბოდე: ნაზი შეკერვა და უსაფრთხო თასმები",
+      "en": "Baby Kimono Bodysuit: Gentle Sewing and Safe Tie Fasteners"
+    },
+    "materialsNeeded": {
+      "ka": "1. 100% ორგანული ბამბის ინტერლოკი ან რიბანა (0.5 მეტრი).\n2. ბამბის რბილი კანტი ან კიპერის ლენტი თასმებისთვის (დაახლოებით 1 მეტრი).\n3. უჟანგავი, ალერგიის საწინააღმდეგო ლითონის ან პლასტმასის კნოპკები (3 ცალი შუასასთვის).\n4. ტრიკოტაჟის ნემსი (Ballpoint/Jersey) საკერავი მანქანისთვის.\n5. ტექსტილის მაკრატელი, მკერდის ცარცი და დამცავი ქინძისთავები.",
+      "en": "1. 100% organic cotton interlock or rib knit (0.5 meters).\n2. Soft cotton bias tape or twill tape for ties (approx. 1 meter).\n3. Nickel-free, hypoallergenic metal or plastic snaps (3 pcs for the crotch).\n4. Ballpoint/Jersey sewing machine needle.\n5. Fabric scissors, tailor's chalk, and sewing pins."
+    },
+    "stepByStepGuide": {
+      "ka": "1. თარგის მომზადება და ჭრა: გამოჭერით ზურგის 1 დეტალი, წინა გადამფარავი 2 დეტალი (მარჯვენა და მარცხენა) და 2 სახელო.\n2. წინა გადაფარვისა და თასმების მომზადება: დაამუშავეთ წინა დეტალების ირიბი წიბოები რბილი ბამბის კანტით. ჩაკერეთ მოკლე თასმები (10-12 სმ) გადაფარვის კუთხეებში.\n3. მხრების შეერთება: დაადეთ წინა დეტალები ზურგის დეტალს პირისპირ და შეიკერეთ მხრები ელასტიური ნაკერით.\n4. სახელოების მიკერება: გაშლილ მდგომარეობაში მიაკერეთ სახელოები იღლიის ამოჭრილობას.\n5. გვერდითი ნაკერები: ერთიანი ნაკერით შეერთეთ გვერდები სახელოს მაჯიდან ბოდეს ქვედა კუთხემდე.\n6. შუასას დამუშავება: დაამუშავეთ ბოდეს ქვედა ამოჭრილობა კანტით და დაამაგრეთ 3 ცალი უსაფრთხო კნოპკა.",
+      "en": "1. Pattern Preparation and Cutting: Cut 1 back piece, 2 overlapping front pieces (right and left), and 2 sleeves.\n2. Front Overlap and Tie Setup: Bind the diagonal edges of the front pieces with soft cotton bias tape. Insert short tie ribbons (10-12 cm) at the overlap corners.\n3. Shoulder Seams: Place front pieces onto the back piece right sides together and stitch the shoulders using a stretch stitch.\n4. Sleeve Attachment: Sew sleeves into the open armholes while the garment is flat.\n5. Side Seams: Stitch side seams and sleeve inseams in one continuous line from cuff to bottom hem.\n6. Crotch Finish: Bind the bottom crotch curve with knit tape and attach 3 safety snaps."
+    },
+    "patternNotes": {
+      "ka": "ტაბებას ოჯახური რჩევა: ახალშობილისთვის კიმონო ბოდე ყველაზე მოსახერხებელია, რადგან პატარას ტანსაცმელი თავზე გადაცმის გარეშე, ნაზად ეცმევა. თარგზე წინა გადაფარვის ზონა გააკეთეთ მინიმუმ 3-4 სმ-იანი, რათა გულმკერდი თბილად იყოს დაფარული. უსაფრთხოებისთვის თასმების სიგრძე არასოდეს გადააჭარბოთ 10-12 სმ-ს. ახალშობილის ძალიან ნაზი კანისთვის შეგიძლიათ ნაკერები გარეთა მხარეს გააკეთოთ.",
+      "en": "Tabeba's Family Tip: A kimono bodysuit is most convenient for newborns as it dresses them gently without pulling over their delicate head. Ensure a 3-4 cm front overlap on the pattern to keep the baby's chest warm. For baby safety, never make tie ribbons longer than 10-12 cm. For extra delicate newborn skin, you can even place seams on the outside."
+    },
+    "quiz": [
+      {
+        "question": {
+          "ka": "რატომ არის კიმონოს სტილის ბოდე საუკეთესო არჩევანი ახალშობილისთვის?",
+          "en": "Why is a kimono-style bodysuit the best choice for a newborn?"
+        },
+        "options": [
+          {
+            "ka": "მხოლოდ დეკორატიული, ლამაზი იერის გამო",
+            "en": "Only because of its decorative appearance"
+          },
+          {
+            "ka": "რადგან იხსნება სრულად და ბავშვს ეცმევა თავზე გადაცმის გარეშე",
+            "en": "Because it opens fully and dresses the baby without pulling over the head"
+          },
+          {
+            "ka": "რადგან ნაკლებ ქსოვილს მოითხოვს ჭრისას",
+            "en": "Because it requires less fabric when cutting"
+          },
+          {
+            "ka": "რადგან მასზე ღილების დაკერება საერთოდ არ არის საჭირო",
+            "en": "Because it does not require sewing any snaps at all"
+          }
+        ],
+        "correctIndex": 1,
+        "explanation": {
+          "ka": "კიმონო ბოდე სრულად იშლება, რაც ახალშობილის ჩაცმას ხდის სრულიად უსაფრთხოსა და სტრესისგან თავისუფალს, რადგან ტანსაცმლის თავზე გადაცმა საჭირო არ არის.",
+          "en": "A kimono bodysuit opens completely, making dressing safe and stress-free for a newborn without pulling fabric over their sensitive head."
+        }
+      },
+      {
+        "question": {
+          "ka": "რა არის საბავშვო ტანსაცმელზე თასმების/ლენტების მაქსიმალური უსაფრთხო სიგრძე?",
+          "en": "What is the maximum safe length for tie ribbons on baby clothing?"
+        },
+        "options": [
+          {
+            "ka": "10-12 სმ",
+            "en": "10-12 cm"
+          },
+          {
+            "ka": "25-30 სმ",
+            "en": "25-30 cm"
+          },
+          {
+            "ka": "50 სმ",
+            "en": "50 cm"
+          },
+          {
+            "ka": "სიგრძეს შეზღუდვა არ აქვს",
+            "en": "There is no length limit"
+          }
+        ],
+        "correctIndex": 0,
+        "explanation": {
+          "ka": "ჩვილის უსაფრთხოების საერთაშორისო სტანდარტებით, თასმების სიგრძე არ უნდა აღემატებოდეს 10-12 სმ-ს, რათა თავიდან აირიდოთ გადახლართვის ან გაგუდვის საფრთხე.",
+          "en": "According to baby safety standards, tie ribbons should not exceed 10-12 cm to prevent any risk of entanglement or choking."
+        }
+      },
+      {
+        "question": {
+          "ka": "რომელი ნემსი უნდა გამოვიყენოთ ბამბის ელასტიური ტრიკოტაჟის (ინტერლოკის) კერვისას?",
+          "en": "Which needle should be used when sewing elastic cotton knit (interlock)?"
+        },
+        "options": [
+          {
+            "ka": "სქელი ჯინსის ნემსი (Denim needle)",
+            "en": "Thick denim needle"
+          },
+          {
+            "ka": "ტრიკოტაჟის მომრგვალებულწვერიანი ნემსი (Ballpoint/Jersey needle)",
+            "en": "Rounded tip knit needle (Ballpoint/Jersey needle)"
+          },
+          {
+            "ka": "ტყავის ჭრის ნემსი (Leather needle)",
+            "en": "Leather cutting needle"
+          },
+          {
+            "ka": "ნებისმიერი ძველი უნივერსალური ნემსი",
+            "en": "Any old universal needle"
+          }
+        ],
+        "correctIndex": 1,
+        "explanation": {
+          "ka": "ტრიკოტაჟის ნემსის მომრგვალებული წვერი არ ჭრის ელასტიურ ძაფებს, არამედ ნაზად ჩადის მათ შორის, რაც იცავს ქსოვილს დახვრეტისა და გაფუჭებისგან.",
+          "en": "A ballpoint/jersey needle has a rounded tip that slides gently between knit fibers rather than cutting them, preventing holes and damage."
+        }
+      }
+    ],
+    "status": "published",
+    "createdAt": "2026-08-30T21:12:25.590Z"
+  }
+]

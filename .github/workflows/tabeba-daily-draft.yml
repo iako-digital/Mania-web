@@ -1,0 +1,23 @@
+name: Tabeba Daily Draft Lesson
+
+on:
+  schedule:
+    # 09:00 Tbilisi time (UTC+4) = 05:00 UTC
+    - cron: "0 5 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  generate-draft:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request a new draft lesson from Tabeba
+        run: |
+          status=$(curl -s -o /tmp/response.json -w "%{http_code}" -X POST \
+            "https://mania.com.ge/api/cron/generate-daily-tabeba-lesson" \
+            -H "Authorization: Bearer ${{ secrets.TABEBA_DRAFT_SECRET }}")
+          echo "HTTP status: $status"
+          cat /tmp/response.json
+          if [ "$status" -ge 300 ]; then
+            echo "Draft generation failed"
+            exit 1
+          fi
