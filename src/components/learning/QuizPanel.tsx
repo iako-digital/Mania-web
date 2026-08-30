@@ -10,12 +10,16 @@ interface QuizQuestion {
   explanation?: string;
 }
 
+// The learning player has its own Georgian-only chrome (not routed under
+// [locale] — see src/app/learning/layout.tsx), so there's no site locale to
+// read here. This toggle is the quiz's own, explicit language choice.
 export function QuizPanel({ courseId }: { courseId: string }) {
   const [questions, setQuestions] = useState<QuizQuestion[] | null>(null);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [locale, setLocale] = useState<"ka" | "en">("ka");
 
   async function generate() {
     setLoading(true);
@@ -26,7 +30,7 @@ export function QuizPanel({ courseId }: { courseId: string }) {
       const res = await fetch("/api/learning/ai-tutor/quiz", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ courseId }),
+        body: JSON.stringify({ courseId, locale }),
       });
       const data = await res.json();
       if (!res.ok || !Array.isArray(data.questions)) {
@@ -61,6 +65,21 @@ export function QuizPanel({ courseId }: { courseId: string }) {
     return (
       <div className="flex flex-col items-start gap-4">
         <p className="text-text-muted">გაიარეთ AI-ს მიერ გენერირებული ქვიზი კურსის მასალაზე დაყრდნობით.</p>
+        <div className="flex gap-2">
+          {(["ka", "en"] as const).map((l) => (
+            <button
+              key={l}
+              type="button"
+              onClick={() => setLocale(l)}
+              className={
+                "border px-3 py-1.5 font-mono text-xs uppercase tracking-widest transition-colors cursor-pointer " +
+                (locale === l ? "border-gold text-gold" : "border-hairline text-text-muted hover:text-text-primary")
+              }
+            >
+              {l === "ka" ? "ქართული" : "English"}
+            </button>
+          ))}
+        </div>
         <button
           type="button"
           onClick={generate}

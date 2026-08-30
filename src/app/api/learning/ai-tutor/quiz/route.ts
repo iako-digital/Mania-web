@@ -22,10 +22,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const { courseId } = (body ?? {}) as Record<string, unknown>;
+  const { courseId, locale } = (body ?? {}) as Record<string, unknown>;
   if (typeof courseId !== "string" || !courseId) {
     return NextResponse.json({ error: "courseId is required" }, { status: 400 });
   }
+  const quizLocale = locale === "en" ? "en" : "ka";
 
   const student = await getCurrentStudent();
   const [course, enrollment] = await Promise.all([getCourseById(courseId), getEnrollment(courseId, student.id)]);
@@ -36,21 +37,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "ამ კურსზე წვდომა არ გაქვთ." }, { status: 403 });
   }
 
+  // Includes both locale versions as source material regardless of which
+  // language the quiz will be written in — richer grounding either way.
   const lessonLines: string[] = [];
   for (const section of course.sections) {
     for (const lesson of section.lessons) {
-      lessonLines.push(lesson.title.ka || lesson.title.en);
-      if (lesson.articleBody?.ka || lesson.articleBody?.en) {
-        lessonLines.push((lesson.articleBody.ka || lesson.articleBody.en).slice(0, 1500));
-      }
+      lessonLines.push([lesson.title.ka, lesson.title.en].filter(Boolean).join(" / "));
+      const body = [lesson.articleBody?.ka, lesson.articleBody?.en].filter(Boolean).join("\n");
+      if (body) lessonLines.push(body.slice(0, 3000));
     }
   }
-  const knowledgeBase = course.aiTutor?.knowledgeBase?.ka || course.aiTutor?.knowledgeBase?.en || "";
-  const material = [course.description.ka || course.description.en, ...lessonLines, knowledgeBase]
-    .filter(Boolean)
-    .join("\n");
+  const knowledgeBase = [course.aiTutor?.knowledgeBase?.ka, course.aiTutor?.knowledgeBase?.en].filter(Boolean).join("\n");
+  const description = [course.description.ka, course.description.en].filter(Boolean).join("\n");
+  const material = [description, ...lessonLines, knowledgeBase].filter(Boolean).join("\n");
 
-  const prompt = `შეადგინე ${QUESTION_COUNT} ტესტის კითხვა (4 ვარიანტით თითოეულს) კურსის „${course.title.ka || course.title.en}“ მასალაზე დაყრდნობით. მასალა:\n\n${material.slice(0, 8000)}\n\nუპასუხე მხოლოდ JSON მასივით, ყოველ ელემენტს ეს ველები უნდა ჰქონდეს: question (string), options (4 string-ის მასივი), correctIndex (0-3), explanation (string, მოკლე ახსნა). არაფერი დაწერო JSON-ის გარდა.`;
+  const courseTitle = [course.title.ka, course.title.en].filter(Boolean).join(" / ");
+  const languageInstruction =
+    quizLocale === "en" ? "Write the quiz in English." : "დაწერე ქვიზი ქართულად.";
+  const prompt = `შეადგინე ${QUESTION_COUNT} ტესტის კითხვა (4 ვარიანტით თითოეულს) კურსის „${courseTitle}“ მასალაზე დაყრდნობით. ${languageInstruction} მასალა:\n\n${material.slice(0, 8000)}\n\nუპასუხე მხოლოდ JSON მასივით, ყოველ ელემენტს ეს ველები უნდა ჰქონდეს: question (string), options (4 string-ის მასივი), correctIndex (0-3), explanation (string, მოკლე ახსნა). არაფერი დაწერო JSON-ის გარდა.`;
 
   try {
     const raw = await callGemini({

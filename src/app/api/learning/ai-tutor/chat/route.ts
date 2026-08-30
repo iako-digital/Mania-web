@@ -6,27 +6,34 @@ import { callGemini, isGeminiTurn } from "@/lib/gemini";
 const MAX_MESSAGE_LENGTH = 2000;
 const MAX_HISTORY_TURNS = 12;
 
+// Feeds BOTH locale versions of the course's content to Gemini and asks it
+// to mirror whichever language the student actually writes in — rather
+// than picking one language server-side (via .ka || .en, which would only
+// ever expose the Georgian half even when a course is fully bilingual, and
+// hardcoding a reply language regardless of what the student typed).
 function buildSystemInstruction(course: NonNullable<Awaited<ReturnType<typeof getCourseById>>>): string {
+  const title = [course.title.ka, course.title.en].filter(Boolean).join(" / ");
   const parts = [
-    `შენ ხარ AI ინსტრუქტორი კურსისთვის „${course.title.ka || course.title.en}“. უპასუხე მხოლოდ ამ კურსის მასალაზე დაყრდნობით, ქართულად, გასაგებად და მოკლედ. თუ კითხვა კურსის თემას არ ეხება, თავაზიანად აუხსენი, რომ პასუხობ მხოლოდ ამ კურსთან დაკავშირებულ კითხვებზე.`,
-    course.description.ka || course.description.en ? `კურსის აღწერა:\n${course.description.ka || course.description.en}` : "",
+    `შენ ხარ AI ინსტრუქტორი კურსისთვის „${title}“. უპასუხე მხოლოდ ამ კურსის მასალაზე დაყრდნობით, გასაგებად და მოკლედ. უპასუხე იმ ენაზე, რომელზეც მოსწავლემ დაწერა კითხვა (ქართულად ან ინგლისურად) — არასდროს გადართო სხვა ენაზე თავისით. თუ კითხვა კურსის თემას არ ეხება, თავაზიანად აუხსენი, რომ პასუხობ მხოლოდ ამ კურსთან დაკავშირებულ კითხვებზე, იმავე ენაზე რომელზეც მოგმართეს.`,
   ];
+
+  const description = [course.description.ka, course.description.en].filter(Boolean).join("\n");
+  if (description) parts.push(`კურსის აღწერა:\n${description}`);
 
   const lessonLines: string[] = [];
   for (const section of course.sections) {
-    lessonLines.push(`სექცია: ${section.title.ka || section.title.en}`);
+    lessonLines.push(`სექცია: ${[section.title.ka, section.title.en].filter(Boolean).join(" / ")}`);
     for (const lesson of section.lessons) {
-      lessonLines.push(`- ${lesson.title.ka || lesson.title.en}`);
-      if (lesson.articleBody?.ka || lesson.articleBody?.en) {
-        lessonLines.push(`  ${(lesson.articleBody.ka || lesson.articleBody.en).slice(0, 1500)}`);
-      }
+      lessonLines.push(`- ${[lesson.title.ka, lesson.title.en].filter(Boolean).join(" / ")}`);
+      const body = [lesson.articleBody?.ka, lesson.articleBody?.en].filter(Boolean).join("\n");
+      if (body) lessonLines.push(`  ${body.slice(0, 3000)}`);
     }
   }
   if (lessonLines.length > 0) {
     parts.push(`კურსის სილაბუსი და მასალა:\n${lessonLines.join("\n")}`);
   }
 
-  const knowledgeBase = course.aiTutor?.knowledgeBase?.ka || course.aiTutor?.knowledgeBase?.en;
+  const knowledgeBase = [course.aiTutor?.knowledgeBase?.ka, course.aiTutor?.knowledgeBase?.en].filter(Boolean).join("\n");
   if (knowledgeBase) {
     parts.push(`დამატებითი ცოდნის ბაზა:\n${knowledgeBase}`);
   }
