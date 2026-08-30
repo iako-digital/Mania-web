@@ -20,20 +20,20 @@ export async function FeaturedProjects({
   }
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+    <section className="mx-auto max-w-7xl px-6 py-8 md:py-20 lg:px-10">
       <RevealOnScroll>
         <SectionHeading kicker="02 — Selected Work" title={t("featuredTitle")} subtitle={t("featuredSubtitle")} />
       </RevealOnScroll>
 
       <RevealOnScroll variants={staggerChildren}>
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:mt-14 md:gap-8 lg:grid-cols-3">
           {items.map((item, i) => (
             <ProjectCard key={item.id} item={item} priority={i === 0} />
           ))}
         </div>
       </RevealOnScroll>
 
-      <div className="mt-14 flex justify-center">
+      <div className="mt-8 flex justify-center md:mt-14">
         <Button href="/portfolio" variant="ghost">
           {t("featuredAllCta")}
         </Button>

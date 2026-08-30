@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 import { readContent, writeContent } from "@/lib/content/store";
-import { DEMO_STUDENT_EMAIL, DEMO_STUDENT_ID, DEMO_STUDENT_NAME } from "@/lib/courses/demo-student";
+import { getCurrentStudent } from "@/lib/auth/current-student";
 import type { Enrollment } from "@/lib/courses/types";
 
 const FILE = "enrollments.json";
@@ -12,8 +12,9 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "courseId is required" }, { status: 400 });
   }
 
+  const student = await getCurrentStudent();
   const enrollments = await readContent<Enrollment[]>(FILE);
-  const enrollment = enrollments.find((e) => e.courseId === courseId && e.studentId === DEMO_STUDENT_ID);
+  const enrollment = enrollments.find((e) => e.courseId === courseId && e.studentId === student.id);
 
   return NextResponse.json({ completedLessonIds: enrollment?.completedLessonIds ?? [] });
 }
@@ -31,17 +32,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "courseId, lessonId and completed are required" }, { status: 400 });
   }
 
+  const student = await getCurrentStudent();
   const enrollments = await readContent<Enrollment[]>(FILE);
-  let enrollment = enrollments.find((e) => e.courseId === courseId && e.studentId === DEMO_STUDENT_ID);
+  let enrollment = enrollments.find((e) => e.courseId === courseId && e.studentId === student.id);
   const now = new Date().toISOString();
 
   if (!enrollment) {
     enrollment = {
       id: randomUUID(),
       courseId,
-      studentId: DEMO_STUDENT_ID,
-      studentName: DEMO_STUDENT_NAME,
-      studentEmail: DEMO_STUDENT_EMAIL,
+      studentId: student.id,
+      studentName: student.name,
+      studentEmail: student.email,
       completedLessonIds: [],
       enrolledAt: now,
       lastActivityAt: now,

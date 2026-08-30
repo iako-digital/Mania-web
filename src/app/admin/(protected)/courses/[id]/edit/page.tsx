@@ -4,6 +4,7 @@ import { BilingualInput, BilingualTextarea, DeleteButton, Field, SaveButton, Tex
 import { MediaUploadField } from "@/components/admin/MediaUploadField";
 import { PdfUploadField } from "@/components/admin/PdfUploadField";
 import { BunnyVideoField } from "@/components/admin/BunnyVideoField";
+import { CourseFormatFields } from "@/components/admin/CourseFormatFields";
 import { UploadGateProvider } from "@/components/admin/UploadGateContext";
 import type { Course } from "@/lib/courses/types";
 import {
@@ -26,6 +27,7 @@ const EMPTY: Course = {
   price: 0,
   currency: "GEL",
   published: false,
+  format: "on_demand",
   sections: [],
   createdAt: "",
   updatedAt: "",
@@ -115,6 +117,8 @@ export default async function AdminCourseEditPage({
             <input type="checkbox" name="published" defaultChecked={course.published} className="h-4 w-4 accent-[var(--gold)]" />
             <span className="font-mono text-xs uppercase tracking-widest text-text-muted">გამოქვეყნებული</span>
           </label>
+
+          <CourseFormatFields course={course} />
 
           <div>
             <SaveButton>{id === "new" ? "კურსის შექმნა" : "შენახვა"}</SaveButton>

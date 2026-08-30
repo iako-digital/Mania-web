@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { DEMO_STUDENT_ID } from "@/lib/courses/demo-student";
+import { getCurrentStudent } from "@/lib/auth/current-student";
 import { getPatternById, getPatternPurchases, getStudentPatternPurchases, savePatternPurchases } from "@/lib/patterns/queries";
 
 // GET with no query: list the demo student's purchased patterns.
@@ -9,14 +9,15 @@ import { getPatternById, getPatternPurchases, getStudentPatternPurchases, savePa
 // pdfUrl is never exposed to a browsing student who hasn't paid.
 export async function GET(request: Request) {
   const downloadPatternId = new URL(request.url).searchParams.get("download");
+  const student = await getCurrentStudent();
 
   if (!downloadPatternId) {
-    const purchases = await getStudentPatternPurchases(DEMO_STUDENT_ID);
+    const purchases = await getStudentPatternPurchases(student.id);
     return NextResponse.json({ purchases });
   }
 
   const purchases = await getPatternPurchases();
-  const purchase = purchases.find((p) => p.patternId === downloadPatternId && p.studentId === DEMO_STUDENT_ID);
+  const purchase = purchases.find((p) => p.patternId === downloadPatternId && p.studentId === student.id);
   if (!purchase || purchase.accessRevoked) {
     return NextResponse.json({ error: "No access to this pattern" }, { status: 403 });
   }

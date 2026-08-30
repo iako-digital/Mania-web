@@ -2,6 +2,13 @@ import Link from "next/link";
 import { getCourses } from "@/lib/courses/queries";
 import { DeleteButton } from "@/components/admin/fields";
 import { removeCourse } from "./actions";
+import type { CourseFormat } from "@/lib/courses/types";
+
+const FORMAT_LABELS: Record<CourseFormat, string> = {
+  on_demand: "ჩაწერილი ვიდეო",
+  live: "ლაივ გაკვეთილი",
+  ai_tutor: "AI ინსტრუქტორი",
+};
 
 export default async function AdminCoursesListPage({
   searchParams,
@@ -44,7 +51,8 @@ export default async function AdminCoursesListPage({
               <div className="flex-1">
                 <p className="text-text-primary">{course.title.ka || course.title.en || "(უსათაურო)"}</p>
                 <p className="font-mono text-xs uppercase tracking-widest text-text-muted">
-                  {course.sections.length} სექცია · {lessonCount} გაკვეთილი · {course.price} {course.currency}
+                  {FORMAT_LABELS[course.format]} · {course.sections.length} სექცია · {lessonCount} გაკვეთილი ·{" "}
+                  {course.price} {course.currency}
                   {course.published ? " · გამოქვეყნებული" : " · დრაფტი"}
                 </p>
               </div>

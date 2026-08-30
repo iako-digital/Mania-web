@@ -1,19 +1,9 @@
 import { NextResponse } from "next/server";
 import { getAiAssistantContent } from "@/lib/content/queries";
+import { callGemini, isGeminiTurn } from "@/lib/gemini";
 
 const MAX_MESSAGE_LENGTH = 2000;
 const MAX_HISTORY_TURNS = 12;
-
-interface ChatTurn {
-  role: "user" | "model";
-  text: string;
-}
-
-function isChatTurn(value: unknown): value is ChatTurn {
-  if (!value || typeof value !== "object") return false;
-  const { role, text } = value as Record<string, unknown>;
-  return (role === "user" || role === "model") && typeof text === "string";
-}
 
 export async function POST(request: Request) {
   const apiKey = process.env.GEMINI_API_KEY;
@@ -38,49 +28,29 @@ export async function POST(request: Request) {
   }
 
   const trimmedMessage = message.trim().slice(0, MAX_MESSAGE_LENGTH);
-  const priorTurns = Array.isArray(history) ? history.filter(isChatTurn).slice(-MAX_HISTORY_TURNS) : [];
+  const priorTurns = Array.isArray(history) ? history.filter(isGeminiTurn).slice(-MAX_HISTORY_TURNS) : [];
 
   const ai = await getAiAssistantContent();
   if (!ai.enabled) {
     return NextResponse.json({ error: "AI ასისტენტი გამორთულია." }, { status: 503 });
   }
 
-  const model = process.env.GEMINI_MODEL || "gemini-3.6-flash";
   const systemInstruction = [ai.systemInstructions, ai.knowledgeBase ? `ცოდნის ბაზა:\n${ai.knowledgeBase}` : ""]
     .filter(Boolean)
     .join("\n\n");
 
   try {
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          systemInstruction: systemInstruction ? { parts: [{ text: systemInstruction }] } : undefined,
-          contents: [
-            ...priorTurns.map((turn) => ({ role: turn.role, parts: [{ text: turn.text.slice(0, MAX_MESSAGE_LENGTH) }] })),
-            { role: "user", parts: [{ text: trimmedMessage }] },
-          ],
-        }),
-      },
-    );
-
-    if (!res.ok) {
-      console.error("[ai-chat] Gemini request failed:", res.status, await res.text());
-      return NextResponse.json({ error: "პასუხის მიღება ვერ მოხერხდა." }, { status: 502 });
-    }
-
-    const data = await res.json();
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    if (typeof reply !== "string" || !reply.trim()) {
-      return NextResponse.json({ error: "პასუხის მიღება ვერ მოხერხდა." }, { status: 502 });
-    }
-
-    return NextResponse.json({ reply: reply.trim() });
+    const reply = await callGemini({
+      apiKey,
+      systemInstruction: systemInstruction || undefined,
+      contents: [
+        ...priorTurns.map((turn) => ({ role: turn.role, parts: [{ text: turn.text.slice(0, MAX_MESSAGE_LENGTH) }] })),
+        { role: "user" as const, parts: [{ text: trimmedMessage }] },
+      ],
+    });
+    return NextResponse.json({ reply });
   } catch (err) {
     console.error("[ai-chat] Gemini request error:", err);
-    return NextResponse.json({ error: "ქსელის შეცდომა." }, { status: 502 });
+    return NextResponse.json({ error: err instanceof Error ? err.message : "ქსელის შეცდომა." }, { status: 502 });
   }
 }

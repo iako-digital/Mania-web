@@ -1,0 +1,323 @@
+// Target schema for a future migration off the current content/*.json flat
+// files. This is a DESIGN artifact only:
+//   - Nothing in the app imports @prisma/client yet — every domain still
+//     reads/writes through src/lib/content/store.ts against content/*.json.
+//   - `npx prisma generate` (schema validation + client typegen) works
+//     without a reachable database — it just needs DATABASE_URL to resolve
+//     as a string, e.g.
+//       DATABASE_URL=postgresql://user:pass@localhost:5432/placeholder npx prisma generate
+//     (the Prisma CLI reads .env, not this project's .env.local). `npx
+//     prisma migrate` needs an actually reachable database, so it has not
+//     been run against this file.
+//   - The intended cutover, once a real Supabase Postgres DATABASE_URL is
+//     supplied, is one domain at a time (e.g. orders first, then courses),
+//     swapping each src/lib/<domain>/queries.ts implementation from the
+//     JSON store to Prisma Client calls while keeping the same function
+//     signatures — so call sites across the app don't need to change.
+// Field/relation shapes below mirror the current JSON types 1:1
+// (src/lib/{courses,orders,patterns}/types.ts) plus Auth.js's standard
+// adapter tables, so a database-session cutover is a drop-in later too.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Prisma 7 moved connection config out of the schema file: the database
+// URL/adapter now live in prisma.config.ts (see that file's comment) —
+// this block only declares the provider.
+datasource db {
+  provider = "postgresql"
+}
+
+// ── Auth.js (next-auth v5) standard adapter tables ──────────────────────
+// Not connected today (the app runs Auth.js in JWT session mode, no
+// adapter) — kept here so switching to database sessions later needs no
+// schema redesign, only wiring up @auth/prisma-adapter.
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  role          UserRole  @default(STUDENT)
+  accounts      Account[]
+  sessions      Session[]
+
+  enrollments  Enrollment[]
+  orders       Order[]
+  purchases    PatternPurchase[]
+  notifications Notification[]
+  quizAttempts QuizAttempt[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum UserRole {
+  STUDENT
+  ADMIN
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ── Domain tables ─────────────────────────────────────────────────────
+
+enum CourseFormat {
+  ON_DEMAND
+  LIVE
+  AI_TUTOR
+}
+
+enum Currency {
+  GEL
+  USD
+}
+
+model Course {
+  id             String       @id @default(cuid())
+  slug           String       @unique
+  titleKa        String
+  titleEn        String
+  subtitleKa     String
+  subtitleEn     String
+  descriptionKa  String       @db.Text
+  descriptionEn  String       @db.Text
+  coverImageUrl  String
+  instructorName String
+  price          Float
+  currency       Currency     @default(GEL)
+  published      Boolean      @default(false)
+  format         CourseFormat @default(ON_DEMAND)
+
+  // "live" format only
+  liveLocationKa String?
+  liveLocationEn String?
+  liveCapacity   Int?
+  liveSessions   LiveSession[]
+
+  // "ai_tutor" format (also settable on other formats)
+  aiTutorEnabled        Boolean @default(false)
+  aiTutorKnowledgeBaseKa String? @db.Text
+  aiTutorKnowledgeBaseEn String? @db.Text
+
+  sections     CourseSection[]
+  enrollments  Enrollment[]
+  quizAttempts QuizAttempt[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model LiveSession {
+  id        String   @id @default(cuid())
+  courseId  String
+  date      String
+  startTime String
+  endTime   String
+
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+}
+
+model CourseSection {
+  id       String @id @default(cuid())
+  courseId String
+  order    Int
+  titleKa  String
+  titleEn  String
+
+  course  Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons Lesson[]
+}
+
+enum LessonType {
+  VIDEO
+  ARTICLE
+  QUIZ
+}
+
+model Lesson {
+  id              String     @id @default(cuid())
+  sectionId       String
+  order           Int
+  titleKa         String
+  titleEn         String
+  type            LessonType @default(VIDEO)
+  durationSeconds Int?
+  bunnyVideoId    String?
+  pdfUrl          String?
+  articleBodyKa   String?    @db.Text
+  articleBodyEn   String?    @db.Text
+  isPreview       Boolean    @default(false)
+
+  section CourseSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+}
+
+model Enrollment {
+  id                 String   @id @default(cuid())
+  courseId           String
+  studentId          String
+  studentName        String
+  studentEmail       String
+  completedLessonIds String[]
+  enrolledAt         DateTime @default(now())
+  lastActivityAt     DateTime @default(now())
+  accessRevoked      Boolean  @default(false)
+
+  course  Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  student User?  @relation(fields: [studentId], references: [id])
+
+  @@unique([courseId, studentId])
+}
+
+model Pattern {
+  id            String              @id @default(cuid())
+  slug          String              @unique
+  titleKa       String
+  titleEn       String
+  descriptionKa String              @db.Text
+  descriptionEn String              @db.Text
+  category      String
+  sizeRange     String
+  difficulty    PatternDifficulty   @default(BEGINNER)
+  coverImageUrl String
+  galleryUrls   String[]
+  pdfUrl        String
+  price         Float
+  currency      Currency            @default(GEL)
+  published     Boolean             @default(false)
+
+  purchases PatternPurchase[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum PatternDifficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+model PatternPurchase {
+  id            String   @id @default(cuid())
+  patternId     String
+  studentId     String
+  studentName   String
+  studentEmail  String
+  purchasedAt   DateTime @default(now())
+  downloadCount Int      @default(0)
+  accessRevoked Boolean  @default(false)
+
+  pattern Pattern @relation(fields: [patternId], references: [id], onDelete: Cascade)
+  student User?   @relation(fields: [studentId], references: [id])
+}
+
+enum PaymentProvider {
+  BOG
+  TBC
+}
+
+enum PaymentMethod {
+  MANUAL_TRANSFER
+  GATEWAY
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PENDING_VERIFICATION
+  PAID
+  FAILED
+}
+
+enum OrderItemType {
+  COURSE
+  PATTERN
+}
+
+model Order {
+  id            String          @id @default(cuid())
+  orderCode     String          @unique
+  provider      PaymentProvider
+  method        PaymentMethod   @default(MANUAL_TRANSFER)
+  status        OrderStatus     @default(PENDING_PAYMENT)
+  itemType      OrderItemType
+  itemId        String
+  itemTitle     String
+  studentId     String
+  studentName   String
+  studentEmail  String
+  amount        Float
+  currency      Currency        @default(GEL)
+  receiptUrl    String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  completedAt   DateTime?
+
+  student User? @relation(fields: [studentId], references: [id])
+}
+
+enum NotificationType {
+  ORDER_APPROVED
+  ORDER_REJECTED
+  ADMIN_MESSAGE
+  SYSTEM
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  studentId String
+  title     String
+  body      String           @db.Text
+  type      NotificationType @default(SYSTEM)
+  read      Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  student User? @relation(fields: [studentId], references: [id])
+}
+
+model QuizAttempt {
+  id          String   @id @default(cuid())
+  courseId    String
+  studentId   String
+  score       Int
+  total       Int
+  submittedAt DateTime @default(now())
+
+  course  Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  student User?  @relation(fields: [studentId], references: [id])
+}

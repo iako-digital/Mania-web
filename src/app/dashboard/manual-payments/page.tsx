@@ -1,5 +1,5 @@
 import { getStudentOrders } from "@/lib/orders/queries";
-import { DEMO_STUDENT_ID } from "@/lib/courses/demo-student";
+import { getCurrentStudent } from "@/lib/auth/current-student";
 import { DashboardNav } from "@/components/dashboard/DashboardNav";
 import { ReceiptUploadForm } from "@/components/dashboard/ReceiptUploadForm";
 
@@ -11,7 +11,8 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 export default async function ManualPaymentsPage() {
-  const orders = await getStudentOrders(DEMO_STUDENT_ID);
+  const student = await getCurrentStudent();
+  const orders = await getStudentOrders(student.id);
 
   return (
     <div>

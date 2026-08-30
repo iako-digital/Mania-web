@@ -1,15 +1,20 @@
 import { getCourses, getStudentEnrollments } from "@/lib/courses/queries";
 import { getPatterns, getStudentPatternPurchases } from "@/lib/patterns/queries";
-import { DEMO_STUDENT_EMAIL, DEMO_STUDENT_ID, DEMO_STUDENT_NAME } from "@/lib/courses/demo-student";
+import { getStudentOrders } from "@/lib/orders/queries";
+import { getStudentNotifications } from "@/lib/notifications/queries";
+import { getCurrentStudent } from "@/lib/auth/current-student";
 import { DashboardNav } from "@/components/dashboard/DashboardNav";
 import { DashboardTabs } from "@/components/dashboard/DashboardTabs";
 
 export default async function DashboardPage() {
-  const [enrollments, courses, purchases, patterns] = await Promise.all([
-    getStudentEnrollments(DEMO_STUDENT_ID),
+  const student = await getCurrentStudent();
+  const [enrollments, courses, purchases, patterns, orders, notifications] = await Promise.all([
+    getStudentEnrollments(student.id),
     getCourses(),
-    getStudentPatternPurchases(DEMO_STUDENT_ID),
+    getStudentPatternPurchases(student.id),
     getPatterns(),
+    getStudentOrders(student.id),
+    getStudentNotifications(student.id),
   ]);
 
   const courseById = new Map(courses.map((c) => [c.id, c]));
@@ -38,12 +43,23 @@ export default async function DashboardPage() {
       <div className="mx-auto max-w-4xl px-6 py-10">
         <div className="border border-hairline bg-surface p-6">
           <p className="font-mono text-xs uppercase tracking-widest text-text-muted">პროფილი</p>
-          <p className="mt-2 text-lg text-text-primary">{DEMO_STUDENT_NAME}</p>
-          <p className="text-sm text-text-muted">{DEMO_STUDENT_EMAIL}</p>
+          <p className="mt-2 text-lg text-text-primary">{student.name}</p>
+          <p className="text-sm text-text-muted">{student.email}</p>
         </div>
 
         <div className="mt-8">
-          <DashboardTabs myCourses={myCourses} myPatterns={myPatterns} />
+          <DashboardTabs
+            myCourses={myCourses}
+            myPatterns={myPatterns}
+            myOrders={orders.map((o) => ({
+              orderCode: o.orderCode,
+              itemTitle: o.itemTitle,
+              amount: o.amount,
+              currency: o.currency,
+              status: o.status,
+            }))}
+            myNotifications={notifications}
+          />
         </div>
       </div>
     </div>

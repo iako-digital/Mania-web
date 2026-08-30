@@ -2,6 +2,7 @@
   "nav": {
     "home": "Home",
     "portfolio": "Portfolio",
+    "courses": "Courses",
     "expertise": "Expertise",
     "about": "About",
     "patternShop": "Pattern Shop",
@@ -13,6 +14,7 @@
     "kicker": "Technical Designer & Gerber Accumark Specialist",
     "heroCta": "View Portfolio",
     "heroSecondaryCta": "The Process",
+    "heroCoursesCta": "Courses",
     "introTitle": "A universal professional, since 2004",
     "introBody": "In this craft since 2004. My driving force has always been a deep love of creativity and art, and the desire to master the endless possibilities this field offers. Years of tireless work and hands-on experience have shaped me into a truly universal professional — equally at home sketching a concept, drafting a pattern, or fitting the final seam.",
     "introCta": "Read the full story",
@@ -112,5 +114,38 @@
     "buyingCta": "Processing…",
     "buyError": "Purchase failed. Please try again.",
     "instantDownload": "Instant PDF download after purchase"
+  },
+  "courses": {
+    "title": "Courses",
+    "subtitle": "Learn pattern-making and AI tools step by step",
+    "empty": "Courses are being added soon.",
+    "backToShop": "Back to courses",
+    "curriculumLabel": "Curriculum",
+    "scheduleLabel": "Schedule",
+    "scheduleTba": "Schedule to be announced",
+    "locationLabel": "Location",
+    "seatsLeftLabel": "Seats left",
+    "instructorLabel": "Instructor",
+    "priceLabel": "Price",
+    "buyCta": "Buy now",
+    "buyingCta": "Processing…",
+    "buyError": "Purchase failed. Please try again.",
+    "registerCta": "Register",
+    "soldOut": "Sold out",
+    "format": {
+      "on_demand": "On-demand video",
+      "live": "Live classroom",
+      "ai_tutor": "AI Tutor"
+    }
+  },
+  "terms": {
+    "title": "Terms of Service & Privacy Policy",
+    "effectiveDate": "Effective",
+    "georgianGoverns": "The legally binding version of this document is drafted in Georgian only; it is shown below as the governing text."
+  },
+  "cookieConsent": {
+    "message": "This site uses cookies to improve your experience.",
+    "learnMore": "Learn more",
+    "accept": "Accept"
   }
 }

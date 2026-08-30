@@ -2,15 +2,13 @@ import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 import { getCourseById } from "@/lib/courses/queries";
 import { getPatternById } from "@/lib/patterns/queries";
-import { DEMO_STUDENT_EMAIL, DEMO_STUDENT_ID, DEMO_STUDENT_NAME } from "@/lib/courses/demo-student";
+import { getCurrentStudent } from "@/lib/auth/current-student";
 import { generateOrderCode, saveOrder } from "@/lib/orders/queries";
 import type { Order, OrderItemType, PaymentProvider } from "@/lib/orders/types";
 
 // Creates a "pending_payment" order for a course or pattern purchase and
 // hands back its id + orderCode so /checkout/manual-transfer can show the
 // student where to send the transfer and what reference code to use.
-// Runs as the hard-coded demo student until real student auth exists (see
-// [[demo-student]]) — swap DEMO_STUDENT_ID for the authenticated user's id.
 export async function POST(request: Request) {
   let body: unknown;
   try {
@@ -34,6 +32,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Item not found" }, { status: 404 });
   }
 
+  const student = await getCurrentStudent();
+
   const order: Order = {
     id: randomUUID(),
     orderCode: generateOrderCode(),
@@ -43,9 +43,9 @@ export async function POST(request: Request) {
     itemType: itemType as OrderItemType,
     itemId,
     itemTitle: item.title.ka || item.title.en,
-    studentId: DEMO_STUDENT_ID,
-    studentName: DEMO_STUDENT_NAME,
-    studentEmail: DEMO_STUDENT_EMAIL,
+    studentId: student.id,
+    studentName: student.name,
+    studentEmail: student.email,
     amount: item.price,
     currency: item.currency,
     createdAt: new Date().toISOString(),

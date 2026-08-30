@@ -21,6 +21,31 @@ export interface CourseSection {
   lessons: Lesson[];
 }
 
+// The delivery format a course is taught in. "on_demand" (self-paced video)
+// is the original/default shape; "live" adds a schedule instead of playable
+// curriculum; "ai_tutor" keeps curriculum but centers the Gemini-powered
+// tutor/quiz experience over the AiTutor panel. All three share the same
+// purchase flow (BuyButton → order → manual-transfer → admin approve).
+export type CourseFormat = "on_demand" | "live" | "ai_tutor";
+
+export interface LiveSessionSlot {
+  id: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface LiveDetails {
+  location: LocaleString;
+  capacity: number;
+  sessions: LiveSessionSlot[];
+}
+
+export interface AiTutorSettings {
+  enabled: boolean;
+  knowledgeBase?: LocaleString;
+}
+
 export interface Course {
   id: string;
   slug: string;
@@ -32,6 +57,9 @@ export interface Course {
   price: number;
   currency: "GEL" | "USD";
   published: boolean;
+  format: CourseFormat;
+  liveDetails?: LiveDetails;
+  aiTutor?: AiTutorSettings;
   sections: CourseSection[];
   createdAt: string;
   updatedAt: string;

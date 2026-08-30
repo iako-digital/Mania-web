@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { DEMO_STUDENT_ID } from "@/lib/courses/demo-student";
+import { getCurrentStudent } from "@/lib/auth/current-student";
 import { getOrderById, saveOrder } from "@/lib/orders/queries";
 import { notifyAdminNewReceipt, notifyStudentVerificationPending } from "@/lib/email";
 
@@ -24,7 +24,8 @@ export async function POST(request: Request) {
   if (!order) {
     return NextResponse.json({ error: "Order not found" }, { status: 404 });
   }
-  if (order.studentId !== DEMO_STUDENT_ID) {
+  const student = await getCurrentStudent();
+  if (order.studentId !== student.id) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 

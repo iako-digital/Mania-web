@@ -3,7 +3,11 @@ import { readContent, writeContent } from "@/lib/content/store";
 import type { Course, Enrollment } from "./types";
 
 export async function getCourses(): Promise<Course[]> {
-  return readContent<Course[]>("courses.json");
+  const courses = await readContent<Course[]>("courses.json");
+  // Backfills courses written before the `format` field existed (and covers
+  // any future write path that omits it) so every caller can rely on it
+  // being set, rather than checking every read site individually.
+  return courses.map((course) => ({ ...course, format: course.format ?? "on_demand" }));
 }
 
 export async function getPublishedCourses(): Promise<Course[]> {

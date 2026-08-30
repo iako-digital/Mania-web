@@ -6,7 +6,15 @@ import { redirect } from "next/navigation";
 import { readContent } from "@/lib/content/store";
 import { deleteItem, upsertItem } from "@/lib/content/collections";
 import { resolveLocaleString } from "@/lib/translate";
-import type { Course, CourseSection, Lesson, LessonType } from "@/lib/courses/types";
+import type {
+  AiTutorSettings,
+  Course,
+  CourseFormat,
+  CourseSection,
+  Lesson,
+  LessonType,
+  LiveDetails,
+} from "@/lib/courses/types";
 
 const FILE = "courses.json";
 
@@ -53,6 +61,51 @@ export async function saveCourseMeta(formData: FormData): Promise<void> {
   const existing = isNew ? null : await loadCourse(id);
   const now = new Date().toISOString();
 
+  const format: CourseFormat =
+    formData.get("format") === "live" || formData.get("format") === "ai_tutor"
+      ? (formData.get("format") as CourseFormat)
+      : "on_demand";
+
+  let liveDetails: LiveDetails | undefined;
+  if (format === "live") {
+    const [liveLocation] = await Promise.all([
+      resolveLocaleString(String(formData.get("liveLocation_ka") || ""), String(formData.get("liveLocation_en") || "")),
+    ]);
+    let sessions: LiveDetails["sessions"] = [];
+    try {
+      const parsed = JSON.parse(String(formData.get("liveSessionsJson") || "[]"));
+      if (Array.isArray(parsed)) {
+        sessions = parsed
+          .filter((s) => s && typeof s.date === "string")
+          .map((s) => ({
+            id: String(s.id || randomUUID()),
+            date: String(s.date || ""),
+            startTime: String(s.startTime || ""),
+            endTime: String(s.endTime || ""),
+          }));
+      }
+    } catch {
+      sessions = existing?.liveDetails?.sessions ?? [];
+    }
+    liveDetails = {
+      location: liveLocation,
+      capacity: Number(formData.get("liveCapacity") || 0),
+      sessions,
+    };
+  }
+
+  let aiTutor: AiTutorSettings | undefined;
+  if (format === "ai_tutor" || formData.get("aiTutorEnabled") === "on") {
+    const knowledgeBase = await resolveLocaleString(
+      String(formData.get("aiTutorKnowledgeBase_ka") || ""),
+      String(formData.get("aiTutorKnowledgeBase_en") || ""),
+    );
+    aiTutor = {
+      enabled: format === "ai_tutor" || formData.get("aiTutorEnabled") === "on",
+      knowledgeBase,
+    };
+  }
+
   const course: Course = {
     id,
     slug: slugify(slugInput || title.en) || id.slice(0, 8),
@@ -64,6 +117,9 @@ export async function saveCourseMeta(formData: FormData): Promise<void> {
     price: Number(formData.get("price") || 0),
     currency: formData.get("currency") === "USD" ? "USD" : "GEL",
     published: formData.get("published") === "on",
+    format,
+    liveDetails,
+    aiTutor,
     sections: existing?.sections ?? [],
     createdAt: existing?.createdAt ?? now,
     updatedAt: now,

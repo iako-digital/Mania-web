@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Download, PlayCircle } from "lucide-react";
+import { Bell, Download, PlayCircle } from "lucide-react";
 
 interface MyCourse {
   courseId: string;
@@ -16,8 +16,42 @@ interface MyPattern {
   purchasedAt: string;
 }
 
-export function DashboardTabs({ myCourses, myPatterns }: { myCourses: MyCourse[]; myPatterns: MyPattern[] }) {
-  const [tab, setTab] = useState<"courses" | "patterns">("courses");
+export interface MyOrder {
+  orderCode: string;
+  itemTitle: string;
+  amount: number;
+  currency: string;
+  status: "pending_payment" | "pending_verification" | "paid" | "failed";
+}
+
+export interface MyNotification {
+  id: string;
+  title: string;
+  body: string;
+  read: boolean;
+  createdAt: string;
+}
+
+const ORDER_STATUS_LABEL: Record<MyOrder["status"], string> = {
+  pending_payment: "მოლოდინში",
+  pending_verification: "მოწმდება",
+  paid: "დადასტურებული",
+  failed: "უარყოფილი",
+};
+
+export function DashboardTabs({
+  myCourses,
+  myPatterns,
+  myOrders,
+  myNotifications,
+}: {
+  myCourses: MyCourse[];
+  myPatterns: MyPattern[];
+  myOrders: MyOrder[];
+  myNotifications: MyNotification[];
+}) {
+  const [tab, setTab] = useState<"courses" | "patterns" | "payments" | "notifications">("courses");
+  const unreadCount = myNotifications.filter((n) => !n.read).length;
 
   return (
     <div>
@@ -41,6 +75,28 @@ export function DashboardTabs({ myCourses, myPatterns }: { myCourses: MyCourse[]
           }
         >
           ჩემი თარგები
+        </button>
+        <button
+          type="button"
+          onClick={() => setTab("payments")}
+          className={
+            "px-5 py-3 font-mono text-xs uppercase tracking-widest transition-colors cursor-pointer " +
+            (tab === "payments" ? "border-b-2 border-gold text-gold" : "border-b-2 border-transparent text-text-muted hover:text-text-primary")
+          }
+        >
+          გადახდები
+        </button>
+        <button
+          type="button"
+          onClick={() => setTab("notifications")}
+          className={
+            "flex items-center gap-2 px-5 py-3 font-mono text-xs uppercase tracking-widest transition-colors cursor-pointer " +
+            (tab === "notifications" ? "border-b-2 border-gold text-gold" : "border-b-2 border-transparent text-text-muted hover:text-text-primary")
+          }
+        >
+          <Bell size={13} />
+          შეტყობინებები
+          {unreadCount > 0 && <span className="rounded-full bg-gold px-1.5 py-0.5 text-[10px] text-ink">{unreadCount}</span>}
         </button>
       </div>
 
@@ -89,7 +145,76 @@ export function DashboardTabs({ myCourses, myPatterns }: { myCourses: MyCourse[]
           ) : (
             <p className="text-text-muted">ჯერ არცერთი თარგი არ გაქვთ შეძენილი.</p>
           ))}
+
+        {tab === "payments" &&
+          (myOrders.length > 0 ? (
+            myOrders.map((o) => (
+              <div key={o.orderCode} className="flex items-center gap-4 border border-hairline bg-surface p-4">
+                <div className="flex-1">
+                  <p className="text-text-primary">{o.itemTitle}</p>
+                  <p className="font-mono text-xs uppercase tracking-widest text-text-muted">
+                    კოდი: {o.orderCode} · {o.amount} {o.currency}
+                  </p>
+                </div>
+                <span
+                  className={
+                    "font-mono text-xs uppercase tracking-widest " +
+                    (o.status === "paid" ? "text-gold" : o.status === "failed" ? "text-red-400" : "text-text-muted")
+                  }
+                >
+                  {ORDER_STATUS_LABEL[o.status]}
+                </span>
+              </div>
+            ))
+          ) : (
+            <p className="text-text-muted">ჯერ არცერთი გადახდა არ გაქვთ.</p>
+          ))}
+
+        {tab === "notifications" &&
+          (myNotifications.length > 0 ? (
+            myNotifications.map((n) => <NotificationRow key={n.id} notification={n} />)
+          ) : (
+            <p className="text-text-muted">ჯერ არცერთი შეტყობინება არ გაქვთ.</p>
+          ))}
       </div>
     </div>
+  );
+}
+
+function NotificationRow({ notification }: { notification: MyNotification }) {
+  const [read, setRead] = useState(notification.read);
+
+  async function markRead() {
+    if (read) return;
+    setRead(true);
+    try {
+      await fetch("/api/dashboard/notifications/mark-read", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: notification.id }),
+      });
+    } catch {
+      // Best-effort — the notification stays visually read either way.
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={markRead}
+      className={
+        "flex flex-col items-start gap-1 border p-4 text-left transition-colors " +
+        (read ? "border-hairline bg-surface" : "border-gold/60 bg-surface cursor-pointer")
+      }
+    >
+      <div className="flex w-full items-center justify-between gap-3">
+        <p className="text-text-primary">{notification.title}</p>
+        {!read && <span className="h-2 w-2 shrink-0 rounded-full bg-gold" />}
+      </div>
+      <p className="text-sm text-text-muted">{notification.body}</p>
+      <p className="font-mono text-xs uppercase tracking-widest text-text-muted/70">
+        {new Date(notification.createdAt).toLocaleDateString("ka-GE")}
+      </p>
+    </button>
   );
 }

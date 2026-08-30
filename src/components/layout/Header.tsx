@@ -12,6 +12,7 @@ import { MobileNav } from "./MobileNav";
 const NAV_ITEMS = [
   { href: "/", key: "home" },
   { href: "/portfolio", key: "portfolio" },
+  { href: "/courses", key: "courses" },
   { href: "/expertise", key: "expertise" },
   { href: "/about", key: "about" },
   { href: "/pattern-shop", key: "patternShop" },

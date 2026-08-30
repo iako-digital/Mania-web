@@ -43,6 +43,7 @@ export async function POST(request: Request) {
     price: 0,
     currency: "GEL",
     published: false,
+    format: "on_demand",
     sections: [],
     createdAt: now,
     updatedAt: now,

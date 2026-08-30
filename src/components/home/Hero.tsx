@@ -33,7 +33,7 @@ export function Hero({ data }: { data: HeroContent | null }) {
   const youTubeId = hasVideo ? getYouTubeId(data!.videoUrl) : null;
 
   return (
-    <section ref={ref} className="relative flex min-h-[92vh] items-center overflow-hidden">
+    <section ref={ref} className="relative flex min-h-fit items-center overflow-hidden py-16 md:min-h-[92vh] md:py-0">
       <motion.div style={{ y }} className="absolute inset-0 z-0">
         {hasVideo && youTubeId ? (
           <div className="absolute inset-0 opacity-60">
@@ -82,7 +82,7 @@ export function Hero({ data }: { data: HeroContent | null }) {
         initial="hidden"
         animate="visible"
         variants={staggerChildren}
-        className="relative z-10 mx-auto max-w-7xl px-6 pb-24 sm:pb-0 lg:px-10"
+        className="relative z-10 mx-auto max-w-7xl px-6 pb-12 sm:pb-0 lg:px-10"
       >
         <motion.p
           variants={fadeUp}
@@ -115,12 +115,15 @@ export function Hero({ data }: { data: HeroContent | null }) {
           {subheadline}
         </motion.p>
 
-        <motion.div variants={fadeUp} className="mt-10 flex flex-wrap gap-4">
+        <motion.div variants={fadeUp} className="mt-6 flex flex-wrap gap-4 md:mt-10 md:gap-8">
           <Button href="/portfolio" variant="primary">
             {t("heroCta")}
           </Button>
           <Button href="/expertise" variant="ghost">
             {t("heroSecondaryCta")}
+          </Button>
+          <Button href="/courses" variant="ghost">
+            {t("heroCoursesCta")}
           </Button>
         </motion.div>
       </motion.div>

@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ThemeScript } from "@/components/ui/ThemeScript";
 import { MessengerFAB } from "@/components/ui/MessengerFAB";
 import { AiChatWidget } from "@/components/ui/AiChatWidget";
+import { CookieConsent } from "@/components/CookieConsent";
 import { getAiAssistantContent, getSiteSettings } from "@/lib/content/queries";
 import { pickLocale } from "@/lib/content/locale";
 import "../globals.css";
@@ -134,6 +135,7 @@ export default async function LocaleLayout({
           {aiAssistant.enabled && (
             <AiChatWidget welcomeMessage={pickLocale(aiAssistant.welcomeMessage, locale)} />
           )}
+          <CookieConsent />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -1,11 +1,16 @@
 import Link from "next/link";
+import { auth, isGoogleAuthConfigured } from "@/auth";
+import { GoogleSignInButton } from "./GoogleSignInButton";
+import { SignOutButton } from "./SignOutButton";
 
 const LINKS = [
   { href: "/dashboard", label: "ჩემი კაბინეტი" },
   { href: "/dashboard/manual-payments", label: "შეკვეთები და ქვითრები" },
 ];
 
-export function DashboardNav({ active }: { active: string }) {
+export async function DashboardNav({ active }: { active: string }) {
+  const session = await auth();
+
   return (
     <header className="border-b border-hairline">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
@@ -23,6 +28,7 @@ export function DashboardNav({ active }: { active: string }) {
               {link.label}
             </Link>
           ))}
+          {session?.user ? <SignOutButton /> : <GoogleSignInButton configured={isGoogleAuthConfigured()} />}
           <Link href="/" className="font-mono text-xs uppercase tracking-widest text-text-muted hover:text-gold">
             საიტზე დაბრუნება
           </Link>

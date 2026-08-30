@@ -1,4 +1,5 @@
 import { getOrders, sumRevenue } from "@/lib/orders/queries";
+import { RevenueChart } from "@/components/admin/RevenueChart";
 
 const PROVIDER_LABEL: Record<string, string> = { BOG: "საქართველოს ბანკი", TBC: "თიბისი ბანკი" };
 const STATUS_LABEL: Record<string, string> = {
@@ -9,13 +10,30 @@ const STATUS_LABEL: Record<string, string> = {
 };
 const ITEM_TYPE_LABEL: Record<string, string> = { course: "კურსი", pattern: "თარგი" };
 
+function monthLabel(iso: string): string {
+  return new Date(iso).toLocaleDateString("ka-GE", { year: "2-digit", month: "short" });
+}
+
 export default async function AdminSalesPage() {
   const orders = await getOrders();
+  const paidOrders = orders.filter((o) => o.status === "paid");
   const totalRevenue = sumRevenue(orders);
   const byItemType = (["course", "pattern"] as const).map((itemType) => ({
     itemType,
     total: sumRevenue(orders.filter((o) => o.itemType === itemType)),
   }));
+
+  const totalStudents = new Set(orders.map((o) => o.studentEmail)).size;
+  const pendingVerificationCount = orders.filter((o) => o.status === "pending_verification").length;
+
+  const monthlyRevenue = new Map<string, number>();
+  for (const order of paidOrders) {
+    const key = monthLabel(order.completedAt || order.updatedAt);
+    monthlyRevenue.set(key, (monthlyRevenue.get(key) ?? 0) + order.amount);
+  }
+  const monthlyRevenueData = Array.from(monthlyRevenue.entries()).map(([label, value]) => ({ label, value }));
+
+  const revenueByTypeData = byItemType.map(({ itemType, total }) => ({ label: ITEM_TYPE_LABEL[itemType], value: total }));
 
   return (
     <div className="max-w-5xl">
@@ -38,6 +56,39 @@ export default async function AdminSalesPage() {
           </div>
         ))}
       </div>
+
+      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="border border-hairline bg-surface p-6">
+          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">მოსწავლეები</p>
+          <p className="mt-2 font-display text-2xl text-text-primary">{totalStudents}</p>
+        </div>
+        <div className="border border-hairline bg-surface p-6">
+          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">სულ შეკვეთები</p>
+          <p className="mt-2 font-display text-2xl text-text-primary">{orders.length}</p>
+        </div>
+        <div className="border border-hairline bg-surface p-6">
+          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">დასადასტურებელი</p>
+          <p className="mt-2 font-display text-2xl text-text-primary">{pendingVerificationCount}</p>
+        </div>
+      </div>
+
+      {monthlyRevenueData.length > 0 && (
+        <div className="mt-10 border border-hairline bg-surface p-6">
+          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">შემოსავალი თვეების მიხედვით</p>
+          <div className="mt-4">
+            <RevenueChart data={monthlyRevenueData} />
+          </div>
+        </div>
+      )}
+
+      {revenueByTypeData.some((d) => d.value > 0) && (
+        <div className="mt-6 border border-hairline bg-surface p-6">
+          <p className="font-mono text-xs uppercase tracking-widest text-text-muted">კურსები vs თარგები</p>
+          <div className="mt-4">
+            <RevenueChart data={revenueByTypeData} />
+          </div>
+        </div>
+      )}
 
       <div className="mt-10 overflow-x-auto">
         <table className="w-full min-w-[720px] border-collapse text-left">

@@ -6,6 +6,7 @@ const TABS = [
   { id: "overview", label: "მიმოხილვა" },
   { id: "qa", label: "კითხვა-პასუხი" },
   { id: "ai", label: "AI ასისტენტი" },
+  { id: "quiz", label: "ქვიზი" },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
@@ -14,13 +15,15 @@ export function PlayerTabs({
   overview,
   qa,
   ai,
+  quiz,
 }: {
   overview: ReactNode;
   qa: ReactNode;
   ai: ReactNode;
+  quiz: ReactNode;
 }) {
   const [active, setActive] = useState<TabId>("overview");
-  const panels: Record<TabId, ReactNode> = { overview, qa, ai };
+  const panels: Record<TabId, ReactNode> = { overview, qa, ai, quiz };
 
   return (
     <div>

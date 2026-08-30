@@ -12,20 +12,20 @@ export async function FeaturedPatterns({ locale, patterns }: { locale: string; p
   if (patterns.length === 0) return null;
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+    <section className="mx-auto max-w-7xl px-6 py-8 md:py-20 lg:px-10">
       <RevealOnScroll>
         <SectionHeading kicker="Pattern Shop" title={t("featuredPatternsTitle")} subtitle={t("featuredPatternsSubtitle")} />
       </RevealOnScroll>
 
       <RevealOnScroll variants={staggerChildren}>
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:mt-14 md:gap-8 lg:grid-cols-4">
           {patterns.map((pattern) => (
             <PatternCard key={pattern.id} pattern={pattern} />
           ))}
         </div>
       </RevealOnScroll>
 
-      <div className="mt-14 flex justify-center">
+      <div className="mt-8 flex justify-center md:mt-14">
         <Button href="/pattern-shop" variant="ghost">
           {t("featuredPatternsCta")}
         </Button>
