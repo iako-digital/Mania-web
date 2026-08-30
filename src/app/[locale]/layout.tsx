@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter, JetBrains_Mono, Noto_Sans_Georgian, Noto_Serif_Georgian } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeScript } from "@/components/ui/ThemeScript";
@@ -54,20 +54,43 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+const SITE_TITLE = "Mania Vashakidze — Pattern-Making & Technical Apparel Designer";
+const SITE_DESCRIPTION: Record<Locale, string> = {
+  ka: "Mania Vashakidze-ს პორტფოლიო — ტანსაცმლის კონსტრუირება, თარგების დამუშავება და ტექნიკური დიზაინი.",
+  en: "Portfolio of Mania Vashakidze — Pattern-Making, Apparel Construction, and Technical Design.",
+};
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "footer" });
+  const description = pickLocale(SITE_DESCRIPTION, locale as Locale);
 
   return {
+    metadataBase: new URL("https://mania.com.ge"),
     title: {
-      default: "Mania Vashakidze — Pattern-Maker Designer",
+      default: SITE_TITLE,
       template: "%s — Mania Vashakidze",
     },
-    description: t("tagline"),
+    description,
+    other: {
+      title: SITE_TITLE,
+    },
+    openGraph: {
+      type: "website",
+      url: "https://mania.com.ge/",
+      title: SITE_TITLE,
+      description,
+      images: "/og-image.jpg",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: SITE_TITLE,
+      description,
+      images: "/og-image.jpg",
+    },
   };
 }
 
