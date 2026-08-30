@@ -87,14 +87,21 @@ export function SaveButton({ children = "შენახვა" }: { children?: 
 export function DeleteButton({
   formAction,
   children = "წაშლა",
+  stopPropagation = false,
 }: {
   formAction: string | ((formData: FormData) => void | Promise<void>);
   children?: React.ReactNode;
+  // Set when nesting this inside a clickable ancestor (e.g. a <summary>
+  // disclosure) that shouldn't also react to the delete click. Defined here
+  // rather than accepted as an onClick prop because a Server Component
+  // parent cannot hand a plain closure across the Client Component boundary.
+  stopPropagation?: boolean;
 }) {
   return (
     <button
       type="submit"
       formAction={formAction}
+      onClick={stopPropagation ? (e) => e.stopPropagation() : undefined}
       className="border border-hairline px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-text-muted transition-colors hover:border-red-400 hover:text-red-400 cursor-pointer"
     >
       {children}

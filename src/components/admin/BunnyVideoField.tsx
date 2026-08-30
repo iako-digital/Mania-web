@@ -1,22 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { RefreshCw, Upload } from "lucide-react";
+import { createBunnyUpload, uploadToBunny } from "@/lib/bunny-upload";
+import { useUploadGate } from "./UploadGateContext";
 import { Field, TextInput } from "./fields";
 
-interface BunnyCredentials {
-  videoId: string;
-  libraryId: string;
-  expiration: number;
-  signature: string;
-  tusEndpoint: string;
-}
-
-// Manual-bind field for a lesson's Bunny Stream video. "Generate" calls
-// /api/admin/bunny-upload to create the video entry on Bunny and return a
-// signed TUS upload credential set — actually pushing the file bytes to
-// Bunny needs a TUS client (e.g. tus-js-client) wired to these credentials,
-// which is outside this scaffold's scope. Existing videos can also just be
-// pasted in by GUID.
+// Real Bunny Stream upload: creates the video entry + signed TUS credentials
+// server-side (/api/admin/bunny-upload, needs the private API key), then
+// streams the file bytes straight from the browser to Bunny over TUS with
+// live progress. An existing video can also just be pasted in by GUID.
 export function BunnyVideoField({
   name,
   defaultValue = "",
@@ -27,65 +20,72 @@ export function BunnyVideoField({
   lessonTitle: string;
 }) {
   const [videoId, setVideoId] = useState(defaultValue);
-  const [credentials, setCredentials] = useState<BunnyCredentials | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const gate = useUploadGate();
 
-  async function generate() {
-    setLoading(true);
+  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
     setError(null);
+    setProgress(0);
+    gate?.begin();
+
     try {
-      const res = await fetch("/api/admin/bunny-upload", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: lessonTitle || "Untitled lesson" }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        setError(data?.error || "ვერ მოხერხდა.");
-        return;
-      }
-      setCredentials(data);
-      setVideoId(data.videoId);
-    } catch {
-      setError("ქსელის შეცდომა.");
+      const credentials = await createBunnyUpload(lessonTitle || file.name || "Untitled lesson");
+      await uploadToBunny(file, credentials, setProgress);
+      setVideoId(credentials.videoId);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "ატვირთვა ვერ მოხერხდა.");
     } finally {
-      setLoading(false);
+      setProgress(null);
+      gate?.end();
+      if (fileInputRef.current) fileInputRef.current.value = "";
     }
   }
 
+  const isUploading = progress !== null;
+
   return (
-    <Field label="Bunny Stream ვიდეო GUID">
-      <div className="mt-2 flex flex-col gap-2">
-        <div className="flex gap-2">
-          <TextInput
-            name={name}
-            value={videoId}
-            onChange={(e) => setVideoId(e.target.value)}
-            placeholder="არსებული ვიდეოს GUID, ან შექმენით ახალი →"
-            className="mt-0"
-          />
+    <Field label="ვიდეო გაკვეთილი">
+      <div className="mt-2 flex flex-col gap-3">
+        <input ref={fileInputRef} type="file" accept="video/*" onChange={handleFileChange} className="hidden" />
+
+        <div className="flex flex-wrap items-center gap-3">
           <button
             type="button"
-            onClick={generate}
-            disabled={loading}
-            className="shrink-0 whitespace-nowrap border border-hairline px-4 py-2 font-mono text-xs uppercase tracking-widest text-text-muted transition-colors hover:border-gold hover:text-gold disabled:opacity-50 cursor-pointer"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isUploading}
+            className="inline-flex items-center gap-2 bg-gold px-4 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-ink transition-colors hover:bg-text-primary disabled:opacity-50 cursor-pointer"
           >
-            {loading ? "იქმნება…" : "ახლის შექმნა"}
+            {videoId ? <RefreshCw size={13} /> : <Upload size={13} />}
+            {isUploading ? "იტვირთება…" : videoId ? "ვიდეოს ჩანაცვლება" : "ვიდეოს ატვირთვა"}
           </button>
+
+          {videoId && !isUploading && (
+            <span className="font-mono text-xs text-text-muted">GUID: {videoId}</span>
+          )}
         </div>
+
+        {isUploading && (
+          <div className="flex items-center gap-2">
+            <div className="h-1.5 w-32 overflow-hidden rounded-full bg-hairline">
+              <div className="h-full bg-gold transition-all duration-200" style={{ width: `${progress}%` }} />
+            </div>
+            <span className="font-mono text-xs text-text-muted">{progress}%</span>
+          </div>
+        )}
 
         {error && <p className="text-xs text-red-400">{error}</p>}
 
-        {credentials && (
-          <pre className="overflow-x-auto border border-hairline bg-ink p-3 text-[11px] text-text-muted">
-{JSON.stringify(credentials, null, 2)}
-          </pre>
-        )}
-        <p className="text-xs text-text-muted/70">
-          „ახლის შექმნა“ ამზადებს ატვირთვის Signature-ს Bunny Stream-ისთვის (TUS resumable upload) — რეალურად
-          ფაილის ატვირთვას ესაჭიროება TUS client, აქ ჩვენებულია დამაკავშირებელი მონაცემები.
-        </p>
+        <TextInput
+          name={name}
+          value={videoId}
+          onChange={(e) => setVideoId(e.target.value)}
+          placeholder="ან ჩასვით არსებული ვიდეოს Bunny Stream GUID პირდაპირ"
+        />
       </div>
     </Field>
   );

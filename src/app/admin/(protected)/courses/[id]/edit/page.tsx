@@ -158,11 +158,13 @@ export default async function AdminCourseEditPage({
                                 {lesson.isPreview ? " · უფასო გადახედვა" : ""}
                               </span>
                             </span>
-                            <form action={removeLesson} onClick={(e) => e.stopPropagation()}>
+                            <form action={removeLesson}>
                               <input type="hidden" name="courseId" value={course.id} />
                               <input type="hidden" name="sectionId" value={section.id} />
                               <input type="hidden" name="lessonId" value={lesson.id} />
-                              <DeleteButton formAction={removeLesson}>წაშლა</DeleteButton>
+                              <DeleteButton formAction={removeLesson} stopPropagation>
+                                წაშლა
+                              </DeleteButton>
                             </form>
                           </summary>
 
