@@ -55,6 +55,8 @@ export function generateStaticParams() {
 }
 
 const SITE_TITLE = "Mania Vashakidze — Pattern-Making & Technical Apparel Designer";
+const OG_IMAGE =
+  "https://res.cloudinary.com/dmcabui00/image/upload/v1788104366/xlhpuwvres9lh1kww7hx.jpg";
 const SITE_DESCRIPTION: Record<Locale, string> = {
   ka: "Mania Vashakidze-ს პორტფოლიო — ტანსაცმლის კონსტრუირება, თარგების დამუშავება და ტექნიკური დიზაინი.",
   en: "Portfolio of Mania Vashakidze — Pattern-Making, Apparel Construction, and Technical Design.",
@@ -83,13 +85,13 @@ export async function generateMetadata({
       url: "https://mania.com.ge/",
       title: SITE_TITLE,
       description,
-      images: "/og-image.jpg",
+      images: OG_IMAGE,
     },
     twitter: {
       card: "summary_large_image",
       title: SITE_TITLE,
       description,
-      images: "/og-image.jpg",
+      images: OG_IMAGE,
     },
   };
 }
