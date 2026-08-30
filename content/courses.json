@@ -74,5 +74,128 @@
     ],
     "createdAt": "2026-08-01T09:00:00.000Z",
     "updatedAt": "2026-08-01T09:00:00.000Z"
+  },
+  {
+    "id": "tabeba-kids-sewing-basics",
+    "slug": "tabeba-kids-sewing-basics",
+    "title": {
+      "ka": "TA-BEBA FOR KIDS: საბავშვო ტანსაცმლის კერვა და ჭრა (დამწყებთათვის)",
+      "en": "TA-BEBA FOR KIDS: Children's Clothing Sewing & Pattern-Cutting (For Beginners)"
+    },
+    "subtitle": {
+      "ka": "დამწყებთათვის — ბავშვის სამოსის ჭრა-კერვა AI მასწავლებელთან, ტაბებასთან ერთად",
+      "en": "For beginners — cut and sew children's clothing together with your AI teacher, Tabeba"
+    },
+    "description": {
+      "ka": "სპეციალური კურსი დამწყებთათვის! ისწავლეთ ჩვილისა და ბავშვის მარტივი, კომფორტული და უსაფრთხო სამოსის (ბოდე, საბავშვო შარვალი, კაბა) ჭრა-კერვა AI მასწავლებელ „ტაბებასთან“ ერთად.",
+      "en": "A special course for beginners! Learn to cut and sew simple, comfortable, and safe clothing for infants and children (rompers, kids' pants, dresses) together with your AI teacher, Tabeba."
+    },
+    "coverImageUrl": "",
+    "instructorName": "Tabeba (ტაბება) — AI საბავშვო მკერავი მასწავლებელი",
+    "price": 49,
+    "currency": "GEL",
+    "published": true,
+    "format": "ai_tutor",
+    "aiTutor": {
+      "enabled": true,
+      "knowledgeBase": {
+        "ka": "შენ ხარ ტაბება (Tabeba) — მეგობრული, თბილი და პროფესიონალი AI მკერავი მასწავლებელი, რომელიც სპეციალიზებულია საბავშვო ტანსაცმლის ჭრა-კერვასა და თარგების მომზადებაზე. შენი მიზანია ასწავლო მშობლებსა და დამწყებებს ნატურალური ქსოვილების არჩევა, ბავშვის ზომების სწორად აღება და უსაფრთხო, რბილი ნაკერების გაკეთება. მიმართე მოსწავლეს თბილად და მოთმინებით, გამოიყენე მარტივი, დამწყებისთვის გასაგები ენა.",
+        "en": "You are Tabeba — a friendly, warm, and professional AI sewing teacher who specializes in cutting and sewing children's clothing and preparing patterns. Your goal is to teach parents and beginners how to choose natural fabrics, correctly take a child's measurements, and sew safe, soft seams. Speak warmly and patiently, using simple language a beginner can follow."
+      }
+    },
+    "sections": [
+      {
+        "id": "section-materials",
+        "order": 0,
+        "title": { "ka": "მოდული 1: შესავალი და მასალები", "en": "Module 1: Introduction & Materials" },
+        "lessons": [
+          {
+            "id": "lesson-fabrics-tools",
+            "order": 0,
+            "title": { "ka": "ქსოვილები, ძაფები და საკერავი მანქანის მომზადება", "en": "Fabrics, thread, and preparing your sewing machine" },
+            "type": "article",
+            "articleBody": {
+              "ka": "ბავშვის ნაზი კანისთვის საუკეთესოა ბამბის ან სხვა ნატურალური ქსოვილები — ისინი სუნთქავენ და არ აღიზიანებენ კანს. ამ გაკვეთილში ვისწავლით, როგორ ავირჩიოთ შესაფერისი ქსოვილი და ძაფი, და როგორ მოვამზადოთ საკერავი მანქანა საბავშვო სამოსზე სამუშაოდ.",
+              "en": "Cotton and other natural fabrics are best for a child's delicate skin — they breathe and don't irritate. In this lesson we'll learn how to choose the right fabric and thread, and how to set up a sewing machine for children's clothing."
+            },
+            "isPreview": true
+          }
+        ]
+      },
+      {
+        "id": "section-measurements",
+        "order": 1,
+        "title": { "ka": "მოდული 2: ზომების აღება", "en": "Module 2: Taking Measurements" },
+        "lessons": [
+          {
+            "id": "lesson-measuring-child",
+            "order": 0,
+            "title": { "ka": "ბავშვის სწორი გაზომვა", "en": "How to correctly measure a child" },
+            "type": "article",
+            "articleBody": {
+              "ka": "სწორი გაზომვა ნებისმიერი კარგად მორგებული სამოსის საფუძველია. ვისწავლით სიმაღლის, გულმკერდის, წელისა და თეძოების სწორად გაზომვას, და როგორ გადავიტანოთ ეს ზომები თარგზე.",
+              "en": "Correct measurements are the foundation of any well-fitting garment. We'll learn how to properly measure height, chest, waist, and hips, and how to translate those measurements onto a pattern."
+            },
+            "isPreview": false
+          }
+        ]
+      },
+      {
+        "id": "section-first-project",
+        "order": 2,
+        "title": { "ka": "მოდული 3: პირველი პროექტი — საბავშვო შარვალი", "en": "Module 3: First Project — Kids' Pants" },
+        "lessons": [
+          {
+            "id": "lesson-pants-project",
+            "order": 0,
+            "title": { "ka": "რეზინიანი შორტი: თარგის გადატანა, ჭრა და აწყობა", "en": "Elastic-waist shorts: transferring the pattern, cutting, and assembly" },
+            "type": "article",
+            "articleBody": {
+              "ka": "პირველი პრაქტიკული პროექტი — მარტივი რეზინიანი საბავშვო შორტი. ვისწავლით თარგის ქსოვილზე გადატანას, სწორ ჭრას და ნაწილების ერთმანეთთან აწყობას ნაბიჯ-ნაბიჯ.",
+              "en": "Our first hands-on project — simple elastic-waist kids' shorts. We'll learn to transfer the pattern onto fabric, cut it correctly, and assemble the pieces step by step."
+            },
+            "isPreview": false
+          }
+        ]
+      },
+      {
+        "id": "section-onesie-dress",
+        "order": 3,
+        "title": { "ka": "მოდული 4: საბავშვო ბოდე და კაბა", "en": "Module 4: Baby Onesie & Dress" },
+        "lessons": [
+          {
+            "id": "lesson-onesie-dress-project",
+            "order": 0,
+            "title": { "ka": "საყელო, ელასტიური ნაკერები და ღილების დამაგრება", "en": "Collar, elastic seams, and attaching buttons/snaps" },
+            "type": "article",
+            "articleBody": {
+              "ka": "ამ მოდულში ვკერავთ საბავშვო ბოდესა და კაბას — ვისწავლით საყელოს მიკერებას, ელასტიური, კანისთვის უსაფრთხო ნაკერების გაკეთებას და ღილების ან კნოპების სწორად დამაგრებას.",
+              "en": "In this module we sew a baby onesie and dress — learning to attach a collar, sew soft, skin-safe elastic seams, and correctly attach buttons or snaps."
+            },
+            "isPreview": false
+          }
+        ]
+      },
+      {
+        "id": "section-quiz",
+        "order": 4,
+        "title": { "ka": "მოდული 5: AI ქვიზი და დასრულების დადასტურება", "en": "Module 5: AI Quiz & Completion" },
+        "lessons": [
+          {
+            "id": "lesson-final-quiz",
+            "order": 0,
+            "title": { "ka": "ტაბებას პრაქტიკული ქვიზი", "en": "Tabeba's practical quiz" },
+            "type": "article",
+            "articleBody": {
+              "ka": "მოდულების დასრულების შემდეგ გაიარეთ ტაბებას მიერ გენერირებული პრაქტიკული ქვიზი „ქვიზის“ ჩანართში — ის ამოწმებს თქვენს ცოდნას ქსოვილების, ზომების აღებისა და ნაკერების შესახებ. თქვენი შედეგი ინახება თქვენს პირად კაბინეტში.",
+              "en": "After completing the modules, take Tabeba's generated practical quiz in the Quiz tab — it checks your knowledge of fabrics, measuring, and seams. Your score is saved to your personal dashboard."
+            },
+            "isPreview": false
+          }
+        ]
+      }
+    ],
+    "createdAt": "2026-08-31T00:00:00.000Z",
+    "updatedAt": "2026-08-31T00:00:00.000Z"
   }
 ]
