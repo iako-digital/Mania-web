@@ -7,6 +7,11 @@ const CARDS = [
   { href: "/admin/workflow", title: "სამუშაო პროცესი", description: "5-საფეხურიანი პროცესი „ექსპერტიზის“ გვერდზე." },
   { href: "/admin/categories", title: "კატეგორიები", description: "პორტფოლიოს კატეგორიების სახელები." },
   { href: "/admin/portfolio", title: "პორტფოლიო", description: "პროექტების დამატება, რედაქტირება და წაშლა." },
+  { href: "/admin/courses", title: "კურსები", description: "კურსების მენეჯერი და Curriculum Builder — სექციები, გაკვეთილები, ვიდეო და PDF." },
+  { href: "/admin/patterns", title: "თარგები", description: "თარგების (PDF) მენეჯერი — ფოტოები, ფასი, ფაილი." },
+  { href: "/admin/students", title: "მოსწავლეები", description: "მოსწავლეთა პროგრესი და კურსებზე წვდომის მართვა." },
+  { href: "/admin/sales", title: "გაყიდვები", description: "შემოსავლების ანალიტიკა — კურსები და თარგები, BOG / TBC." },
+  { href: "/admin/verifications", title: "გადახდის დადასტურება", description: "ბანკში გადარიცხვის ქვითრები — დადასტურება ან უარყოფა." },
   { href: "/admin/settings", title: "საიტის პარამეტრები", description: "საიტის სახელი, სლოგანი, ტელეფონი, ელ. ფოსტა, სოციალური ბმულები." },
 ];
 

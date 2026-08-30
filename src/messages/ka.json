@@ -4,6 +4,7 @@
     "portfolio": "პორტფოლიო",
     "expertise": "ექსპერტიზა",
     "about": "ჩემ შესახებ",
+    "patternShop": "თარგების მაღაზია",
     "contact": "კონტაქტი",
     "menu": "მენიუ",
     "close": "დახურვა"
@@ -18,7 +19,13 @@
     "featuredTitle": "გამორჩეული ნამუშევრები",
     "featuredSubtitle": "სამი ნამუშევარი, რომლებიც კონცეფციიდან კონსტრუქციამდე გზას მიჰყვება",
     "featuredCta": "პროექტის ნახვა",
-    "featuredAllCta": "სრული პორტფოლიოს ნახვა"
+    "featuredAllCta": "სრული პორტფოლიოს ნახვა",
+    "featuredCoursesTitle": "კურსები",
+    "featuredCoursesSubtitle": "ისწავლეთ კონსტრუირება და AI ინსტრუმენტები ნაბიჯ-ნაბიჯ ვიდეო გაკვეთილებით",
+    "featuredCoursesCta": "ყველა კურსის ნახვა",
+    "featuredPatternsTitle": "თარგები",
+    "featuredPatternsSubtitle": "მზა PDF თარგები — ჩამოტვირთეთ და დაიწყეთ კერვა დღესვე",
+    "featuredPatternsCta": "მაღაზიის ნახვა"
   },
   "portfolio": {
     "title": "პორტფოლიო",
@@ -86,5 +93,24 @@
     "dark": "მუქი",
     "light": "ღია",
     "toggle": "თემის შეცვლა"
+  },
+  "patternShop": {
+    "title": "თარგების მაღაზია",
+    "subtitle": "მზა PDF თარგები, დაუყოვნებელი ჩამოტვირთვით",
+    "allCategories": "ყველა",
+    "empty": "ამ კატეგორიაში თარგები მალე დაემატება.",
+    "backToShop": "მაღაზიაში დაბრუნება",
+    "priceLabel": "ფასი",
+    "sizeRangeLabel": "ზომები",
+    "difficultyLabel": "სირთულე",
+    "difficulty": {
+      "beginner": "დამწყები",
+      "intermediate": "საშუალო",
+      "advanced": "გამოცდილი"
+    },
+    "buyCta": "ყიდვა",
+    "buyingCta": "მიმდინარეობს…",
+    "buyError": "ყიდვა ვერ მოხერხდა. სცადეთ თავიდან.",
+    "instantDownload": "დაუყოვნებელი PDF ჩამოტვირთვა შეძენისთანავე"
   }
 }

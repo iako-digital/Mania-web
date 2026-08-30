@@ -1,0 +1,78 @@
+[
+  {
+    "id": "ai-tools-for-creatives",
+    "slug": "ai-tools-for-creatives",
+    "title": { "ka": "AI ინსტრუმენტები კრეატიულებისთვის", "en": "AI Tools for Creatives" },
+    "subtitle": {
+      "ka": "ისწავლეთ ხელოვნური ინტელექტის გამოყენება დიზაინში, ვიდეოსა და კონტენტის წარმოებაში",
+      "en": "Learn to use AI across design, video, and content production"
+    },
+    "description": {
+      "ka": "პრაქტიკული კურსი, სადაც გაივლით გენერაციული AI ინსტრუმენტების სრულ ციკლს — იდეიდან საბოლოო პროექტამდე.",
+      "en": "A hands-on course covering the full cycle of generative AI tools — from idea to finished project."
+    },
+    "coverImageUrl": "",
+    "instructorName": "Mania Vashakidze",
+    "price": 149,
+    "currency": "GEL",
+    "published": true,
+    "sections": [
+      {
+        "id": "section-intro",
+        "order": 0,
+        "title": { "ka": "შესავალი", "en": "Introduction" },
+        "lessons": [
+          {
+            "id": "lesson-welcome",
+            "order": 0,
+            "title": { "ka": "კურსში მოგესალმებით", "en": "Welcome to the course" },
+            "type": "video",
+            "durationSeconds": 240,
+            "bunnyVideoId": "",
+            "pdfUrl": "",
+            "isPreview": true
+          },
+          {
+            "id": "lesson-tools-overview",
+            "order": 1,
+            "title": { "ka": "ინსტრუმენტების მიმოხილვა", "en": "Overview of the tools" },
+            "type": "video",
+            "durationSeconds": 620,
+            "bunnyVideoId": "",
+            "pdfUrl": "",
+            "isPreview": false
+          }
+        ]
+      },
+      {
+        "id": "section-practice",
+        "order": 1,
+        "title": { "ka": "პრაქტიკული პროექტები", "en": "Hands-on Projects" },
+        "lessons": [
+          {
+            "id": "lesson-project-1",
+            "order": 0,
+            "title": { "ka": "პროექტი #1 — ბრენდის ვიზუალები", "en": "Project #1 — Brand Visuals" },
+            "type": "video",
+            "durationSeconds": 900,
+            "bunnyVideoId": "",
+            "pdfUrl": "",
+            "isPreview": false
+          },
+          {
+            "id": "lesson-project-2",
+            "order": 1,
+            "title": { "ka": "პროექტი #2 — AI ვიდეო მონტაჟი", "en": "Project #2 — AI Video Editing" },
+            "type": "video",
+            "durationSeconds": 780,
+            "bunnyVideoId": "",
+            "pdfUrl": "",
+            "isPreview": false
+          }
+        ]
+      }
+    ],
+    "createdAt": "2026-08-01T09:00:00.000Z",
+    "updatedAt": "2026-08-01T09:00:00.000Z"
+  }
+]

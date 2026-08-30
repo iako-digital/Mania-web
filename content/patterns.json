@@ -1,0 +1,42 @@
+[
+  {
+    "id": "pattern-wrap-dress",
+    "slug": "wrap-dress-pattern",
+    "title": { "ka": "შემოსახვევი კაბის თარგი", "en": "Wrap Dress Pattern" },
+    "description": {
+      "ka": "კლასიკური შემოსახვევი კაბის PDF თარგი, დაბეჭდვად A4/A0 ფორმატებში, სრული ინსტრუქციით.",
+      "en": "A classic wrap dress PDF pattern, print-ready in A4/A0, with full instructions."
+    },
+    "category": "dresses",
+    "sizeRange": "XS–XL",
+    "difficulty": "intermediate",
+    "coverImageUrl": "",
+    "galleryUrls": [],
+    "pdfUrl": "",
+    "price": 45,
+    "currency": "GEL",
+    "published": true,
+    "createdAt": "2026-08-10T09:00:00.000Z",
+    "updatedAt": "2026-08-10T09:00:00.000Z"
+  },
+  {
+    "id": "pattern-tailored-blazer",
+    "slug": "tailored-blazer-pattern",
+    "title": { "ka": "მოქარგული ჟაკეტის თარგი", "en": "Tailored Blazer Pattern" },
+    "description": {
+      "ka": "სტრუქტურირებული ჟაკეტის თარგი — გამოცდილი მკერავებისთვის, დეტალური ნაკერების მონიშვნით.",
+      "en": "A structured blazer pattern for experienced sewists, with detailed seam markings."
+    },
+    "category": "outerwear",
+    "sizeRange": "S–XXL",
+    "difficulty": "advanced",
+    "coverImageUrl": "",
+    "galleryUrls": [],
+    "pdfUrl": "",
+    "price": 65,
+    "currency": "GEL",
+    "published": true,
+    "createdAt": "2026-08-12T09:00:00.000Z",
+    "updatedAt": "2026-08-12T09:00:00.000Z"
+  }
+]

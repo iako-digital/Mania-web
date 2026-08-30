@@ -1,0 +1,39 @@
+[
+  {
+    "id": "order-demo-1",
+    "orderCode": "A1B2C3D4",
+    "provider": "BOG",
+    "method": "manual_transfer",
+    "status": "paid",
+    "itemType": "pattern",
+    "itemId": "pattern-wrap-dress",
+    "itemTitle": "შემოსახვევი კაბის თარგი",
+    "studentId": "demo-student",
+    "studentName": "დემო მოსწავლე",
+    "studentEmail": "demo.student@example.com",
+    "amount": 45,
+    "currency": "GEL",
+    "receiptUrl": "",
+    "createdAt": "2026-08-15T09:40:00.000Z",
+    "updatedAt": "2026-08-15T10:00:00.000Z",
+    "completedAt": "2026-08-15T10:00:00.000Z"
+  },
+  {
+    "id": "order-demo-2",
+    "orderCode": "E5F6A7B8",
+    "provider": "TBC",
+    "method": "manual_transfer",
+    "status": "pending_verification",
+    "itemType": "course",
+    "itemId": "ai-tools-for-creatives",
+    "itemTitle": "AI ინსტრუმენტები კრეატიულებისთვის",
+    "studentId": "luka-demo",
+    "studentName": "ლუკა მელაძე",
+    "studentEmail": "luka.demo@example.com",
+    "amount": 149,
+    "currency": "GEL",
+    "receiptUrl": "",
+    "createdAt": "2026-08-22T16:12:00.000Z",
+    "updatedAt": "2026-08-22T16:20:00.000Z"
+  }
+]

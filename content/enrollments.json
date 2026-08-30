@@ -1,0 +1,13 @@
+[
+  {
+    "id": "enrollment-demo-1",
+    "courseId": "ai-tools-for-creatives",
+    "studentId": "demo-student",
+    "studentName": "დემო მოსწავლე",
+    "studentEmail": "demo.student@example.com",
+    "completedLessonIds": ["lesson-welcome"],
+    "enrolledAt": "2026-08-05T10:00:00.000Z",
+    "lastActivityAt": "2026-08-20T14:30:00.000Z",
+    "accessRevoked": false
+  }
+]

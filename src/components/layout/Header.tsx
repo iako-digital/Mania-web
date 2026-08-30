@@ -14,6 +14,7 @@ const NAV_ITEMS = [
   { href: "/portfolio", key: "portfolio" },
   { href: "/expertise", key: "expertise" },
   { href: "/about", key: "about" },
+  { href: "/pattern-shop", key: "patternShop" },
   { href: "/contact", key: "contact" },
 ] as const;
 

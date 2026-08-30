@@ -4,6 +4,7 @@
     "portfolio": "Portfolio",
     "expertise": "Expertise",
     "about": "About",
+    "patternShop": "Pattern Shop",
     "contact": "Contact",
     "menu": "Menu",
     "close": "Close"
@@ -18,7 +19,13 @@
     "featuredTitle": "Selected Work",
     "featuredSubtitle": "Three pieces that trace the line from concept to construction",
     "featuredCta": "View project",
-    "featuredAllCta": "View full portfolio"
+    "featuredAllCta": "View full portfolio",
+    "featuredCoursesTitle": "Courses",
+    "featuredCoursesSubtitle": "Learn pattern-making and AI tools step by step with video lessons",
+    "featuredCoursesCta": "View all courses",
+    "featuredPatternsTitle": "Patterns",
+    "featuredPatternsSubtitle": "Ready-made PDF patterns — download and start sewing today",
+    "featuredPatternsCta": "Visit the shop"
   },
   "portfolio": {
     "title": "Portfolio",
@@ -86,5 +93,24 @@
     "dark": "Dark",
     "light": "Light",
     "toggle": "Toggle theme"
+  },
+  "patternShop": {
+    "title": "Pattern Shop",
+    "subtitle": "Ready-made PDF patterns, instant download",
+    "allCategories": "All",
+    "empty": "Patterns for this category are being added.",
+    "backToShop": "Back to shop",
+    "priceLabel": "Price",
+    "sizeRangeLabel": "Sizes",
+    "difficultyLabel": "Difficulty",
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "buyCta": "Buy now",
+    "buyingCta": "Processing…",
+    "buyError": "Purchase failed. Please try again.",
+    "instantDownload": "Instant PDF download after purchase"
   }
 }
