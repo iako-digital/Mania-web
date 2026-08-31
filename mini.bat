@@ -1,0 +1,1 @@
+aider --model azure/gpt-4o-mini --openai-api-type azure --openai-api-base https://m4a-sweden.openai.azure.com/ --openai-api-version 2024-08-01-preview --openai-api-key AQ.AbBRN6KnScrKMy2J6-QTv8s1kjcXqIFgJgy0OuRxq2DSr7NcMQ

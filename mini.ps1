@@ -1,0 +1,1 @@
+$env:AZURE_API_KEY="AQ.AbBRN6KnScrKMy2J6-QTv8s1kjcXqIFgJgy0OuRxq2DSr7NcMQ"; $env:AZURE_OPENAI_API_KEY="AQ.AbBRN6KnScrKMy2J6-QTv8s1kjcXqIFgJgy0OuRxq2DSr7NcMQ"; $env:AZURE_API_BASE="https://m4a-sweden.openai.azure.com/"; $env:AZURE_API_VERSION="2024-08-01-preview"; aider --model azure/gpt-4o-mini --no-show-model-warnings
