@@ -35,5 +35,22 @@
     "receiptUrl": "",
     "createdAt": "2026-08-22T16:12:00.000Z",
     "updatedAt": "2026-08-22T16:20:00.000Z"
+  },
+  {
+    "id": "f769c215-ce04-4116-a790-00edf9d77336",
+    "orderCode": "6FC8C8CE",
+    "provider": "BOG",
+    "method": "manual_transfer",
+    "status": "pending_payment",
+    "itemType": "course",
+    "itemId": "tabeba-kids-sewing-basics",
+    "itemTitle": "TA-BEBA FOR KIDS: საბავშვო ტანსაცმლის კერვა და ჭრა (დამწყებთათვის)",
+    "studentId": "demo-student",
+    "studentName": "დემო მოსწავლე",
+    "studentEmail": "demo.student@example.com",
+    "amount": 49,
+    "currency": "GEL",
+    "createdAt": "2026-08-31T20:53:59.953Z",
+    "updatedAt": "2026-08-31T20:53:59.953Z"
   }
 ]
