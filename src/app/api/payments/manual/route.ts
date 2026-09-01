@@ -17,5 +17,20 @@ export async function POST(request: Request) {
     },
   });
 
+  // Notify admin via email
+  const adminEmail = "info@mania.com.ge";
+  const emailPayload = {
+    to: adminEmail,
+    subject: "New Manual Payment Request",
+    text: `A new manual payment request has been submitted:
+    - Reference Code: ${referenceCode}
+    - User Name: ${name}
+    - Transaction Code: ${transactionCode}
+    - Status: PENDING`,
+  };
+
+  // Simulate email sending (replace with actual email service logic)
+  console.log("Sending email to admin:", emailPayload);
+
   return NextResponse.json({ success: true, payment });
 }

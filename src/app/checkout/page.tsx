@@ -23,6 +23,7 @@ export default function CheckoutPage() {
   return (
     <div className="checkout-page">
       <h1>Bank Transfer Payment</h1>
+      <p>For support, contact us at <strong>info@mania.com.ge</strong>.</p>
       <p>Recipient: <strong>მანია ვაშაკიძე</strong></p>
       <p>
         BOG IBAN: <strong>GE98BG0000000612692174</strong>{" "}
