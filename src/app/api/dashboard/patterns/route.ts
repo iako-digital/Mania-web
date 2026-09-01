@@ -32,3 +32,8 @@ export async function GET(request: Request) {
 
   return NextResponse.redirect(pattern.pdfUrl);
 }
+
+
+
+
+export const dynamic = 'force-dynamic';

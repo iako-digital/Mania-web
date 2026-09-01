@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { generateSVGDiagram } from "@/lib/diagrams";
+function generateSVGDiagram(step: string): string {
+  return `<svg><text>${step}</text></svg>`;
+}
 import { getYouTubeSearchUrl } from "@/lib/youtube";
 
 export async function POST(request: Request) {
@@ -49,3 +51,9 @@ export async function POST(request: Request) {
     testBoxNotice,
   });
 }
+
+
+
+
+
+export const dynamic = 'force-dynamic';

@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-export function PatternDownloadButton({ userId, patternCategory, steps }: { userId: string; patternCategory: string; steps: string[] }) {
+interface PatternDownloadButtonProps {
+  userId: string;
+  patternCategory: string;
+  steps: string[];
+}
+
+export function PatternDownloadButton({ userId, patternCategory, steps }: PatternDownloadButtonProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [patternData, setPatternData] = useState<any>(null);

@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
-  const { userId } = await request.json();
+  const { userId }: { userId: string } = await request.json();
 
-  const user = await prisma.user.findUnique({
+  const user = await prisma.user.findUnique<{ id: string; patternCredits: number; purchases: { status: string }[] }>({
     where: { id: userId },
     include: { patternCredits: true, purchases: true },
   });
@@ -22,3 +22,9 @@ export async function POST(request: Request) {
 
   return NextResponse.json({ allowed: false });
 }
+
+
+
+
+
+export const dynamic = 'force-dynamic';

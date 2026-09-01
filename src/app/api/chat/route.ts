@@ -10,3 +10,8 @@ export async function POST(request: Request) {
 
   // Your existing logic for handling the AI response goes here.
 }
+
+
+
+
+export const dynamic = 'force-dynamic';

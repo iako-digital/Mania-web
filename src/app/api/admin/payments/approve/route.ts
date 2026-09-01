@@ -2,13 +2,13 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  const { paymentId, action } = await request.json();
+  const { paymentId, action }: { paymentId: string; action: "approve" | "reject" } = await request.json();
 
   if (!paymentId || !["approve", "reject"].includes(action)) {
     return NextResponse.json({ error: "Invalid data" }, { status: 400 });
   }
 
-  const payment = await prisma.payment.findUnique({
+  const payment = await prisma.payment.findUnique<{ id: string; status: string; amount: number; userId: string }>({
     where: { id: paymentId },
     include: { user: true },
   });
@@ -38,3 +38,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   }
 }
+
+
+
+
+
+export const dynamic = 'force-dynamic';

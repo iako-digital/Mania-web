@@ -90,3 +90,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "ქვიზის შექმნა ვერ მოხერხდა." }, { status: 502 });
   }
 }
+
+
+
+
+export const dynamic = 'force-dynamic';

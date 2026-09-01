@@ -65,3 +65,8 @@ export async function POST(request: Request) {
 
   return NextResponse.json({ completedLessonIds: enrollment.completedLessonIds });
 }
+
+
+
+
+export const dynamic = 'force-dynamic';

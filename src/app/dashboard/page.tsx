@@ -1,7 +1,7 @@
 import { getCurrentStudent } from "@/lib/auth/current-student";
 import { DashboardNav } from "@/components/dashboard/DashboardNav";
 import { DashboardTabs } from "@/components/dashboard/DashboardTabs";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 export default async function DashboardPage() {
   const student = await getCurrentStudent();
@@ -18,7 +18,7 @@ export default async function DashboardPage() {
     throw new Error("User not found");
   }
 
-  const myPatterns = user.purchases.map((purchase) => ({
+  const myPatterns = user.purchases.map((purchase: { pattern: { id: string; title: { ka?: string; en?: string }; steps: string; tutorialLink?: string }; createdAt: string }) => ({
     patternId: purchase.pattern.id,
     title: purchase.pattern.title.ka || purchase.pattern.title.en,
     purchasedAt: purchase.createdAt,
@@ -26,7 +26,7 @@ export default async function DashboardPage() {
     tutorialLink: purchase.pattern.tutorialLink,
   }));
 
-  const manualPayments = user.manualPayments.map((payment) => ({
+  const manualPayments = user.manualPayments.map((payment: { id: string; status: string; amount: number; createdAt: string }) => ({
     id: payment.id,
     status: payment.status,
     amount: payment.amount,
@@ -96,3 +96,5 @@ export default async function DashboardPage() {
     </div>
   );
 }
+
+export const dynamic = 'force-dynamic';
