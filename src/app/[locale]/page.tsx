@@ -28,7 +28,26 @@ export default async function HomePage({
     <>
       <Hero data={hero} />
       <IntroStatement locale={locale} about={about} />
-      <FeaturedCourses locale={locale} courses={courses.slice(0, 3)} />
+      <FeaturedCourses
+        locale={locale}
+        courses={[
+          {
+            category: "ვიდეო ჩანაწერების კურსები",
+            description: "Explore our video recorded courses for self-paced learning.",
+            courses: courses.filter((course) => course.format === "on_demand"),
+          },
+          {
+            category: "AI მასწავლებელი",
+            description: "Learn with the help of an AI mentor for personalized guidance.",
+            courses: courses.filter((course) => course.format === "ai_tutor"),
+          },
+          {
+            category: "კონსტრუქტორების კურსები",
+            description: "Master pattern construction with our specialized courses.",
+            courses: courses.filter((course) => course.format === "live"),
+          },
+        ]}
+      />
       <FeaturedPatterns locale={locale} patterns={patterns.slice(0, 4)} />
       <FeaturedProjects locale={locale} items={featured} />
     </>
