@@ -35,9 +35,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "AI ასისტენტი გამორთულია." }, { status: 503 });
   }
 
-  const systemInstruction = [ai.systemInstructions, ai.knowledgeBase ? `ცოდნის ბაზა:\n${ai.knowledgeBase}` : ""]
-    .filter(Boolean)
-    .join("\n\n");
+  const systemInstruction = [
+    ai.systemInstructions,
+    ai.knowledgeBase ? `ცოდნის ბაზა:\n${ai.knowledgeBase}` : "",
+    "გამოიყენე Markdown ფორმატირება: **სათაურები** და მოკლე, გასაგები ბულეტები. იყავი მეგობრული და დამხმარე ტონით.",
+  ].filter(Boolean).join("\n\n");
 
   try {
     const reply = await callGemini({
@@ -51,7 +53,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ reply });
   } catch (err) {
     console.error("[ai-chat] Gemini request error:", err);
-    return NextResponse.json({ error: err instanceof Error ? err.message : "ქსელის შეცდომა." }, { status: 502 });
+    console.error("[ai-chat] Gemini request error:", err);
+    const fallbackReply = "ბოდიშით, AI ასისტენტი დროებით მიუწვდომელია. სცადეთ მოგვიანებით.";
+    return NextResponse.json({ reply: fallbackReply }, { status: 502 });
   }
 }
 

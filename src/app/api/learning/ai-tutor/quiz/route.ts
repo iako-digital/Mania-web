@@ -84,6 +84,20 @@ export async function POST(request: Request) {
 
     if (questions.length === 0) throw new Error("No valid questions generated");
 
+    if (questions.length === 0) {
+      console.warn("[ai-tutor/quiz] Falling back to default quiz.");
+      return NextResponse.json({
+        questions: [
+          {
+            question: "ეს არის ნიმუში კითხვა?",
+            options: ["პასუხი 1", "პასუხი 2", "პასუხი 3", "პასუხი 4"],
+            correctIndex: 0,
+            explanation: "ეს არის ნიმუში ახსნა.",
+          },
+        ],
+      });
+    }
+
     return NextResponse.json({ questions });
   } catch (err) {
     console.error("[ai-tutor/quiz] generation error:", err);
