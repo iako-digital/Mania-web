@@ -4,9 +4,9 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  typescript: { ignoreBuildErrors: true },
-  eslint: { ignoreDuringBuilds: true },
+  output: 'export',
   images: { unoptimized: true },
+  typescript: { ignoreBuildErrors: true },
 };
 
 export default withNextIntl(nextConfig);
