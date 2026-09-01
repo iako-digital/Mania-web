@@ -11,8 +11,9 @@ export default function CoursesPage() {
       description: "Learn with the help of an AI mentor for personalized guidance.",
     },
     {
-      title: "კონსტრუქტორების კურსები",
-      description: "Master pattern construction with our specialized courses.",
+      title: "საბავშვო ტანსაცმლის ჭრა-კერვის კურსი დედებისა და მკერავებისთვის",
+      description:
+        "Learn to craft children's clothing with tailored sizing, step-by-step video lessons, eco-friendly fabric choices, and AI-guided pattern construction.",
     },
   ];
 
