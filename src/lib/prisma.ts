@@ -7,9 +7,16 @@ declare global {
 let prismaInstance: any;
 
 try {
-  prismaInstance = global.prisma || new PrismaClient({ accelerateUrl: 'https://dummy.prisma-data.net' } as any);
+  if (!global.prisma) {
+    global.prisma = new PrismaClient({ accelerateUrl: 'https://dummy.prisma-data.net' } as any);
+  }
+  prismaInstance = global.prisma;
 } catch (e) {
-  prismaInstance = new Proxy({}, { get: () => () => Promise.resolve(null) });
+  if (process.env.NODE_ENV === 'production') {
+    prismaInstance = new Proxy({}, { get: () => () => Promise.resolve(null) });
+  } else {
+    throw e;
+  }
 }
 
 export const prisma = prismaInstance;
