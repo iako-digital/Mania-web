@@ -36,7 +36,6 @@ datasource db {
 
 model User {
   userPurchases Purchase[]
-  purchases Purchase[]
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
