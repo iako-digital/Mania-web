@@ -12,15 +12,17 @@ export async function POST(request: Request) {
     include: { patternCredits: true, purchases: true },
   });
 
-  if (!user || user.patternCredits <= 0) {
-    return NextResponse.json({ error: "Insufficient credits" }, { status: 403 });
+  if (!user || (user.patternCredits <= 0 && !user.purchases.some(p => p.category === patternCategory))) {
+    return NextResponse.json({ error: "Insufficient credits or no approved purchase" }, { status: 403 });
   }
 
-  // Deduct one credit
-  await prisma.user.update({
-    where: { id: userId },
-    data: { patternCredits: user.patternCredits - 1 },
-  });
+  // Deduct one credit if credits are available
+  if (user.patternCredits > 0) {
+    await prisma.user.update({
+      where: { id: userId },
+      data: { patternCredits: user.patternCredits - 1 },
+    });
+  }
 
   // Smart fallback logic for video tutorials
   const videoTutorial = await prisma.videoTutorial.findFirst({
@@ -29,7 +31,7 @@ export async function POST(request: Request) {
 
   const videoUrl = videoTutorial
     ? videoTutorial.videoUrl
-    : getYouTubeSearchUrl(`how to ${patternCategory}`);
+    : getYouTubeSearchUrl(`how to ${patternCategory} ${steps.join(", ")}`);
 
   // Generate step-by-step SVG diagrams
   const diagrams = steps.map((step: string) => generateSVGDiagram(step));

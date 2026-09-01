@@ -41,10 +41,13 @@ export function PatternDownloadButton({ userId, patternCategory, steps }: { user
       <div>
         <h2>Pattern Generated</h2>
         <p>{patternData.testBoxNotice}</p>
-        <iframe src={patternData.videoUrl} title="Tutorial Video" />
-        <div>
+        <iframe src={patternData.videoUrl} title="Tutorial Video" className="video-embed" />
+        <div className="diagrams">
           {patternData.diagrams.map((diagram: string, index: number) => (
-            <img key={index} src={diagram} alt={`Step ${index + 1}`} />
+            <div key={index} className="diagram-step">
+              <img src={diagram} alt={`Step ${index + 1}`} />
+              <p>Step {index + 1}: {steps[index]}</p>
+            </div>
           ))}
         </div>
       </div>
