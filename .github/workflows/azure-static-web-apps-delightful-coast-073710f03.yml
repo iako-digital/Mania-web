@@ -29,9 +29,9 @@ jobs:
           app_location: '/'
           api_location: ''
           output_location: ''
-          app_build_command: 'npx prisma generate && npm run build'
         env:
           SKIP_BUILD_CHECKS: 'true'
+          NEXT_TELEMETRY_DISABLED: '1'
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
