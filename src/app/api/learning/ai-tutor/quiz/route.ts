@@ -86,21 +86,24 @@ export async function POST(request: Request) {
 
     if (questions.length === 0) {
       console.warn("[ai-tutor/quiz] Falling back to default quiz.");
-      return NextResponse.json({
-        questions: [
-          {
-            question: "ეს არის ნიმუში კითხვა?",
-            options: ["პასუხი 1", "პასუხი 2", "პასუხი 3", "პასუხი 4"],
-            correctIndex: 0,
-            explanation: "ეს არის ნიმუში ახსნა.",
-          },
-        ],
-      });
+      const fallbackQuiz = [
+        {
+          question: "ეს არის ნიმუში კითხვა?",
+          options: ["პასუხი 1", "პასუხი 2", "პასუხი 3", "პასუხი 4"],
+          correctIndex: 0,
+          explanation: "ეს არის ნიმუში ახსნა.",
+        },
+      ];
+      return NextResponse.json({ questions: fallbackQuiz });
     }
 
     return NextResponse.json({ questions });
   } catch (err) {
-    console.error("[ai-tutor/quiz] generation error:", err);
+    console.error("[ai-tutor/quiz] generation error:", err.message, {
+      stack: err.stack,
+      courseId,
+      studentId: student.id,
+    });
     return NextResponse.json({ error: "ქვიზის შექმნა ვერ მოხერხდა." }, { status: 502 });
   }
 }

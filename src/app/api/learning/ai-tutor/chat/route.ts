@@ -77,7 +77,9 @@ export async function POST(request: Request) {
   }
 
   const trimmedMessage = message.trim().slice(0, MAX_MESSAGE_LENGTH);
-  const priorTurns = Array.isArray(history) ? history.filter(isGeminiTurn).slice(-MAX_HISTORY_TURNS) : [];
+  const priorTurns = Array.isArray(history)
+    ? history.filter((turn) => isGeminiTurn(turn) && turn.text.trim().length > 0).slice(-MAX_HISTORY_TURNS)
+    : [];
 
   try {
     const reply = await callGemini({
@@ -90,8 +92,11 @@ export async function POST(request: Request) {
     });
     return NextResponse.json({ reply });
   } catch (err) {
-    console.error("[ai-tutor/chat] Gemini request error:", err);
-    console.error("[ai-tutor/chat] Gemini request error:", err);
+    console.error("[ai-tutor/chat] Gemini request error:", err.message, {
+      stack: err.stack,
+      courseId,
+      studentId: student.id,
+    });
     const fallbackReply = "ბოდიშით, AI ინსტრუქტორი დროებით მიუწვდომელია. სცადეთ მოგვიანებით.";
     return NextResponse.json({ reply: fallbackReply }, { status: 502 });
   }
