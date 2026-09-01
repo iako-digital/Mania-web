@@ -35,6 +35,7 @@ datasource db {
 // schema redesign, only wiring up @auth/prisma-adapter.
 
 model User {
+  userPurchases Purchase[]
   purchases Purchase[]
   id            String    @id @default(cuid())
   name          String?
