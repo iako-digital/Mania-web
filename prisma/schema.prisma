@@ -330,17 +330,7 @@ model VideoTutorial {
   tags      String[]
   createdAt DateTime @default(now())
 }
-model Pattern {
-  id            String   @id @default(cuid())
-  userId        String
-  title         String
-  dimensionsJson String  @db.Text
-  pdfUrl        String
-  videoId       String?
-  createdAt     DateTime @default(now())
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
 model Purchase {
   id        String   @id @default(cuid())
   userId    String
