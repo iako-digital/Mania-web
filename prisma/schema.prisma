@@ -41,14 +41,12 @@ model User {
   emailVerified DateTime?
   image         String?
   role          UserRole  @default(STUDENT)
-  patternCredits Int      @default(0)
   subscriptionType String @default("FREE")
   accounts      Account[]
   sessions      Session[]
 
   enrollments  Enrollment[]
   orders       Order[]
-  purchases    PatternPurchase[]
   notifications Notification[]
   quizAttempts QuizAttempt[]
 
@@ -206,7 +204,6 @@ model Enrollment {
   @@unique([courseId, studentId])
 }
 
-model Pattern {
   id            String              @id @default(cuid())
   slug          String              @unique
   titleKa       String
@@ -215,7 +212,6 @@ model Pattern {
   descriptionEn String              @db.Text
   category      String
   sizeRange     String
-  difficulty    PatternDifficulty   @default(BEGINNER)
   coverImageUrl String
   galleryUrls   String[]
   pdfUrl        String
@@ -223,21 +219,17 @@ model Pattern {
   currency      Currency            @default(GEL)
   published     Boolean             @default(false)
 
-  purchases PatternPurchase[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-enum PatternDifficulty {
   BEGINNER
   INTERMEDIATE
   ADVANCED
 }
 
-model PatternPurchase {
   id            String   @id @default(cuid())
-  patternId     String
   studentId     String
   studentName   String
   studentEmail  String
@@ -245,7 +237,6 @@ model PatternPurchase {
   downloadCount Int      @default(0)
   accessRevoked Boolean  @default(false)
 
-  pattern Pattern @relation(fields: [patternId], references: [id], onDelete: Cascade)
   student User?   @relation(fields: [studentId], references: [id])
 }
 
@@ -268,7 +259,6 @@ enum OrderStatus {
 
 enum OrderItemType {
   COURSE
-  PATTERN
 }
 
 model Order {
