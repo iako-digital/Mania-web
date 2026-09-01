@@ -30,7 +30,7 @@ export function CourseCard({ course }: { course: Course }) {
             </div>
           )}
           <span className="absolute left-3 top-3 bg-ink/80 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-gold">
-            {t(`format.${course.format || 'ONLINE'}`)}
+            {t(`format.${course.format || 'ON_DEMAND'}`)}
           </span>
         </div>
         <div className="p-4">
