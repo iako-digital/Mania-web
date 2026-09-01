@@ -2,9 +2,10 @@
   "name": "mania-web",
   "version": "0.1.0",
   "private": true,
-  "scripts": {`n    "postinstall": "prisma generate",
+  "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev",
-    "build": "prisma generate && next build"
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint"
   },
