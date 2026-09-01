@@ -12,7 +12,11 @@ export async function POST(request: Request) {
     include: { patternCredits: true, purchases: true },
   });
 
-  if (!user || (user.patternCredits <= 0 && !user.purchases.some(p => p.category === patternCategory))) {
+  if (!user) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+
+  if (user.patternCredits <= 0 && !user.purchases.some(p => p.category === patternCategory)) {
     return NextResponse.json({ error: "Insufficient credits or no approved purchase" }, { status: 403 });
   }
 
