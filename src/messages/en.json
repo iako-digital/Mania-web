@@ -133,9 +133,9 @@
     "registerCta": "Register",
     "soldOut": "Sold out",
     "format": {
-      "on_demand": "On-demand video",
-      "live": "Live classroom",
-      "ai_tutor": "AI Tutor"
+      "ON_DEMAND": "On-Demand",
+      "LIVE": "Live Sessions",
+      "AI_TUTOR": "AI Tutor"
     }
   },
   "terms": {
