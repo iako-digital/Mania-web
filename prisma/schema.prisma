@@ -1,19 +1,26 @@
 // Target schema for a future migration off the current content/*.json flat
-// files. This is a DESIGN artifact only:
-//   - Nothing in the app imports @prisma/client yet — every domain still
-//     reads/writes through src/lib/content/store.ts against content/*.json.
-//   - `npx prisma generate` (schema validation + client typegen) works
-//     without a reachable database — it just needs DATABASE_URL to resolve
-//     as a string, e.g.
-//       DATABASE_URL=postgresql://user:pass@localhost:5432/placeholder npx prisma generate
-//     (the Prisma CLI reads .env, not this project's .env.local). `npx
-//     prisma migrate` needs an actually reachable database, so it has not
-//     been run against this file.
+// files. This is a DESIGN artifact only — plain documentation, not a live
+// dependency:
+//   - Nothing in the app imports @prisma/client (the package isn't even
+//     installed — see below) — every domain still reads/writes through
+//     src/lib/content/store.ts against content/*.json.
+//   - `prisma`/`@prisma/client` were removed from package.json entirely.
+//     Their mere presence as dependencies was very likely why Azure Static
+//     Web Apps' Oryx builder started failing every deploy from the commit
+//     that first added them onward — Oryx's Node.js platform detection
+//     auto-runs `prisma generate` for repos with a prisma schema, which
+//     fails hard without a resolvable DATABASE_URL (reproduced locally:
+//     `PrismaConfigEnvError: Cannot resolve environment variable`). This
+//     schema file is left as pure documentation since nothing executes it
+//     without the CLI. To validate it locally: temporarily
+//     `npm install --no-save prisma @prisma/client`, then
+//     `DATABASE_URL=postgresql://user:pass@localhost:5432/placeholder npx prisma generate`.
 //   - The intended cutover, once a real Supabase Postgres DATABASE_URL is
 //     supplied, is one domain at a time (e.g. orders first, then courses),
 //     swapping each src/lib/<domain>/queries.ts implementation from the
 //     JSON store to Prisma Client calls while keeping the same function
-//     signatures — so call sites across the app don't need to change.
+//     signatures — so call sites across the app don't need to change. At
+//     that point, reinstall prisma/@prisma-client as real dependencies.
 // Field/relation shapes below mirror the current JSON types 1:1
 // (src/lib/{courses,orders,patterns}/types.ts) plus Auth.js's standard
 // adapter tables, so a database-session cutover is a drop-in later too.
