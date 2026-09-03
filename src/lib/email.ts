@@ -26,6 +26,30 @@ function adminEmail(): string | null {
   return process.env.CONTACT_NOTIFICATION_EMAIL || null;
 }
 
+// Fires the moment an order is created (before any payment has happened) —
+// gives the student the transfer details in their inbox too, not just on
+// the /checkout/manual-transfer page, in case they don't complete the
+// transfer in the same session.
+export async function notifyStudentOrderCreated(params: {
+  to: string;
+  orderCode: string;
+  itemTitle: string;
+  amount: number;
+  currency: string;
+  bankName: string;
+  accountHolder: string;
+  iban: string;
+}): Promise<void> {
+  const transferDetails = params.iban
+    ? `\n\nგადარიცხვის დეტალები:\nბანკი: ${params.bankName}\nმიმღები: ${params.accountHolder}\nანგარიშის ნომერი: ${params.iban}\nდანიშნულებაში აუცილებლად მიუთითეთ შეკვეთის კოდი: ${params.orderCode}`
+    : "";
+  await sendEmail({
+    to: params.to,
+    subject: `შეკვეთა მიღებულია — ${params.orderCode}`,
+    text: `მადლობა შეკვეთისთვის!\n\n„${params.itemTitle}“ — ${params.amount} ${params.currency}\nშეკვეთის კოდი: ${params.orderCode}${transferDetails}\n\nგადარიცხვის შემდეგ ატვირთეთ ქვითარი თქვენს პირად კაბინეტში: /dashboard/manual-payments`,
+  });
+}
+
 export async function notifyAdminNewReceipt(params: {
   orderCode: string;
   itemTitle: string;

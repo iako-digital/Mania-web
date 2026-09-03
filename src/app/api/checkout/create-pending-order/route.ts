@@ -4,6 +4,8 @@ import { getCourseById } from "@/lib/courses/queries";
 import { getPatternById } from "@/lib/patterns/queries";
 import { getCurrentStudent } from "@/lib/auth/current-student";
 import { generateOrderCode, saveOrder } from "@/lib/orders/queries";
+import { getBankAccounts } from "@/lib/payments/bank-accounts";
+import { notifyStudentOrderCreated } from "@/lib/email";
 import type { Order, OrderItemType, PaymentProvider } from "@/lib/orders/types";
 
 // Creates a "pending_payment" order for a course or pattern purchase and
@@ -53,6 +55,18 @@ export async function POST(request: Request) {
   };
 
   await saveOrder(order);
+
+  const account = getBankAccounts().find((a) => a.provider === chosenProvider);
+  await notifyStudentOrderCreated({
+    to: order.studentEmail,
+    orderCode: order.orderCode,
+    itemTitle: order.itemTitle,
+    amount: order.amount,
+    currency: order.currency,
+    bankName: account?.bankName ?? "",
+    accountHolder: account?.accountHolder ?? "",
+    iban: account?.iban ?? "",
+  });
 
   return NextResponse.json({ order }, { status: 201 });
 }

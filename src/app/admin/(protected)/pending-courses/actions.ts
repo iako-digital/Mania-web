@@ -2,6 +2,7 @@
 
 import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { readContent } from "@/lib/content/store";
 import { upsertItem } from "@/lib/content/collections";
 import { generateTabebaDraftLesson } from "@/lib/draft-lessons/generate";
@@ -14,8 +15,16 @@ const DAILY_SECTION_ID = "section-daily-tabeba";
 const DAILY_SECTION_TITLE = { ka: "დღიური გაკვეთილები (Tabeba)", en: "Daily Lessons (Tabeba)" };
 
 export async function generateNow(): Promise<void> {
-  await generateTabebaDraftLesson();
+  try {
+    await generateTabebaDraftLesson();
+  } catch (err) {
+    // Gemini can fail (missing key, network error, malformed JSON response)
+    // — surface it as a friendly banner instead of a raw error boundary.
+    const message = err instanceof Error ? err.message : "დრაფტის გენერირება ვერ მოხერხდა.";
+    redirect(`/admin/pending-courses?error=${encodeURIComponent(message)}`);
+  }
   revalidatePath("/admin/pending-courses");
+  redirect("/admin/pending-courses?saved=1");
 }
 
 export async function updateDraft(formData: FormData): Promise<void> {

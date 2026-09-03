@@ -5,9 +5,9 @@ import { approveDraft, deleteDraft, generateNow, updateDraft } from "./actions";
 export default async function AdminPendingCoursesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ saved?: string }>;
+  searchParams: Promise<{ saved?: string; error?: string }>;
 }) {
-  const { saved } = await searchParams;
+  const { saved, error } = await searchParams;
   const drafts = await getPendingDraftLessons();
 
   return (
@@ -26,6 +26,7 @@ export default async function AdminPendingCoursesPage({
       </div>
 
       {saved && <p className="mt-4 text-sm text-gold">შენახულია.</p>}
+      {error && <p className="mt-4 text-sm text-red-400">{error}</p>}
 
       <div className="mt-10 flex flex-col gap-4">
         {drafts.length === 0 && <p className="text-text-muted">ჯერ არცერთი დრაფტი არ არის მოლოდინში.</p>}
