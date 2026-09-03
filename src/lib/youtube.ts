@@ -15,7 +15,3 @@ export function getYouTubeId(url: string | undefined | null): string | null {
 export function isYouTubeUrl(url: string | undefined | null): boolean {
   return getYouTubeId(url) !== null;
 }
-export function getYouTubeSearchUrl(query: string): string {
-  const encodedQuery = encodeURIComponent(query);
-  return `https://www.youtube.com/results?search_query=${encodedQuery}`;
-}

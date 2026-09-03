@@ -35,15 +35,12 @@ datasource db {
 // schema redesign, only wiring up @auth/prisma-adapter.
 
 model User {
-  userPurchases Purchase[]
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
   role          UserRole  @default(STUDENT)
-  patternCredits Int      @default(0)
-  subscriptionType String @default("FREE")
   accounts      Account[]
   sessions      Session[]
 
@@ -323,22 +320,4 @@ model QuizAttempt {
 
   course  Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
   student User?  @relation(fields: [studentId], references: [id])
-}
-model VideoTutorial {
-  id        String   @id @default(cuid())
-  title     String
-  videoUrl  String
-  tags      String[]
-  createdAt DateTime @default(now())
-}
-
-model Purchase {
-  id        String   @id @default(cuid())
-  userId    String
-  amount    Float
-  type      String
-  status    String
-  createdAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

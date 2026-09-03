@@ -25,8 +25,3 @@ export async function POST(request: Request) {
   const attempt = await recordQuizAttempt({ courseId, studentId: student.id, score, total });
   return NextResponse.json({ attempt });
 }
-
-
-
-
-export const dynamic = 'force-dynamic';

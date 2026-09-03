@@ -1,4 +1,3 @@
-export const dynamic = 'force-static';
 import { NextResponse } from "next/server";
 import { isAuthenticated } from "@/lib/admin/auth";
 import { readContent, writeContent } from "@/lib/content/store";

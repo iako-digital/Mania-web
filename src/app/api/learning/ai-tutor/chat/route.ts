@@ -14,9 +14,7 @@ const MAX_HISTORY_TURNS = 12;
 function buildSystemInstruction(course: NonNullable<Awaited<ReturnType<typeof getCourseById>>>): string {
   const title = [course.title.ka, course.title.en].filter(Boolean).join(" / ");
   const parts = [
-    `შენ ხარ AI ინსტრუქტორი კურსისთვის „${title}“. უპასუხე მხოლოდ ამ კურსის მასალაზე დაყრდნობით, გასაგებად და მოკლედ. უპასუხე იმ ენაზე, რომელზეც მოსწავლემ დაწერა კითხვა (ქართულად ან ინგლისურად) — არასდროს გადართო სხვა ენაზე თავისით.`,
-    `გამოიყენე Markdown ფორმატირება: **სათაურები** და მოკლე, გასაგები ბულეტები. იყავი მეგობრული და დამხმარე ტონით.`,
-    `თუ კითხვა კურსის თემას არ ეხება, თავაზიანად აუხსენი, რომ პასუხობ მხოლოდ ამ კურსთან დაკავშირებულ კითხვებზე, იმავე ენაზე რომელზეც მოგმართეს.`,
+    `შენ ხარ AI ინსტრუქტორი კურსისთვის „${title}“. უპასუხე მხოლოდ ამ კურსის მასალაზე დაყრდნობით, გასაგებად და მოკლედ. უპასუხე იმ ენაზე, რომელზეც მოსწავლემ დაწერა კითხვა (ქართულად ან ინგლისურად) — არასდროს გადართო სხვა ენაზე თავისით. თუ კითხვა კურსის თემას არ ეხება, თავაზიანად აუხსენი, რომ პასუხობ მხოლოდ ამ კურსთან დაკავშირებულ კითხვებზე, იმავე ენაზე რომელზეც მოგმართეს.`,
   ];
 
   const description = [course.description.ka, course.description.en].filter(Boolean).join("\n");
@@ -77,9 +75,7 @@ export async function POST(request: Request) {
   }
 
   const trimmedMessage = message.trim().slice(0, MAX_MESSAGE_LENGTH);
-  const priorTurns = Array.isArray(history)
-    ? history.filter((turn) => isGeminiTurn(turn) && turn.text.trim().length > 0).slice(-MAX_HISTORY_TURNS)
-    : [];
+  const priorTurns = Array.isArray(history) ? history.filter(isGeminiTurn).slice(-MAX_HISTORY_TURNS) : [];
 
   try {
     const reply = await callGemini({
@@ -92,17 +88,7 @@ export async function POST(request: Request) {
     });
     return NextResponse.json({ reply });
   } catch (err) {
-    console.error("[ai-tutor/chat] Gemini request error:", err.message, {
-      stack: err.stack,
-      courseId,
-      studentId: student.id,
-    });
-    const fallbackReply = "ბოდიშით, AI ინსტრუქტორი დროებით მიუწვდომელია. სცადეთ მოგვიანებით.";
-    return NextResponse.json({ reply: fallbackReply }, { status: 502 });
+    console.error("[ai-tutor/chat] Gemini request error:", err);
+    return NextResponse.json({ error: err instanceof Error ? err.message : "ქსელის შეცდომა." }, { status: 502 });
   }
 }
-
-
-
-
-export const dynamic = 'force-dynamic';

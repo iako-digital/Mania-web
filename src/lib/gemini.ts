@@ -41,20 +41,13 @@ export async function callGemini({
   });
 
   if (!res.ok) {
-    const errorText = await res.text();
-    console.error("[gemini] request failed:", {
-      status: res.status,
-      errorText,
-      model,
-      systemInstruction,
-    });
+    console.error("[gemini] request failed:", res.status, await res.text());
     throw new Error("პასუხის მიღება ვერ მოხერხდა.");
   }
 
   const data = await res.json();
   const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!reply || typeof reply !== "string" || !reply.trim()) {
-    console.error("[gemini] Invalid response structure:", data);
+  if (typeof reply !== "string" || !reply.trim()) {
     throw new Error("პასუხის მიღება ვერ მოხერხდა.");
   }
 
