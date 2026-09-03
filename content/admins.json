@@ -5,5 +5,12 @@
     "email": "info@mania.com.ge",
     "role": "super_admin",
     "createdAt": "2026-08-30T21:15:33.562Z"
+  },
+  {
+    "id": "8f3c1a2d-6b9e-4c7a-9d5f-2e1b8a4c6f90",
+    "name": "Mania Vashakidze",
+    "email": "vashakidzemania@gmail.com",
+    "role": "super_admin",
+    "createdAt": "2026-09-04T00:00:00.000Z"
   }
 ]
