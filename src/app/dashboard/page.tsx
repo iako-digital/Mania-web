@@ -5,6 +5,13 @@ import { getStudentNotifications } from "@/lib/notifications/queries";
 import { getCurrentStudent } from "@/lib/auth/current-student";
 import { DashboardNav } from "@/components/dashboard/DashboardNav";
 import { DashboardTabs } from "@/components/dashboard/DashboardTabs";
+import type { Order } from "@/lib/orders/types";
+
+function findPendingOrder(orders: Order[], itemType: "course" | "pattern", itemId: string) {
+  return orders.find(
+    (o) => o.itemType === itemType && o.itemId === itemId && (o.status === "pending_payment" || o.status === "pending_verification"),
+  );
+}
 
 export default async function DashboardPage() {
   const student = await getCurrentStudent();
@@ -17,23 +24,72 @@ export default async function DashboardPage() {
     getStudentNotifications(student.id),
   ]);
 
-  const courseById = new Map(courses.map((c) => [c.id, c]));
-  const patternById = new Map(patterns.map((p) => [p.id, p]));
+  const enrollmentByCourseId = new Map(enrollments.map((e) => [e.courseId, e]));
+  const purchaseByPatternId = new Map(purchases.map((p) => [p.patternId, p]));
 
-  const myCourses = enrollments
-    .filter((e) => !e.accessRevoked && courseById.has(e.courseId))
-    .map((e) => {
-      const course = courseById.get(e.courseId)!;
-      const totalLessons = course.sections.reduce((total, s) => total + s.lessons.length, 0);
-      const percent = totalLessons > 0 ? Math.round((e.completedLessonIds.length / totalLessons) * 100) : 0;
-      return { courseId: course.id, title: course.title.ka || course.title.en, percent };
+  // Every published product shows up here — not just owned ones — with a
+  // per-item status (available/pending/active) so the dashboard doubles as
+  // a full catalog view, not just a purchase history.
+  const myCourses = courses
+    .filter((c) => c.published)
+    .map((course) => {
+      const enrollment = enrollmentByCourseId.get(course.id);
+      const title = course.title.ka || course.title.en;
+
+      if (enrollment && !enrollment.accessRevoked) {
+        const totalLessons = course.sections.reduce((total, s) => total + s.lessons.length, 0);
+        const percent = totalLessons > 0 ? Math.round((enrollment.completedLessonIds.length / totalLessons) * 100) : 0;
+        return { courseId: course.id, slug: course.slug, title, price: course.price, currency: course.currency, status: "active" as const, percent };
+      }
+
+      const pendingOrder = findPendingOrder(orders, "course", course.id);
+      if (pendingOrder) {
+        return {
+          courseId: course.id,
+          slug: course.slug,
+          title,
+          price: course.price,
+          currency: course.currency,
+          status: "pending" as const,
+          orderStatus: pendingOrder.status as "pending_payment" | "pending_verification",
+        };
+      }
+
+      return { courseId: course.id, slug: course.slug, title, price: course.price, currency: course.currency, status: "available" as const };
     });
 
-  const myPatterns = purchases
-    .filter((p) => !p.accessRevoked && patternById.has(p.patternId))
-    .map((p) => {
-      const pattern = patternById.get(p.patternId)!;
-      return { patternId: pattern.id, title: pattern.title.ka || pattern.title.en, purchasedAt: p.purchasedAt };
+  const myPatterns = patterns
+    .filter((p) => p.published)
+    .map((pattern) => {
+      const purchase = purchaseByPatternId.get(pattern.id);
+      const title = pattern.title.ka || pattern.title.en;
+
+      if (purchase && !purchase.accessRevoked) {
+        return {
+          patternId: pattern.id,
+          slug: pattern.slug,
+          title,
+          price: pattern.price,
+          currency: pattern.currency,
+          status: "active" as const,
+          purchasedAt: purchase.purchasedAt,
+        };
+      }
+
+      const pendingOrder = findPendingOrder(orders, "pattern", pattern.id);
+      if (pendingOrder) {
+        return {
+          patternId: pattern.id,
+          slug: pattern.slug,
+          title,
+          price: pattern.price,
+          currency: pattern.currency,
+          status: "pending" as const,
+          orderStatus: pendingOrder.status as "pending_payment" | "pending_verification",
+        };
+      }
+
+      return { patternId: pattern.id, slug: pattern.slug, title, price: pattern.price, currency: pattern.currency, status: "available" as const };
     });
 
   return (
