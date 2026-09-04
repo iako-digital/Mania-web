@@ -9,6 +9,17 @@ export type OrderStatus = "pending_payment" | "pending_verification" | "paid" | 
 
 export type OrderItemType = "course" | "pattern";
 
+export interface AiReceiptVerification {
+  matchConfidence: number; // 0-100
+  extractedAmount: number | null;
+  extractedDate: string | null;
+  extractedReference: string | null;
+  bankMatch: boolean;
+  recommendation: "approve" | "review" | "reject";
+  summary: string;
+  checkedAt: string;
+}
+
 export interface Order {
   id: string;
   orderCode: string;
@@ -24,6 +35,7 @@ export interface Order {
   amount: number;
   currency: "GEL" | "USD";
   receiptUrl?: string;
+  aiVerification?: AiReceiptVerification;
   createdAt: string;
   updatedAt: string;
   completedAt?: string;

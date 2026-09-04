@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getCurrentStudent } from "@/lib/auth/current-student";
 import { getOrderById, saveOrder } from "@/lib/orders/queries";
 import { notifyAdminNewReceipt, notifyStudentVerificationPending } from "@/lib/email";
+import { verifyReceiptWithAi } from "@/lib/receipt-verification";
 
 // The file itself is uploaded straight from the browser to Cloudinary (same
 // unsigned upload used everywhere else in the app — see cloudinary-upload.ts)
@@ -32,6 +33,17 @@ export async function POST(request: Request) {
   order.receiptUrl = receiptUrl;
   order.status = "pending_verification";
   order.updatedAt = new Date().toISOString();
+
+  const aiVerification = await verifyReceiptWithAi({
+    receiptUrl,
+    provider: order.provider,
+    expectedAmount: order.amount,
+    expectedCurrency: order.currency,
+    orderCode: order.orderCode,
+    itemTitle: order.itemTitle,
+  });
+  if (aiVerification) order.aiVerification = aiVerification;
+
   await saveOrder(order);
 
   await Promise.all([

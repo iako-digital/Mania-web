@@ -9,11 +9,15 @@ export function isGeminiTurn(value: unknown): value is GeminiTurn {
   return (role === "user" || role === "model") && typeof text === "string";
 }
 
+// A part is either plain text or inline binary data (e.g. a receipt image/
+// PDF for vision requests) — Gemini accepts a mix of both within one turn.
+export type GeminiPart = { text: string } | { inlineData: { mimeType: string; data: string } };
+
 interface CallGeminiParams {
   apiKey: string;
   model?: string;
   systemInstruction?: string;
-  contents: { role: "user" | "model"; parts: { text: string }[] }[];
+  contents: { role: "user" | "model"; parts: GeminiPart[] }[];
   // For structured output (e.g. quiz generation) — passed through to
   // Gemini's generationConfig as-is.
   generationConfig?: Record<string, unknown>;

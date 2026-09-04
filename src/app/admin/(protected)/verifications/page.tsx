@@ -22,6 +22,23 @@ export default async function AdminVerificationsPage() {
               <p className="font-mono text-xs uppercase tracking-widest text-text-muted">
                 {order.studentName} · {order.studentEmail} · {order.amount} {order.currency} · კოდი: {order.orderCode}
               </p>
+              {order.aiVerification && (
+                <div className="mt-2 flex flex-wrap items-center gap-2">
+                  <span
+                    className={
+                      "font-mono text-[11px] uppercase tracking-widest px-2 py-0.5 border " +
+                      (order.aiVerification.recommendation === "approve"
+                        ? "border-gold text-gold"
+                        : order.aiVerification.recommendation === "reject"
+                          ? "border-red-400 text-red-400"
+                          : "border-hairline text-text-muted")
+                    }
+                  >
+                    AI: {order.aiVerification.matchConfidence}% · {order.aiVerification.recommendation}
+                  </span>
+                  <span className="text-xs text-text-muted">{order.aiVerification.summary}</span>
+                </div>
+              )}
             </div>
 
             {order.receiptUrl && (

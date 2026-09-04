@@ -1,14 +1,17 @@
 import { getCourses, getEnrollments } from "@/lib/courses/queries";
 import { getPatterns, getPatternPurchases } from "@/lib/patterns/queries";
+import { getUserAnalytics } from "@/lib/analytics";
 import { Field, TextInput, inputClass, SaveButton } from "@/components/admin/fields";
+import { UserAnalyticsTable } from "@/components/admin/UserAnalyticsTable";
 import { grantAccess, sendMessage, setAccessRevoked, setPatternAccessRevoked } from "./actions";
 
 export default async function AdminStudentsPage() {
-  const [enrollments, courses, purchases, patterns] = await Promise.all([
+  const [enrollments, courses, purchases, patterns, userRows] = await Promise.all([
     getEnrollments(),
     getCourses(),
     getPatternPurchases(),
     getPatterns(),
+    getUserAnalytics(),
   ]);
   const courseById = new Map(courses.map((c) => [c.id, c]));
   const patternById = new Map(patterns.map((p) => [p.id, p]));
@@ -18,7 +21,14 @@ export default async function AdminStudentsPage() {
       <h1 className="font-display text-3xl text-text-primary">მოსწავლეები</h1>
       <p className="mt-2 text-text-muted">მოსწავლეთა პროგრესი და კურსებზე/თარგებზე წვდომის მართვა.</p>
 
-      <div className="mt-10 overflow-x-auto">
+      <div className="mt-10">
+        <p className="mb-3 font-mono text-xs uppercase tracking-widest text-text-muted">
+          მომხმარებელთა ანალიტიკა ({userRows.length})
+        </p>
+        <UserAnalyticsTable rows={userRows} />
+      </div>
+
+      <div className="mt-12 overflow-x-auto">
         <p className="mb-3 font-mono text-xs uppercase tracking-widest text-text-muted">კურსები</p>
         <table className="w-full min-w-[720px] border-collapse text-left">
           <thead>
