@@ -4,6 +4,7 @@ import { useLocale } from "next-intl";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 import { pickLocale } from "@/lib/content/locale";
+import { optimizeCloudinaryUrl } from "@/lib/media";
 import { fadeUp } from "@/lib/motion/variants";
 import type { PortfolioItemWithCategory } from "@/lib/content/queries";
 
@@ -26,7 +27,7 @@ export function ProjectCard({
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-surface">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={item.coverImageUrl}
+            src={optimizeCloudinaryUrl(item.coverImageUrl)}
             alt={title}
             loading={priority ? "eager" : "lazy"}
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"

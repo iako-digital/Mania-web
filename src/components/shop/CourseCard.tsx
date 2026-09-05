@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { pickLocale } from "@/lib/content/locale";
+import { optimizeCloudinaryUrl } from "@/lib/media";
 import { fadeUp } from "@/lib/motion/variants";
 import type { Course } from "@/lib/courses/types";
 
@@ -20,7 +21,7 @@ export function CourseCard({ course }: { course: Course }) {
           {course.coverImageUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={course.coverImageUrl}
+              src={optimizeCloudinaryUrl(course.coverImageUrl)}
               alt={title}
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />

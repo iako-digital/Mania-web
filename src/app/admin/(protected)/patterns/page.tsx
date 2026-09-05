@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getPatterns } from "@/lib/patterns/queries";
+import { optimizeCloudinaryUrl } from "@/lib/media";
 import { DeleteButton } from "@/components/admin/fields";
 import { removePattern } from "./actions";
 
@@ -35,7 +36,7 @@ export default async function AdminPatternsListPage({
           <div key={pattern.id} className="flex items-center gap-4 border border-hairline bg-surface p-4">
             {pattern.coverImageUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={pattern.coverImageUrl} alt="" className="h-16 w-16 shrink-0 object-cover" />
+              <img src={optimizeCloudinaryUrl(pattern.coverImageUrl)} alt="" className="h-16 w-16 shrink-0 object-cover" />
             ) : (
               <div className="h-16 w-16 shrink-0 bg-ink" />
             )}

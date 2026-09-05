@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getCourses } from "@/lib/courses/queries";
+import { optimizeCloudinaryUrl } from "@/lib/media";
 import { DeleteButton } from "@/components/admin/fields";
 import { removeCourse } from "./actions";
 import type { CourseFormat } from "@/lib/courses/types";
@@ -44,7 +45,7 @@ export default async function AdminCoursesListPage({
             <div key={course.id} className="flex items-center gap-4 border border-hairline bg-surface p-4">
               {course.coverImageUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={course.coverImageUrl} alt="" className="h-16 w-16 shrink-0 object-cover" />
+                <img src={optimizeCloudinaryUrl(course.coverImageUrl)} alt="" className="h-16 w-16 shrink-0 object-cover" />
               ) : (
                 <div className="h-16 w-16 shrink-0 bg-ink" />
               )}

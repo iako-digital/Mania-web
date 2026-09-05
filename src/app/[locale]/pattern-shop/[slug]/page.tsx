@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { BuyButton } from "@/components/shop/BuyButton";
 import { pickLocale } from "@/lib/content/locale";
+import { optimizeCloudinaryUrl } from "@/lib/media";
 import { getPatternBySlug } from "@/lib/patterns/queries";
 
 export default async function PatternDetailPage({
@@ -38,7 +39,7 @@ export default async function PatternDetailPage({
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-surface">
               {gallery[0] && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={gallery[0]} alt={title} className="absolute inset-0 h-full w-full object-cover" />
+                <img src={optimizeCloudinaryUrl(gallery[0])} alt={title} className="absolute inset-0 h-full w-full object-cover" />
               )}
             </div>
             {gallery.length > 1 && (
@@ -46,7 +47,7 @@ export default async function PatternDetailPage({
                 {gallery.slice(1).map((url) => (
                   <div key={url} className="relative aspect-square overflow-hidden bg-surface">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={url} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                    <img src={optimizeCloudinaryUrl(url)} alt="" className="absolute inset-0 h-full w-full object-cover" />
                   </div>
                 ))}
               </div>

@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { YouTubeEmbed } from "@/components/ui/YouTubeEmbed";
 import { pickLocale } from "@/lib/content/locale";
-import { isVideoUrl } from "@/lib/media";
+import { isVideoUrl, optimizeCloudinaryUrl } from "@/lib/media";
 import { getPortfolioItemBySlug, getSiteSettings } from "@/lib/content/queries";
 import { getYouTubeId } from "@/lib/youtube";
 
@@ -83,7 +83,7 @@ export default async function PortfolioDetailPage({
 
       <RevealOnScroll className="relative mt-14 aspect-[4/5] w-full overflow-hidden md:aspect-[16/9]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={item.coverImageUrl} alt={title} className="absolute inset-0 h-full w-full object-cover" />
+        <img src={optimizeCloudinaryUrl(item.coverImageUrl)} alt={title} className="absolute inset-0 h-full w-full object-cover" />
       </RevealOnScroll>
 
       {item.videoUrl && youTubeId && (
@@ -118,7 +118,7 @@ export default async function PortfolioDetailPage({
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={url}
+                  src={optimizeCloudinaryUrl(url)}
                   alt={`${title} — ${i + 1}`}
                   className="absolute inset-0 h-full w-full object-cover"
                 />

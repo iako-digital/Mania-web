@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getPortfolioItems } from "@/lib/content/queries";
+import { optimizeCloudinaryUrl } from "@/lib/media";
 import { DeleteButton } from "@/components/admin/fields";
 import { removePortfolioItem } from "./actions";
 
@@ -38,7 +39,7 @@ export default async function AdminPortfolioListPage({
           >
             {item.coverImageUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={item.coverImageUrl} alt="" className="h-16 w-16 shrink-0 object-cover" />
+              <img src={optimizeCloudinaryUrl(item.coverImageUrl)} alt="" className="h-16 w-16 shrink-0 object-cover" />
             ) : (
               <div className="h-16 w-16 shrink-0 bg-ink" />
             )}

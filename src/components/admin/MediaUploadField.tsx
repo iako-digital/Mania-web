@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { ImageIcon, RefreshCw, Trash2, Upload, Video as VideoIcon } from "lucide-react";
 import { uploadToCloudinary } from "@/lib/cloudinary-upload";
-import { isVideoUrl } from "@/lib/media";
+import { isVideoUrl, optimizeCloudinaryUrl } from "@/lib/media";
 import { useUploadGate } from "./UploadGateContext";
 import { Field, TextInput } from "./fields";
 
@@ -77,7 +77,7 @@ export function MediaUploadField({
                 <video src={url} className="h-full w-full object-cover" muted />
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={url} alt="" className="h-full w-full object-cover" />
+                <img src={optimizeCloudinaryUrl(url)} alt="" className="h-full w-full object-cover" />
               )}
               <div className="absolute inset-0 flex items-center justify-center gap-2 bg-ink/0 opacity-0 transition-all duration-200 group-hover:bg-ink/80 group-hover:opacity-100">
                 <button

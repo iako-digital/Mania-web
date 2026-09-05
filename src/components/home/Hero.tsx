@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { YouTubeBackground } from "@/components/ui/YouTubeBackground";
 import { pickLocale } from "@/lib/content/locale";
+import { optimizeCloudinaryUrl } from "@/lib/media";
 import { getYouTubeId } from "@/lib/youtube";
 import { staggerChildren, fadeUp, fabricEase } from "@/lib/motion/variants";
 import type { HeroContent } from "@/lib/content/types";
@@ -54,7 +55,7 @@ export function Hero({ data }: { data: HeroContent | null }) {
         ) : hasImage ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={data!.imageUrl}
+            src={optimizeCloudinaryUrl(data!.imageUrl)}
             alt=""
             className="h-full w-full bg-ink object-contain opacity-60 sm:object-cover"
           />

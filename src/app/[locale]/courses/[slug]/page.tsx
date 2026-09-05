@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { BuyButton } from "@/components/shop/BuyButton";
 import { pickLocale } from "@/lib/content/locale";
+import { optimizeCloudinaryUrl } from "@/lib/media";
 import { getCourseBySlug } from "@/lib/courses/queries";
 import { getOrders } from "@/lib/orders/queries";
 
@@ -49,7 +50,7 @@ export default async function CourseDetailPage({
           <div className="relative aspect-video w-full overflow-hidden bg-surface">
             {course.coverImageUrl && (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={course.coverImageUrl} alt={title} className="absolute inset-0 h-full w-full object-cover" />
+              <img src={optimizeCloudinaryUrl(course.coverImageUrl)} alt={title} className="absolute inset-0 h-full w-full object-cover" />
             )}
           </div>
 
