@@ -2,6 +2,7 @@ import Link from "next/link";
 import { auth, isGoogleAuthConfigured } from "@/auth";
 import { GoogleSignInButton } from "./GoogleSignInButton";
 import { SignOutButton } from "./SignOutButton";
+import { CredentialsSignInForm } from "./CredentialsSignInForm";
 
 const LINKS = [
   { href: "/dashboard", label: "ჩემი კაბინეტი" },
@@ -28,7 +29,14 @@ export async function DashboardNav({ active }: { active: string }) {
               {link.label}
             </Link>
           ))}
-          {session?.user ? <SignOutButton /> : <GoogleSignInButton configured={isGoogleAuthConfigured()} />}
+          {session?.user ? (
+            <SignOutButton />
+          ) : (
+            <>
+              <GoogleSignInButton configured={isGoogleAuthConfigured()} />
+              <CredentialsSignInForm />
+            </>
+          )}
           <Link href="/" className="font-mono text-xs uppercase tracking-widest text-text-muted hover:text-gold">
             საიტზე დაბრუნება
           </Link>

@@ -84,6 +84,9 @@ export default async function PatternDetailPage({
                 buyLabel={t("buyCta")}
                 buyingLabel={t("buyingCta")}
                 errorLabel={t("buyError")}
+                promoPlaceholder={t("promoCodePlaceholder")}
+                accessGrantedMessage={t("accessGrantedMessage")}
+                goToDashboardLabel={t("goToDashboard")}
               />
             </div>
           </div>

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { CheckCircle2, Landmark } from "lucide-react";
 import { getOrderById } from "@/lib/orders/queries";
 import { getBankAccounts } from "@/lib/payments/bank-accounts";
+import { PromoCodeForm } from "@/components/checkout/PromoCodeForm";
 
 export default async function ManualTransferCheckoutPage({
   searchParams,
@@ -17,6 +18,28 @@ export default async function ManualTransferCheckoutPage({
 
   const accounts = getBankAccounts();
   const preferred = accounts.find((a) => a.provider === order.provider) ?? accounts[0];
+  const isPending = order.status === "pending_payment";
+
+  if (order.status === "paid") {
+    return (
+      <div className="mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-6 py-16">
+        <div className="border border-hairline bg-surface p-8 text-center">
+          <CheckCircle2 size={32} className="mx-auto text-gold" />
+          <h1 className="mt-4 font-display text-2xl text-text-primary">წვდომა უკვე გახსნილია</h1>
+          <p className="mt-3 text-text-muted">
+            „{order.itemTitle}“
+            {order.promoCode && <> — გააქტიურდა პრომო კოდით {order.promoCode}</>}.
+          </p>
+          <Link
+            href="/dashboard"
+            className="mt-8 inline-flex items-center justify-center gap-2 bg-gold px-6 py-3.5 font-mono text-xs uppercase tracking-[0.2em] text-ink transition-colors hover:bg-text-primary"
+          >
+            კაბინეტში გადასვლა
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-6 py-16">
@@ -43,9 +66,18 @@ export default async function ManualTransferCheckoutPage({
           </div>
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-text-muted">თანხა</p>
-            <p className="mt-1 text-lg text-text-primary">{order.amount} {order.currency}</p>
+            <p className="mt-1 text-lg text-text-primary">
+              {order.amount} {order.currency}
+            </p>
+            {order.promoCode && order.originalAmount != null && (
+              <p className="mt-1 font-mono text-xs text-gold">
+                პრომო {order.promoCode}: {order.originalAmount} → {order.amount} {order.currency}
+              </p>
+            )}
           </div>
         </div>
+
+        {isPending && <PromoCodeForm orderId={order.id} />}
 
         <div className="mt-8 border-t border-hairline pt-6">
           <p className="font-mono text-xs uppercase tracking-widest text-text-muted">ანგარიშის მონაცემები</p>

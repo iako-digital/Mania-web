@@ -12,6 +12,7 @@ import { AiChatWidget } from "@/components/ui/AiChatWidget";
 import { CookieConsent } from "@/components/CookieConsent";
 import { getAiAssistantContent, getSiteSettings } from "@/lib/content/queries";
 import { pickLocale } from "@/lib/content/locale";
+import { auth, isGoogleAuthConfigured } from "@/auth";
 import "../globals.css";
 
 const fraunces = Fraunces({
@@ -112,7 +113,11 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  const [settings, aiAssistant] = await Promise.all([getSiteSettings(), getAiAssistantContent()]);
+  const [settings, aiAssistant, session] = await Promise.all([
+    getSiteSettings(),
+    getAiAssistantContent(),
+    auth(),
+  ]);
 
   return (
     <html
@@ -128,6 +133,8 @@ export default async function LocaleLayout({
             facebookUrl={settings.facebookUrl}
             instagramUrl={settings.instagramUrl}
             youtubeUrl={settings.youtubeUrl}
+            isLoggedIn={Boolean(session?.user)}
+            googleConfigured={isGoogleAuthConfigured()}
           />
           <main className="relative z-10 flex-1">{children}</main>
           <Footer />

@@ -148,6 +148,9 @@ export default async function CourseDetailPage({
                   buyLabel={course.format === "live" ? t("registerCta") : t("buyCta")}
                   buyingLabel={t("buyingCta")}
                   errorLabel={t("buyError")}
+                  promoPlaceholder={t("promoCodePlaceholder")}
+                  accessGrantedMessage={t("accessGrantedMessage")}
+                  goToDashboardLabel={t("goToDashboard")}
                 />
               )}
             </div>

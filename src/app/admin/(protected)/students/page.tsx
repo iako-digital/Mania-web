@@ -3,7 +3,7 @@ import { getPatterns, getPatternPurchases } from "@/lib/patterns/queries";
 import { getUserAnalytics } from "@/lib/analytics";
 import { Field, TextInput, inputClass, SaveButton } from "@/components/admin/fields";
 import { UserAnalyticsTable } from "@/components/admin/UserAnalyticsTable";
-import { grantAccess, sendMessage, setAccessRevoked, setPatternAccessRevoked } from "./actions";
+import { changeStudentPassword, grantAccess, sendMessage, setAccessRevoked, setPatternAccessRevoked } from "./actions";
 
 export default async function AdminStudentsPage() {
   const [enrollments, courses, purchases, patterns, userRows] = await Promise.all([
@@ -15,6 +15,8 @@ export default async function AdminStudentsPage() {
   ]);
   const courseById = new Map(courses.map((c) => [c.id, c]));
   const patternById = new Map(patterns.map((p) => [p.id, p]));
+  const courseOptions = courses.map((c) => ({ id: c.id, title: c.title.ka || c.title.en }));
+  const patternOptions = patterns.map((p) => ({ id: p.id, title: p.title.ka || p.title.en }));
 
   return (
     <div className="max-w-5xl">
@@ -25,7 +27,13 @@ export default async function AdminStudentsPage() {
         <p className="mb-3 font-mono text-xs uppercase tracking-widest text-text-muted">
           მომხმარებელთა ანალიტიკა ({userRows.length})
         </p>
-        <UserAnalyticsTable rows={userRows} />
+        <UserAnalyticsTable
+          rows={userRows}
+          courseOptions={courseOptions}
+          patternOptions={patternOptions}
+          changePasswordAction={changeStudentPassword}
+          grantAccessAction={grantAccess}
+        />
       </div>
 
       <div className="mt-12 overflow-x-auto">
@@ -181,17 +189,27 @@ export default async function AdminStudentsPage() {
             <TextInput name="email" type="email" required />
           </Field>
         </div>
-        <div className="w-40">
-          <Field label="ტიპი">
-            <select name="itemType" defaultValue="course" className={inputClass}>
-              <option value="course">კურსი</option>
-              <option value="pattern">თარგი</option>
+        <div className="min-w-[220px] flex-1">
+          <Field label="პროდუქტი">
+            <select name="target" required defaultValue="" className={inputClass}>
+              <option value="" disabled>
+                აირჩიეთ პროდუქტი
+              </option>
+              <optgroup label="კურსები">
+                {courseOptions.map((c) => (
+                  <option key={c.id} value={`course:${c.id}`}>
+                    {c.title}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="თარგები">
+                {patternOptions.map((p) => (
+                  <option key={p.id} value={`pattern:${p.id}`}>
+                    {p.title}
+                  </option>
+                ))}
+              </optgroup>
             </select>
-          </Field>
-        </div>
-        <div className="flex-1">
-          <Field label="პროდუქტის ID">
-            <TextInput name="itemId" placeholder="course-id ან pattern-id" required />
           </Field>
         </div>
         <div className="shrink-0">

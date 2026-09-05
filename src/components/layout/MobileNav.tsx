@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { SocialLinks } from "@/components/ui/SocialLinks";
+import { AuthNavLink } from "./AuthNavLink";
 
 type NavItem = { href: string; key: string };
 
@@ -18,6 +19,8 @@ export function MobileNav({
   facebookUrl,
   instagramUrl,
   youtubeUrl,
+  isLoggedIn,
+  googleConfigured,
 }: {
   open: boolean;
   onClose: () => void;
@@ -26,6 +29,8 @@ export function MobileNav({
   facebookUrl?: string;
   instagramUrl?: string;
   youtubeUrl?: string;
+  isLoggedIn: boolean;
+  googleConfigured: boolean;
 }) {
   const t = useTranslations("nav");
   const [mounted, setMounted] = useState(false);
@@ -87,6 +92,18 @@ export function MobileNav({
                 </Link>
               </motion.div>
             ))}
+            <div onClick={onClose}>
+              <AuthNavLink
+                isLoggedIn={isLoggedIn}
+                googleConfigured={googleConfigured}
+                registerLabel={t("register")}
+                registerSoonLabel={t("registerSoon")}
+                dashboardLabel={t("dashboard")}
+                logoutLabel={t("logout")}
+                size="lg"
+                className="mt-2"
+              />
+            </div>
           </nav>
 
           <div className="flex flex-col items-center gap-6 px-6 py-8">

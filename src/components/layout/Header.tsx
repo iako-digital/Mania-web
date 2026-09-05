@@ -7,6 +7,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { SocialLinks } from "@/components/ui/SocialLinks";
+import { AuthNavLink } from "./AuthNavLink";
 import { MobileNav } from "./MobileNav";
 
 const NAV_ITEMS = [
@@ -23,10 +24,14 @@ export function Header({
   facebookUrl,
   instagramUrl,
   youtubeUrl,
+  isLoggedIn,
+  googleConfigured,
 }: {
   facebookUrl?: string;
   instagramUrl?: string;
   youtubeUrl?: string;
+  isLoggedIn: boolean;
+  googleConfigured: boolean;
 }) {
   const t = useTranslations("nav");
   const pathname = usePathname();
@@ -74,6 +79,14 @@ export function Header({
           />
           <ThemeToggle />
           <LocaleSwitcher />
+          <AuthNavLink
+            isLoggedIn={isLoggedIn}
+            googleConfigured={googleConfigured}
+            registerLabel={t("register")}
+            registerSoonLabel={t("registerSoon")}
+            dashboardLabel={t("dashboard")}
+            logoutLabel={t("logout")}
+          />
         </div>
 
         <div className="flex items-center gap-4 lg:hidden">
@@ -99,6 +112,8 @@ export function Header({
         facebookUrl={facebookUrl}
         instagramUrl={instagramUrl}
         youtubeUrl={youtubeUrl}
+        isLoggedIn={isLoggedIn}
+        googleConfigured={googleConfigured}
       />
     </header>
   );

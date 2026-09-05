@@ -1,5 +1,5 @@
 export type PaymentProvider = "BOG" | "TBC";
-export type PaymentMethod = "manual_transfer" | "gateway";
+export type PaymentMethod = "manual_transfer" | "gateway" | "promo_code";
 
 // pending_payment    → order created, student hasn't uploaded a receipt yet
 // pending_verification → receipt uploaded, waiting on admin approval
@@ -36,6 +36,8 @@ export interface Order {
   currency: "GEL" | "USD";
   receiptUrl?: string;
   aiVerification?: AiReceiptVerification;
+  promoCode?: string;
+  originalAmount?: number;
   createdAt: string;
   updatedAt: string;
   completedAt?: string;

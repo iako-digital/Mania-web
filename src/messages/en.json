@@ -8,7 +8,11 @@
     "patternShop": "Pattern Shop",
     "contact": "Contact",
     "menu": "Menu",
-    "close": "Close"
+    "close": "Close",
+    "register": "Sign up",
+    "registerSoon": "Sign up (coming soon)",
+    "dashboard": "My dashboard",
+    "logout": "Log out"
   },
   "home": {
     "kicker": "Technical Designer & Gerber Accumark Specialist",
@@ -113,7 +117,10 @@
     "buyCta": "Buy now",
     "buyingCta": "Processing…",
     "buyError": "Purchase failed. Please try again.",
-    "instantDownload": "Instant PDF download after purchase"
+    "instantDownload": "Instant PDF download after purchase",
+    "promoCodePlaceholder": "Promo code (optional)",
+    "accessGrantedMessage": "Access granted! Head to your dashboard.",
+    "goToDashboard": "Go to dashboard"
   },
   "courses": {
     "title": "Courses",
@@ -132,6 +139,9 @@
     "buyError": "Purchase failed. Please try again.",
     "registerCta": "Register",
     "soldOut": "Sold out",
+    "promoCodePlaceholder": "Promo code (optional)",
+    "accessGrantedMessage": "Access granted! Head to your dashboard.",
+    "goToDashboard": "Go to dashboard",
     "format": {
       "on_demand": "On-demand video",
       "live": "Live classroom",

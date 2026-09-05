@@ -5,6 +5,7 @@ import { readContent, writeContent } from "@/lib/content/store";
 import { grantCourseAccess } from "@/lib/courses/queries";
 import { grantPatternAccess } from "@/lib/patterns/queries";
 import { createNotification } from "@/lib/notifications/queries";
+import { setStudentPassword } from "@/lib/auth/student-credentials";
 import type { Enrollment } from "@/lib/courses/types";
 import type { PatternPurchase } from "@/lib/patterns/types";
 
@@ -43,24 +44,42 @@ export async function setPatternAccessRevoked(formData: FormData): Promise<void>
 // order — for edge cases (comped access, a payment handled outside the
 // site, etc). The student is identified by email, matching the id
 // convention used everywhere else once Google sign-in is configured (see
-// src/lib/auth/current-student.ts).
+// src/lib/auth/current-student.ts). `target` packs itemType+itemId as
+// "course:<id>" / "pattern:<id>" — the single dropdown value the admin
+// picks a product from, rather than separate type+raw-id inputs.
 export async function grantAccess(formData: FormData): Promise<void> {
   const name = String(formData.get("name") || "").trim();
   const email = String(formData.get("email") || "").trim();
-  const itemType = String(formData.get("itemType") || "");
-  const itemId = String(formData.get("itemId") || "");
+  const target = String(formData.get("target") || "");
+  const [itemType, itemId] = target.split(":");
 
-  if (!name || !email || !itemId) {
+  if (!name || !email || !itemType || !itemId) {
     revalidatePath("/admin/students");
     return;
   }
 
   if (itemType === "pattern") {
     await grantPatternAccess(itemId, email, name, email);
-  } else {
+  } else if (itemType === "course") {
     await grantCourseAccess(itemId, email, name, email);
   }
 
+  revalidatePath("/admin/students");
+}
+
+// Sets (or resets) a student's password for the "credentials" sign-in
+// provider (see src/auth.ts) — lets them log in with email+password instead
+// of Google, useful for students without a Gmail account.
+export async function changeStudentPassword(formData: FormData): Promise<void> {
+  const email = String(formData.get("email") || "").trim();
+  const password = String(formData.get("password") || "");
+
+  if (!email || password.length < 6) {
+    revalidatePath("/admin/students");
+    return;
+  }
+
+  await setStudentPassword(email, password);
   revalidatePath("/admin/students");
 }
 
