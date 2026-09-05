@@ -14,6 +14,12 @@ export function OverviewTab({ course, lesson }: { course: Course; lesson: Lesson
           <p className="font-mono text-xs uppercase tracking-widest text-text-muted">მიმდინარე გაკვეთილი</p>
           <p className="mt-2 text-text-primary">{lesson.title.ka || lesson.title.en}</p>
 
+          {(lesson.articleBody?.ka || lesson.articleBody?.en) && (
+            <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-text-muted">
+              {lesson.articleBody.ka || lesson.articleBody.en}
+            </p>
+          )}
+
           {lesson.pdfUrl && (
             <a
               href={lesson.pdfUrl}

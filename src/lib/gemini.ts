@@ -23,10 +23,15 @@ interface CallGeminiParams {
   generationConfig?: Record<string, unknown>;
 }
 
+const REQUEST_TIMEOUT_MS = 25_000;
+
 // Raw fetch to the Gemini generateContent endpoint — no SDK, mirrors the
 // original inline call this was extracted from (src/app/api/ai-chat/route.ts).
 // Returns the reply text, or throws with a short message safe to surface to
-// the caller's own error response.
+// the caller's own error response. A hard timeout means a hung upstream
+// request fails fast with a clear message instead of leaving the UI's
+// "thinking…" state hanging until the platform's own (much longer, and not
+// user-facing-friendly) request timeout kicks in.
 export async function callGemini({
   apiKey,
   model = process.env.GEMINI_MODEL || "gemini-3.6-flash",
@@ -34,18 +39,35 @@ export async function callGemini({
   contents,
   generationConfig,
 }: CallGeminiParams): Promise<string> {
-  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      systemInstruction: systemInstruction ? { parts: [{ text: systemInstruction }] } : undefined,
-      contents,
-      generationConfig,
-    }),
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+  let res: Response;
+  try {
+    res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        systemInstruction: systemInstruction ? { parts: [{ text: systemInstruction }] } : undefined,
+        contents,
+        generationConfig,
+      }),
+      signal: controller.signal,
+    });
+  } catch (err) {
+    if (err instanceof Error && err.name === "AbortError") {
+      throw new Error("პასუხის მიღება ძალიან დიდხანს გრძელდება — სცადეთ ისევ.");
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeout);
+  }
 
   if (!res.ok) {
     console.error("[gemini] request failed:", res.status, await res.text());
+    if (res.status === 429) {
+      throw new Error("ბევრი მოთხოვნაა ამ დროისთვის — სცადეთ ცოტა ხანში ისევ.");
+    }
     throw new Error("პასუხის მიღება ვერ მოხერხდა.");
   }
 
